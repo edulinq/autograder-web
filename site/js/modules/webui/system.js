@@ -26,7 +26,7 @@ function initBrightMode() {
 function setBrightMode(isLight) {
     _isLightMode = isLight;
 
-    // Set UI beight mode selector.
+    // Set UI bright mode selector.
     document.querySelectorAll('.bright-mode-toggle .selector').forEach(function(element) {
         if ((isLight && element.classList.contains('light')) || (!isLight && element.classList.contains('dark'))) {
             element.classList.add('active');

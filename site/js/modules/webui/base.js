@@ -2,6 +2,7 @@ import * as Assignment from './assignment.js'
 import * as Course from './course.js'
 import * as Home from './home.js'
 import * as Login from './login.js'
+import * as Metadata from './metadata.js'
 import * as Routing from './routing.js'
 import * as System from './system.js'
 import * as Util from './util.js'
@@ -15,6 +16,7 @@ function init(initialRoute = true) {
     Course.init();
     Home.init();
     Login.init();
+    Metadata.init();
 
     // Init routes last (since it will route).
     Routing.init(initialRoute);
