@@ -1,9 +1,22 @@
 import * as Core from './core.js'
 
+let apiDescription = undefined;
+
 function describe() {
-    return Core.sendRequest({
+    if (apiDescription) {
+        return Promise.resolve(apiDescription);
+    }
+
+    let promise = Core.sendRequest({
         endpoint: 'metadata/describe',
     });
+
+    return promise
+        .then(function(result) {
+            apiDescription = result;
+            return result;
+        })
+    ;
 }
 
 export {
