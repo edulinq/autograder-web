@@ -65,7 +65,7 @@ function prepareEndpointCaller(path, params, context, container) {
 
     Autograder.Metadata.describe()
         .then(function(result) {
-            const endpointInfo = result["endpoints"][targetEndpoint];
+            let endpointInfo = result["endpoints"][targetEndpoint];
             if (!endpointInfo) {
                 container.innerHTML = Render.autograderError(`Unknown endpoint: '${targetEndpoint}'.`);
                 return
@@ -102,9 +102,23 @@ function prepareEndpointCaller(path, params, context, container) {
     ;
 }
 
-function callEndpoint(endpointName, inputFields, context, container) {
-    console.log(endpointName)
-    console.log(inputFields)
+function callEndpoint(targetEndpoint, inputFields, context, container) {
+    let params = {};
+    for (let field of inputFields) {
+        let input = document.getElementById(field.name)
+        if (input) {
+            params[field.name] = input.value;
+        }
+    }
+
+    Autograder.Endpoints.callEndpoint(targetEndpoint, params)
+        .then(function(result) {
+            console.log(result)
+        })
+        .catch(function(message) {
+            container.innerHTML = Render.autograderError(message);
+        })
+    ;
 }
 
 export {
