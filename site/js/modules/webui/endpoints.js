@@ -19,11 +19,6 @@ function handlerEndpoints(path, params, context, container) {
     }
 }
 
-function prepareEndpointCaller(path, params, context, container) {
-    let targetEndpoint = params[Routing.PARAM_TARGET_ENDPOINT]
-    console.log(targetEndpoint)
-}
-
 function prepareEndpointDropdown(path, params, context, container) {
     Routing.loadingStart(container)
 
@@ -51,8 +46,9 @@ function prepareEndpointDropdown(path, params, context, container) {
             let dropdown = document.querySelector(".endpoints");
 
             dropdown.addEventListener("change", function(event) {
-                let newParams = {};
-                newParams[Routing.PARAM_TARGET_ENDPOINT] = event.target.value;
+                let newParams = {
+                    [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
+                };
 
                 let path = Routing.formHashPath(Routing.PATH_ENDPOINTS, newParams);
                 Routing.redirect(path);
@@ -62,6 +58,53 @@ function prepareEndpointDropdown(path, params, context, container) {
             container.innerHTML = Render.autograderError(message);
         })
     ;
+}
+
+function prepareEndpointCaller(path, params, context, container) {
+    let targetEndpoint = params[Routing.PARAM_TARGET_ENDPOINT]
+
+    Autograder.Metadata.describe()
+        .then(function(result) {
+            const endpointInfo = result["endpoints"][targetEndpoint];
+            if (!endpointInfo) {
+                container.innerHTML = Render.autograderError(`Unknown endpoint: '${targetEndpoint}'.`);
+                return
+            }
+
+            let html = `
+            <h3>${targetEndpoint}</h3><div id="input-parameters">
+            `
+
+            for (let field of endpointInfo["input"]) {
+                html += `
+                <label for="${field.name}">${field.name} (expects: ${field.type})</label>
+                <input type="text" id=${field.name} name=${field.name}<br><br>
+                `
+            }
+
+            html += `
+                <br/>
+                <button id="call-endpoint">Call Endpoint</button>
+            </div>
+            `
+
+            container.innerHTML = html;
+
+            let button = document.getElementById("call-endpoint")
+
+            button.addEventListener("click", function() {
+                callEndpoint(targetEndpoint, endpointInfo["input"], context, container);
+            });
+        })
+        .catch(function(message) {
+            container.innerHTML = Render.autograderError(message);
+        })
+    ;
+}
+
+function callEndpoint(endpointName, inputFields, context, container) {
+    console.log(endpointName)
+    console.log(inputFields)
 }
 
 export {
