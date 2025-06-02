@@ -88,7 +88,7 @@ function prepareEndpointCaller(path, params, context, container) {
             </div>
             `
 
-            container.innerHTML = html;
+            container.innerHTML += html;
 
             let button = document.getElementById("call-endpoint")
 
@@ -113,7 +113,11 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
 
     Autograder.Endpoints.callEndpoint(targetEndpoint, params)
         .then(function(result) {
-            console.log(result)
+            container.innerHTML += `
+        <h3>Result:</h3><div id="result">
+            ${result}
+        </div>
+            `
         })
         .catch(function(message) {
             container.innerHTML = Render.autograderError(message);
