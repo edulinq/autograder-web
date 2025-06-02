@@ -6,19 +6,28 @@ import * as Routing from './routing.js'
 // import * as Util from './util.js'
 
 function init() {
-    Routing.addRoute(/^metadata\/describe$/, handlerDescribe, 'Describe', undefined);
+    Routing.addRoute(/^endpoints$/, handlerEndpoints, 'Endpoints', undefined);
 }
 
-function handlerDescribe(path, params, context, container) {
+function handlerEndpoints(path, params, context, container) {
     Routing.loadingStart(container)
+
+    let html = `
+        <label for="endpoints">Choose an endpoint:</label>
+        <select name="endpoints" id="endpoints">
+    `
 
     Autograder.Metadata.describe()
         .then(function(result) {
-            let describeJSON = JSON.stringify(result, null, 4);
+            for (const endpoint in result["endpoints"]) {
+                html += `
+            <option value="${endpoint}">${endpoint}</option>
+                `
+            }
 
-            let html = `
-                <pre id="describe-json">${describeJSON}</pre>
-            `;
+            html += `
+        </select>
+        `
 
             container.innerHTML = html;
         })

@@ -1,5 +1,6 @@
 import * as Assignment from './assignment.js'
 import * as Course from './course.js'
+import * as Endpoints from './endpoints.js'
 import * as Home from './home.js'
 import * as Login from './login.js'
 import * as Metadata from './metadata.js'
@@ -14,6 +15,7 @@ function init(initialRoute = true) {
     // Init handlers.
     Assignment.init();
     Course.init();
+    Endpoints.init();
     Home.init();
     Login.init();
     Metadata.init();
