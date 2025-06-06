@@ -81,7 +81,6 @@ function renderSelector(endpoints, selectedEndpoint) {
     `;
 }
 
-// TODO: Add placeholders.
 function renderEndpointArea(endpoints, selectedEndpoint, context) {
     if (!(selectedEndpoint in endpoints)) {
         return '';
@@ -90,10 +89,19 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     let inputFields = [];
 
     for (let field of endpoints[selectedEndpoint]["input"]) {
+        let placeholder = "";
+        if (field.name === "user-email") {
+            placeholder = context.user.email
+        } else if (field.name === "user-pass") {
+            placeholder = "<current token>"
+        } else if (field.type.includes("SelfOr")) {
+            placeholder = context.user.email
+        }
+
         inputFields.push(`
             <div class="input-field">
                 <label for="${field.name}">${field.name} (expects: ${field.type})</label>
-                <input type="text" id="${field.name}" name="${field.name}">
+                <input type="text" id="${field.name}" name="${field.name}" placeholder="${placeholder}">
             </div>
         `);
     }
