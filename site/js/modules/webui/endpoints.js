@@ -10,117 +10,129 @@ function init() {
 }
 
 function handlerEndpoints(path, params, context, container) {
-    let targetEndpoint = params[Routing.PARAM_TARGET_ENDPOINT] || undefined;
+    Routing.loadingStart(container);
 
-    if (targetEndpoint) {
-        prepareEndpointCaller(path, params, context, container)
-    } else {
-        prepareEndpointDropdown(path, params, context, container)
+    Autograder.Metadata.describe()
+        .then(function(result) {
+            const endpoints = result["endpoints"];
+            const selectedEndpoint = params[Routing.PARAM_TARGET_ENDPOINT] ?? undefined;
+
+            render(endpoints, selectedEndpoint, context, container);
+        })
+        .catch(function(message) {
+            console.error(message)
+            container.innerHTML = Render.autograderError(message);
+        })
+    ;
+}
+
+function render(endpoints, selectedEndpoint, context, container) {
+    let selector = renderSelector(endpoints, selectedEndpoint);
+    let endpointArea = renderEndpointArea(endpoints, selectedEndpoint, context);
+
+    let html = `
+        <div class="control-area">
+            ${selector}
+        </div>
+
+        <div class="endpoint-area">
+            ${endpointArea}
+        </div>
+
+        <div class="results-area">
+        </div>
+    `;
+
+    container.innerHTML = html;
+
+    container.querySelector(".control-area select").addEventListener("change", function(event) {
+        let newParams = {
+            [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
+        };
+
+        let path = Routing.formHashPath(Routing.PATH_ENDPOINTS, newParams);
+        Routing.redirect(path);
+    });
+
+    let button = container.querySelector(".endpoint-area button")
+
+    if (button) {
+        button.addEventListener("click", function(event) {
+            callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
+        });
     }
 }
 
-function prepareEndpointDropdown(path, params, context, container) {
-    Routing.loadingStart(container)
+function renderSelector(endpoints, selectedEndpoint) {
+    let optionsList = [];
 
-    let html = `
-        <label for="endpoints">Choose an endpoint:</label>
-        <select class="endpoints" id="endpoints">
+    console.log(endpoints)
+    for (const endpoint of Object.keys(endpoints)) {
+        let isSelected = "";
+        if (endpoint === selectedEndpoint) {
+            isSelected = "selected";
+        }
+
+        optionsList.push(`<option value="${endpoint}" ${isSelected}>${endpoint}</option>`);
+    }
+
+    return `
+        <select id="endpoint-dropdown">
             <option value="">Select an endpoint...</option>
-    `
-
-    Autograder.Metadata.describe()
-        .then(function(result) {
-            for (const endpoint in result["endpoints"]) {
-                html += `
-            <option value="${endpoint}">${endpoint}</option>
-                `
-            }
-
-            html += `
+            ${optionsList.join("\n")}
         </select>
-        </label>
-        `
-
-            container.innerHTML = html;
-
-            let dropdown = document.querySelector(".endpoints");
-
-            dropdown.addEventListener("change", function(event) {
-                let newParams = {
-                    [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
-                };
-
-                let path = Routing.formHashPath(Routing.PATH_ENDPOINTS, newParams);
-                Routing.redirect(path);
-            });
-        })
-        .catch(function(message) {
-            container.innerHTML = Render.autograderError(message);
-        })
-    ;
+    `;
 }
 
-function prepareEndpointCaller(path, params, context, container) {
-    let targetEndpoint = params[Routing.PARAM_TARGET_ENDPOINT]
+// TODO: Add placeholders.
+function renderEndpointArea(endpoints, selectedEndpoint, context) {
+    if (!(selectedEndpoint in endpoints)) {
+        return ''
+    }
 
-    Autograder.Metadata.describe()
-        .then(function(result) {
-            let endpointInfo = result["endpoints"][targetEndpoint];
-            if (!endpointInfo) {
-                container.innerHTML = Render.autograderError(`Unknown endpoint: '${targetEndpoint}'.`);
-                return
-            }
+    let inputFields = [];
 
-            let html = `
-            <h3>${targetEndpoint}</h3><div id="input-parameters">
-            `
-
-            for (let field of endpointInfo["input"]) {
-                html += `
+    for (let field of endpoints[selectedEndpoint]["input"]) {
+        inputFields.push(`
+            <div class="input-field">
                 <label for="${field.name}">${field.name} (expects: ${field.type})</label>
-                <input type="text" id=${field.name} name=${field.name}<br><br>
-                `
-            }
-
-            html += `
-                <br/>
-                <button id="call-endpoint">Call Endpoint</button>
+                <input type="text" id="${field.name}" name="${field.name}">
             </div>
-            `
+        `);
+    }
 
-            container.innerHTML += html;
-
-            let button = document.getElementById("call-endpoint")
-
-            button.addEventListener("click", function() {
-                callEndpoint(targetEndpoint, endpointInfo["input"], context, container);
-            });
-        })
-        .catch(function(message) {
-            container.innerHTML = Render.autograderError(message);
-        })
-    ;
+    return `
+        <h3>${selectedEndpoint}</h3>
+        <fieldset>
+            ${inputFields.join("\n")}
+        </fieldset>
+        <button class="call-endpoint">Call Endpoint</button>
+    `;
 }
 
 function callEndpoint(targetEndpoint, inputFields, context, container) {
     let params = {};
     for (let field of inputFields) {
-        let input = document.getElementById(field.name)
-        if (input) {
+        let input = container.querySelector(`.endpoint-area fieldset #${field.name}`);
+        if (input && input.value != "") {
             params[field.name] = input.value;
         }
     }
 
+    let resultsArea = container.querySelector(".results-area");
+
+    // TODO: Display result better, see other notes.
+    // TODO: Look at error handling and where to place everything.
     Autograder.Endpoints.callEndpoint(targetEndpoint, params)
         .then(function(result) {
-            container.innerHTML += `
-        <h3>Result:</h3><div id="result">
-            ${result}
-        </div>
-            `
+            console.log(result);
+            resultsArea.innerHTML = `
+                <h3>Result:</h3>
+                <pre><code>${JSON.stringify(result, null, 4)}</code></pre>
+            `;
         })
         .catch(function(message) {
-            container.innerHTML = Render.autograderError(message);
+            resultsArea.innerHTML = Render.autograderError(message);
         })
     ;
 }
