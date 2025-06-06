@@ -1,9 +1,7 @@
 import * as Autograder from '../autograder/base.js'
 
-// import * as Log from './log.js'
 import * as Render from './render.js'
 import * as Routing from './routing.js'
-// import * as Util from './util.js'
 
 function init() {
     Routing.addRoute(/^endpoints$/, handlerEndpoints, 'Endpoints', undefined);
@@ -20,7 +18,7 @@ function handlerEndpoints(path, params, context, container) {
             render(endpoints, selectedEndpoint, context, container);
         })
         .catch(function(message) {
-            console.error(message)
+            console.error(message);
             container.innerHTML = Render.autograderError(message);
         })
     ;
@@ -54,7 +52,7 @@ function render(endpoints, selectedEndpoint, context, container) {
         Routing.redirect(path);
     });
 
-    let button = container.querySelector(".endpoint-area button")
+    let button = container.querySelector(".endpoint-area button");
 
     if (button) {
         button.addEventListener("click", function(event) {
@@ -66,7 +64,6 @@ function render(endpoints, selectedEndpoint, context, container) {
 function renderSelector(endpoints, selectedEndpoint) {
     let optionsList = [];
 
-    console.log(endpoints)
     for (const endpoint of Object.keys(endpoints)) {
         let isSelected = "";
         if (endpoint === selectedEndpoint) {
@@ -87,7 +84,7 @@ function renderSelector(endpoints, selectedEndpoint) {
 // TODO: Add placeholders.
 function renderEndpointArea(endpoints, selectedEndpoint, context) {
     if (!(selectedEndpoint in endpoints)) {
-        return ''
+        return '';
     }
 
     let inputFields = [];
@@ -115,7 +112,16 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
     for (let field of inputFields) {
         let input = container.querySelector(`.endpoint-area fieldset #${field.name}`);
         if (input && input.value != "") {
-            params[field.name] = input.value;
+            if (field.type === "string") {
+                params[field.name] = input.value;
+            } else {
+                try {
+                    params[field.name] = JSON.parse(`${input.value}`);
+                } catch (error) {
+                    console.error(error);
+                    params[field.name] = input.value;
+                }
+            }
         }
     }
 
@@ -125,13 +131,13 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
     // TODO: Look at error handling and where to place everything.
     Autograder.Endpoints.callEndpoint(targetEndpoint, params)
         .then(function(result) {
-            console.log(result);
             resultsArea.innerHTML = `
                 <h3>Result:</h3>
                 <pre><code>${JSON.stringify(result, null, 4)}</code></pre>
             `;
         })
         .catch(function(message) {
+            console.error(message)
             resultsArea.innerHTML = Render.autograderError(message);
         })
     ;
