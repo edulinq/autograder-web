@@ -431,6 +431,80 @@ fieldset {
     padding: 0.25em;
 }
 
+.page-controls select,
+.page-controls ::picker(select) {
+    appearance: base-select;
+}
+
+.page-controls select:hover,
+.page-controls select:focus {
+    background: var(--color-bg-accent-primary);
+}
+
+.page-controls select::picker-icon {
+    transition: 0.4s rotate;
+}
+
+.page-controls select:open::picker-icon {
+    rotate: 180deg;
+}
+
+.page-contols ::picker(select) {
+    border: none;
+}
+
+.page-controls option {
+    display: flex,
+    justify-content: flex-start;
+    gap: 0.5em;
+
+    border-radius: 3px;
+    background: var(--color-bg-primary);
+    padding: 5px;
+    transition: 0.4s;
+}
+
+.page-controls option:first-of-type {
+    borader-radius: 8px 8px 0 0;
+}
+
+.page-controls option:last-of-type {
+    border-radius: 0 0 8px 8px;
+}
+
+.page-controls option:not(option:last-of-type) {
+    border-bottom: none;
+}
+
+.page-controls option:nth-of-type(odd) {
+    background: var(--color-bg-secondary);
+}
+
+.page-controls option:hover,
+.page-controls option:focus {
+    background: var(--color-bg-accent-primary);
+}
+
+.page-controls option::checkmark {
+    order: 1;
+    margin-left: auto;
+}
+
+.page-controls ::picker(select) {
+    opacity: 0;
+    transition: all 0.4s allow-discrete;
+}
+
+.page-controls ::picker(select):popover-open {
+    opacity: 1;
+}
+
+@starting-style {
+    .page-controls ::picker(select):popover-open {
+        opacity: 0;
+    }
+}
+
 .submission table,
 .submission-history table {
     margin-left: 2em;

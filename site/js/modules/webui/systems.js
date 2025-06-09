@@ -47,7 +47,7 @@ function render(endpoints, selectedEndpoint, context, container) {
     let endpointArea = renderEndpointArea(endpoints, selectedEndpoint, context);
 
     let html = `
-        <div class="control-area">
+        <div class="page-controls">
             ${selector}
         </div>
 
@@ -61,7 +61,7 @@ function render(endpoints, selectedEndpoint, context, container) {
 
     container.innerHTML = html;
 
-    container.querySelector(".control-area select").addEventListener("change", function(event) {
+    container.querySelector(".page-controls select").addEventListener("change", function(event) {
         let newParams = {
             [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
         };
