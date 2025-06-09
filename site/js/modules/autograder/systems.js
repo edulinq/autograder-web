@@ -2,6 +2,13 @@ import * as Core from './core.js'
 
 let apiDescription = undefined;
 
+function callEndpoint(targetEndpoint, params) {
+    return Core.sendRequest({
+        endpoint: targetEndpoint,
+        payload: params,
+    });
+}
+
 function describe() {
     if (apiDescription) {
         return Promise.resolve(apiDescription);
@@ -19,6 +26,14 @@ function describe() {
     ;
 }
 
+function systems() {
+    return Core.sendRequest({
+        endpoint: 'systems',
+    });
+}
+
 export {
+    callEndpoint,
     describe,
+    systems,
 }

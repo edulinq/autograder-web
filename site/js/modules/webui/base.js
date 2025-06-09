@@ -1,11 +1,10 @@
 import * as Assignment from './assignment.js'
 import * as Course from './course.js'
-import * as Endpoints from './endpoints.js'
 import * as Home from './home.js'
 import * as Login from './login.js'
-import * as Metadata from './metadata.js'
 import * as Routing from './routing.js'
 import * as System from './system.js'
+import * as Systems from './systems.js'
 import * as Util from './util.js'
 
 function init(initialRoute = true) {
@@ -15,10 +14,9 @@ function init(initialRoute = true) {
     // Init handlers.
     Assignment.init();
     Course.init();
-    Endpoints.init();
     Home.init();
     Login.init();
-    Metadata.init();
+    Systems.init();
 
     // Init routes last (since it will route).
     Routing.init(initialRoute);
