@@ -157,7 +157,8 @@ a {
 }
 
 button,
-input {
+input,
+select {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary);
     border-width: medium;
@@ -165,7 +166,8 @@ input {
 }
 
 button:disabled,
-input:disabled {
+input:disabled,
+select:disabled {
     background-color: var(--color-bg-secondary-low);
     color: var(--color-text-secondary-low);
     cursor: no-drop;
@@ -411,6 +413,28 @@ fieldset {
     color: var(--color-text-primary);
 }
 
+.endpoint-area {
+    padding-bottom: 1em;
+    border-bottom: 3px solid var(--color-text-secondary);
+    margin-bottom: 1em;
+}
+
+/* .endpoint-area h3 { */
+/* 	text-align: center; */
+/* } */
+
+.endpoint-area fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.5em;
+    /* padding-bottom: 0.5em; */
+    margin-bottom: 1em;
+    border-radius: var(--curve-radius);
+    background-color: var(--color-bg-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .page-controls {
     display: flex;
     flex-direction: row;
@@ -427,32 +451,39 @@ fieldset {
     margin-bottom: 1em;
 }
 
+.endpoint-area button,
 .page-controls button {
     padding: 0.25em;
 }
 
+.endpoint-area select,
+.endpoint-area ::picker(select),
 .page-controls select,
 .page-controls ::picker(select) {
     appearance: base-select;
 }
 
+.endpoint-area select:hover,
+.endpoint-area select:focus,
 .page-controls select:hover,
 .page-controls select:focus {
     background: var(--color-bg-accent-primary);
 }
 
-.page-controls select::picker-icon {
+.endpoint-area select::picker-icon {
+.endpoint-area select::picker-icon {
     transition: 0.4s rotate;
 }
 
-.page-controls select:open::picker-icon {
+.endpoint-area select:open::picker-icon {
     rotate: 180deg;
 }
 
-.page-contols ::picker(select) {
+.endpoint-area ::picker(select) {
     border: none;
 }
 
+.endpoint-area option,
 .page-controls option {
     display: flex,
     justify-content: flex-start;
@@ -460,50 +491,86 @@ fieldset {
 
     border-radius: 3px;
     background: var(--color-bg-primary);
-    padding: 5px;
+    padding: 0.25em;
     transition: 0.4s;
 }
 
+.endpoint-area option:first-of-type,
 .page-controls option:first-of-type {
-    borader-radius: 8px 8px 0 0;
+    borader-radius: 1em, 1em, 0 0;
 }
 
+.endpoint-area option:last-of-type,
 .page-controls option:last-of-type {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 1em 1em;
 }
 
+.endpoint-area option:not(option:last-of-type),
 .page-controls option:not(option:last-of-type) {
     border-bottom: none;
 }
 
+.endpoint-area option:nth-of-type(odd),
 .page-controls option:nth-of-type(odd) {
     background: var(--color-bg-secondary);
 }
 
+.endpoint-area option:hover,
+.endpoint-area option:focus,
 .page-controls option:hover,
 .page-controls option:focus {
     background: var(--color-bg-accent-primary);
 }
 
+.endpoint-area option::checkmark,
 .page-controls option::checkmark {
     order: 1;
     margin-left: auto;
 }
 
+.endpoint-area ::picker(select),
 .page-controls ::picker(select) {
     opacity: 0;
     transition: all 0.4s allow-discrete;
 }
 
+.endpoint-area ::picker(select):popover-open,
 .page-controls ::picker(select):popover-open {
     opacity: 1;
 }
 
 @starting-style {
+    .endpoint-area ::picker(select):popover-open,
     .page-controls ::picker(select):popover-open {
         opacity: 0;
     }
 }
+
+.endpoint-area .input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.endpoint-area label {
+    margin-bottom: 0.25em;
+    color: var(--color-text-secondary);
+}
+
+.endpoint-area input[type="text"] {
+    padding: 0.5em 1em;
+	/* TODO: what is the point??? */
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+/* .endpoint-area input[type="text"]:hover { */
+/*     border-color: var(--color-bg-accent-primary); */
+/* } */
+
+/* .endpoint-area input[type="text"]:focus { */
+/*     outline: none; */
+/*     border-color: var(--color-bg-accent-primary); */
+/*     box-shadow: 0 0 0 3px rgba(130, 130, 255, 0.3); */
+/* } */
 
 .submission table,
 .submission-history table {

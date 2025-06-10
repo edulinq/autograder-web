@@ -4,11 +4,11 @@ import * as Render from './render.js'
 import * as Routing from './routing.js'
 
 function init() {
-    Routing.addRoute(/^systems$/, handlerSystems, 'Systems', undefined);
-    Routing.addRoute(/^systems\/call-endpoint$/, handlerCallEndpoint, 'CallEndpoint', undefined);
+    Routing.addRoute(/^server$/, handlerServer, 'Server Actions', undefined);
+    Routing.addRoute(/^server\/call-endpoint$/, handlerCallEndpoint, 'Call Endpoint', undefined);
 }
 
-function handlerSystems(path, params, context, container) {
+function handlerServer(path, params, context, container) {
     Routing.loadingStart(container)
 
     let args = {
@@ -16,11 +16,10 @@ function handlerSystems(path, params, context, container) {
     };
 
     let cards = [
-        Render.makeCardObject('system-action', 'Call Endpoint', Routing.formHashPath(Routing.PATH_SYSTEMS_CALL_ENDPOINT, args))
+        Render.makeCardObject('server-action', 'Call Endpoint', Routing.formHashPath(Routing.PATH_SERVER_CALL_ENDPOINT, args))
     ];
 
     container.innerHTML = `
-        <h2>System Actions</h2>
         ${Render.cards(cards)}
     `
 }
@@ -28,7 +27,7 @@ function handlerSystems(path, params, context, container) {
 function handlerCallEndpoint(path, params, context, container) {
     Routing.loadingStart(container);
 
-    Autograder.Systems.describe()
+    Autograder.Server.describe()
         .then(function(result) {
             const endpoints = result["endpoints"];
             const selectedEndpoint = params[Routing.PARAM_TARGET_ENDPOINT] ?? undefined;
@@ -66,7 +65,7 @@ function render(endpoints, selectedEndpoint, context, container) {
             [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
         };
 
-        let path = Routing.formHashPath(Routing.PATH_SYSTEMS_CALL_ENDPOINT, newParams);
+        let path = Routing.formHashPath(Routing.PATH_SERVER_CALL_ENDPOINT, newParams);
         Routing.redirect(path);
     });
 
@@ -125,7 +124,7 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     }
 
     return `
-        <h3>${selectedEndpoint}</h3>
+        <h2>${selectedEndpoint}</h2>
         <fieldset>
             ${inputFields.join("\n")}
         </fieldset>
@@ -155,10 +154,10 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
 
     // TODO: Display result better, see other notes.
     // TODO: Look at error handling and where to place everything.
-    Autograder.Systems.callEndpoint(targetEndpoint, params)
+    Autograder.Server.callEndpoint(targetEndpoint, params)
         .then(function(result) {
             resultsArea.innerHTML = `
-                <h3>Result:</h3>
+                <h2>Result:</h2>
                 <pre><code>${JSON.stringify(result, null, 4)}</code></pre>
             `;
         })

@@ -17,8 +17,8 @@ const PATH_SUBMIT = `${PATH_ASSIGNMENT}/submit`;
 const PATH_PEEK = `${PATH_ASSIGNMENT}/peek`;
 const PATH_HISTORY = `${PATH_ASSIGNMENT}/history`;
 
-const PATH_SYSTEMS = 'systems';
-const PATH_SYSTEMS_CALL_ENDPOINT = `${PATH_SYSTEMS}/call-endpoint`;
+const PATH_SERVER = 'server';
+const PATH_SERVER_CALL_ENDPOINT = `${PATH_SERVER}/call-endpoint`;
 
 // The current hash/location we are routed to.
 // Should be prefixed with a hash symbol.
@@ -339,6 +339,6 @@ export {
     PATH_PEEK,
     PATH_HISTORY,
 
-    PATH_SYSTEMS,
-    PATH_SYSTEMS_CALL_ENDPOINT,
+    PATH_SERVER,
+    PATH_SERVER_CALL_ENDPOINT,
 }

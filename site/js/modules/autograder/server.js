@@ -26,14 +26,14 @@ function describe() {
     ;
 }
 
-function systems() {
+function server() {
     return Core.sendRequest({
-        endpoint: 'systems',
+        endpoint: 'server',
     });
 }
 
 export {
     callEndpoint,
     describe,
-    systems,
+    server,
 }
