@@ -178,64 +178,8 @@ button {
     padding: 0.25em;
 }
 
-select,
-::picker(select) {
-    appearance: base-select;
-}
-
 select {
     max-width: 95vw;
-}
-
-select:hover {
-    background: var(--color-bg-accent-primary);
-}
-
-select::picker-icon {
-    transition: 0.4s rotate;
-}
-
-select:open::picker-icon {
-    rotate: 180deg;
-}
-
-::picker(select) {
-    border: none;
-    opacity: 0;
-    transition: all 0.4s allow-discrete;
-}
-
-::picker(select):popover-open {
-    opacity: 1;
-}
-
-@starting-style {
-    ::picker(select):popover-open {
-        opacity: 0;
-    }
-}
-
-option {
-    display: flex,
-    justify-content: flex-start;
-    gap: 0.5em;
-
-    border-radius: 3px;
-    padding: 0.25em;
-    transition: 0.4s;
-}
-
-option:not(option:last-of-type) {
-    border-bottom: none;
-}
-
-option:hover {
-    background: var(--color-bg-accent-primary);
-}
-
-option::checkmark {
-    order: 1;
-    margin-left: auto;
 }
 
 /* Set basic relative font sizing. */
