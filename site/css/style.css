@@ -493,7 +493,7 @@ fieldset {
     margin-bottom: 1em;
     border-radius: var(--curve-radius);
     background-color: var(--color-bg-secondary);
-    color-text: var(--color-text-secondary);
+    color: var(--color-text-secondary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-self: stretch;
 }
@@ -543,20 +543,11 @@ fieldset {
     margin-bottom: 1em;
     border-radius: var(--curve-radius);
     background-color: var(--color-bg-secondary);
-    color-text: var(--color-text-secondary);
+    color: var(--color-text-secondary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-self: stretch;
+    overflow-x: scroll;
 }
-
-/* .endpoint-area input[type="text"]:hover { */
-/*     border-color: var(--color-bg-accent-primary); */
-/* } */
-
-/* .endpoint-area input[type="text"]:focus { */
-/*     outline: none; */
-/*     border-color: var(--color-bg-accent-primary); */
-/*     box-shadow: 0 0 0 3px rgba(130, 130, 255, 0.3); */
-/* } */
 
 .submission table,
 .submission-history table {
