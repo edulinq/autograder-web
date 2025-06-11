@@ -46,16 +46,9 @@ function render(endpoints, selectedEndpoint, context, container) {
     let endpointArea = renderEndpointArea(endpoints, selectedEndpoint, context);
 
     let html = `
-        <div class="page-controls">
-            ${selector}
-        </div>
-
-        <div class="endpoint-area">
-            ${endpointArea}
-        </div>
-
-        <div class="results-area">
-        </div>
+        <div class="page-controls">${selector}</div>
+        <div class="endpoint-area">${endpointArea}</div>
+        <div class="results-area"></div>
     `;
 
     container.innerHTML = html;
@@ -157,7 +150,6 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
     Autograder.Server.callEndpoint(targetEndpoint, params)
         .then(function(result) {
             resultsArea.innerHTML = `
-                <h2>Result:</h2>
                 <pre><code>${JSON.stringify(result, null, 4)}</code></pre>
             `;
         })

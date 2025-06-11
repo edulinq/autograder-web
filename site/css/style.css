@@ -471,9 +471,18 @@ fieldset {
 }
 
 .endpoint-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
     padding-bottom: 1em;
-    border-bottom: 3px solid var(--color-text-secondary);
     margin-bottom: 1em;
+    border-bottom: 3px solid var(--color-text-secondary);
+}
+
+.endpoint-area:empty {
+    display: none;
 }
 
 .endpoint-area fieldset {
@@ -481,11 +490,11 @@ fieldset {
     flex-direction: column;
     gap: 1em;
     padding: 1.5em;
-    /* padding-bottom: 0.5em; */
     margin-bottom: 1em;
     border-radius: var(--curve-radius);
     background-color: var(--color-bg-secondary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-self: stretch;
 }
 
 .page-controls {
@@ -519,6 +528,10 @@ fieldset {
     padding: 0.5em 1em;
 	/* TODO: what is the point??? */
     transition: border 0.2s, box-shadow 0.2s;
+}
+
+.endpoint-area .call-endpoint {
+    justify-content: center;
 }
 
 /* .endpoint-area input[type="text"]:hover { */
