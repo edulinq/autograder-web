@@ -438,14 +438,16 @@ fieldset {
 .endpoint-area fieldset {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
+
     gap: 1em;
     padding: 1.5em;
     margin-bottom: 1em;
-    border-radius: var(--curve-radius);
-    background-color: var(--color-bg-secondary);
+
     color: var(--color-text-secondary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: stretch;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--curve-radius);
+    box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
 .page-controls {
@@ -472,10 +474,9 @@ fieldset {
 
 .endpoint-area label {
     margin-bottom: 0.25em;
-    color: var(--color-text-secondary);
 }
 
-.endpoint-area input[type="text"] {
+.endpoint-area input {
     padding: 0.5em 1em;
 }
 
@@ -486,15 +487,18 @@ fieldset {
 .results-area .code {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     gap: 1em;
+
+    overflow-x: scroll;
     padding: 1.5em;
     margin-bottom: 1em;
+
     border-radius: var(--curve-radius);
-    background-color: var(--color-bg-secondary);
+    box-shadow: 2px 2px 1px var(--color-bg-shadow);
+
     color: var(--color-text-secondary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: stretch;
-    overflow-x: scroll;
+    background-color: var(--color-bg-secondary);
 }
 
 .submission table,

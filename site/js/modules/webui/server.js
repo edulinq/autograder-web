@@ -23,7 +23,7 @@ function handlerServer(path, params, context, container) {
     };
 
     let cards = [
-        Render.makeCardObject('server-action', 'Call Endpoint', Routing.formHashPath(Routing.PATH_SERVER_CALL_ENDPOINT, args))
+        Render.makeCardObject('server-action', 'Call Endpoint', Routing.formHashPath(Routing.PATH_SERVER_CALL_ENDPOINT, args)),
     ];
 
     container.innerHTML = `
@@ -120,18 +120,17 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     });
 
     let inputFields = [];
-
     for (const field of sortedInputs) {
         let inputType = "text";
         let placeholder = "";
 
         if (field.name === "user-email") {
-            placeholder = context.user.email
+            placeholder = context.user.email;
         } else if (field.name === "user-pass") {
-            placeholder = "<current token>"
-            inputType = "password"
+            placeholder = "<current token>";
+            inputType = "password";
         } else if (field.type.includes("SelfOr")) {
-            placeholder = context.user.email
+            placeholder = context.user.email;
         }
 
         inputFields.push(`
@@ -143,11 +142,17 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     }
 
     return `
-        <h2>${selectedEndpoint}</h2>
+        <h2>
+            ${selectedEndpoint}
+        </h2>
+
         <fieldset>
             ${inputFields.join("\n")}
         </fieldset>
-        <button class="call-endpoint">Call Endpoint</button>
+
+        <button class="call-endpoint">
+            Call Endpoint
+        </button>
     `;
 }
 
