@@ -3,13 +3,20 @@ import * as Autograder from '../autograder/base.js'
 import * as Render from './render.js'
 import * as Routing from './routing.js'
 
+const fieldPriority = [
+    "user-email",
+    "user-pass",
+    "course-id",
+    "assignment-id",
+];
+
 function init() {
     Routing.addRoute(/^server$/, handlerServer, 'Server Actions', undefined);
     Routing.addRoute(/^server\/call-endpoint$/, handlerCallEndpoint, 'Call Endpoint', undefined);
 }
 
 function handlerServer(path, params, context, container) {
-    Routing.loadingStart(container)
+    Routing.loadingStart(container);
 
     let args = {
         [Routing.PARAM_TARGET_ENDPOINT]: params[Routing.PARAM_TARGET_ENDPOINT],
@@ -21,7 +28,7 @@ function handlerServer(path, params, context, container) {
 
     container.innerHTML = `
         ${Render.cards(cards)}
-    `
+    `;
 }
 
 function handlerCallEndpoint(path, params, context, container) {
@@ -96,14 +103,33 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
         return '';
     }
 
+    let sortedInputs = endpoints[selectedEndpoint]["input"];
+    sortedInputs.sort(function(a, b) {
+        let aPriority = fieldPriority.indexOf(a.name);
+        let bPriority = fieldPriority.indexOf(b.name);
+
+        if (aPriority === -1) {
+            aPriority = fieldPriority.length;
+        }
+
+        if (bPriority === -1) {
+            bPriority = fieldPriority.length;
+        }
+
+        return aPriority - bPriority;
+    });
+
     let inputFields = [];
 
-    for (let field of endpoints[selectedEndpoint]["input"]) {
+    for (const field of sortedInputs) {
+        let inputType = "text";
         let placeholder = "";
+
         if (field.name === "user-email") {
             placeholder = context.user.email
         } else if (field.name === "user-pass") {
             placeholder = "<current token>"
+            inputType = "password"
         } else if (field.type.includes("SelfOr")) {
             placeholder = context.user.email
         }
@@ -111,7 +137,7 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
         inputFields.push(`
             <div class="input-field">
                 <label for="${field.name}">${field.name} (expects: ${field.type})</label>
-                <input type="text" id="${field.name}" name="${field.name}" placeholder="${placeholder}">
+                <input type="${inputType}" id="${field.name}" name="${field.name}" placeholder="${placeholder}">
             </div>
         `);
     }
@@ -126,6 +152,8 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 }
 
 function callEndpoint(targetEndpoint, inputFields, context, container) {
+    Routing.loadingStart(container.querySelector(".results-area"), false);
+
     let params = {};
     for (let field of inputFields) {
         let input = container.querySelector(`.endpoint-area fieldset #${field.name}`);

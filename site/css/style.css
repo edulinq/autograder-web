@@ -226,16 +226,8 @@ fieldset {
 }
 
 .loading-container .loading {
-    z-index: 100;
-
     height: 100%;
     width: 100%;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    background-color: #80808082;
 
     display: flex;
     flex-direction: row;
@@ -243,6 +235,16 @@ fieldset {
     align-items: flex-start;
 
     margin-top: 2em;
+}
+
+.loading-container .loading-modal {
+    z-index: 100;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: #80808082;
 }
 
 .loading-container .loading img {
@@ -475,8 +477,6 @@ fieldset {
 
 .endpoint-area input[type="text"] {
     padding: 0.5em 1em;
-	/* TODO: what is the point??? */
-    transition: border 0.2s, box-shadow 0.2s;
 }
 
 .endpoint-area .call-endpoint {

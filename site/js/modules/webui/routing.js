@@ -298,12 +298,17 @@ function redirectLogout() {
     redirect('logout');
 }
 
-function loadingStart(container = undefined) {
+function loadingStart(container = undefined, modal = true) {
     container = container ?? mainConatiner();
+
+    let loadingClass = 'loading';
+    if (modal) {
+        loadingClass += ' loading-modal';
+    }
 
     container.innerHTML = `
         <div class='loading-container'>
-            <div class='loading'>
+            <div class='${loadingClass}'>
                 <img src='images/loading-basic-edq.png' />
             </div>
         </div>
