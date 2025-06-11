@@ -145,12 +145,10 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
 
     let resultsArea = container.querySelector(".results-area");
 
-    // TODO: Display result better, see other notes.
-    // TODO: Look at error handling and where to place everything.
     Autograder.Server.callEndpoint(targetEndpoint, params)
         .then(function(result) {
             resultsArea.innerHTML = `
-                <pre><code>${JSON.stringify(result, null, 4)}</code></pre>
+                <pre><code class="code code-block" data-lang="json">${JSON.stringify(result, null, 4)}</code></pre>
             `;
         })
         .catch(function(message) {

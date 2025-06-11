@@ -493,6 +493,7 @@ fieldset {
     margin-bottom: 1em;
     border-radius: var(--curve-radius);
     background-color: var(--color-bg-secondary);
+    color-text: var(--color-text-secondary);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     align-self: stretch;
 }
@@ -532,6 +533,19 @@ fieldset {
 
 .endpoint-area .call-endpoint {
     justify-content: center;
+}
+
+.results-area .code {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.5em;
+    margin-bottom: 1em;
+    border-radius: var(--curve-radius);
+    background-color: var(--color-bg-secondary);
+    color-text: var(--color-text-secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-self: stretch;
 }
 
 /* .endpoint-area input[type="text"]:hover { */
