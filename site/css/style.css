@@ -178,6 +178,7 @@ button {
     padding: 0.25em;
 }
 
+/*
 select,
 ::picker(select) {
     appearance: base-select;
@@ -233,6 +234,7 @@ option::checkmark {
     order: 1;
     margin-left: auto;
 }
+*/
 
 /* Set basic relative font sizing. */
 h1 {
