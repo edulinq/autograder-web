@@ -175,6 +175,63 @@ select:disabled {
 
 button {
     border-radius: 5px;
+    padding: 0.25em;
+}
+
+select,
+::picker(select) {
+    appearance: base-select;
+}
+
+select:hover {
+    background: var(--color-bg-accent-primary);
+}
+
+select::picker-icon {
+    transition: 0.4s rotate;
+}
+
+select:open::picker-icon {
+    rotate: 180deg;
+}
+
+::picker(select) {
+    border: none;
+    opacity: 0;
+    transition: all 0.4s allow-discrete;
+}
+
+::picker(select):popover-open {
+    opacity: 1;
+}
+
+@starting-style {
+    ::picker(select):popover-open {
+        opacity: 0;
+    }
+}
+
+option {
+    display: flex,
+    justify-content: flex-start;
+    gap: 0.5em;
+
+    border-radius: 3px;
+    padding: 0.25em;
+    transition: 0.4s;
+}
+
+option:not(option:last-of-type) {
+    border-bottom: none;
+}
+
+option:hover {
+    background: var(--color-bg-accent-primary);
+}
+
+option::checkmark {
+    order: 1;
+    margin-left: auto;
 }
 
 /* Set basic relative font sizing. */
@@ -419,10 +476,6 @@ fieldset {
     margin-bottom: 1em;
 }
 
-/* .endpoint-area h3 { */
-/* 	text-align: center; */
-/* } */
-
 .endpoint-area fieldset {
     display: flex;
     flex-direction: column;
@@ -451,100 +504,6 @@ fieldset {
     margin-bottom: 1em;
 }
 
-.endpoint-area button,
-.page-controls button {
-    padding: 0.25em;
-}
-
-.endpoint-area select,
-.endpoint-area ::picker(select),
-.page-controls select,
-.page-controls ::picker(select) {
-    appearance: base-select;
-}
-
-.endpoint-area select:hover,
-.endpoint-area select:focus,
-.page-controls select:hover,
-.page-controls select:focus {
-    background: var(--color-bg-accent-primary);
-}
-
-.endpoint-area select::picker-icon {
-.endpoint-area select::picker-icon {
-    transition: 0.4s rotate;
-}
-
-.endpoint-area select:open::picker-icon {
-    rotate: 180deg;
-}
-
-.endpoint-area ::picker(select) {
-    border: none;
-}
-
-.endpoint-area option,
-.page-controls option {
-    display: flex,
-    justify-content: flex-start;
-    gap: 0.5em;
-
-    border-radius: 3px;
-    background: var(--color-bg-primary);
-    padding: 0.25em;
-    transition: 0.4s;
-}
-
-.endpoint-area option:first-of-type,
-.page-controls option:first-of-type {
-    borader-radius: 1em, 1em, 0 0;
-}
-
-.endpoint-area option:last-of-type,
-.page-controls option:last-of-type {
-    border-radius: 0 0 1em 1em;
-}
-
-.endpoint-area option:not(option:last-of-type),
-.page-controls option:not(option:last-of-type) {
-    border-bottom: none;
-}
-
-.endpoint-area option:nth-of-type(odd),
-.page-controls option:nth-of-type(odd) {
-    background: var(--color-bg-secondary);
-}
-
-.endpoint-area option:hover,
-.endpoint-area option:focus,
-.page-controls option:hover,
-.page-controls option:focus {
-    background: var(--color-bg-accent-primary);
-}
-
-.endpoint-area option::checkmark,
-.page-controls option::checkmark {
-    order: 1;
-    margin-left: auto;
-}
-
-.endpoint-area ::picker(select),
-.page-controls ::picker(select) {
-    opacity: 0;
-    transition: all 0.4s allow-discrete;
-}
-
-.endpoint-area ::picker(select):popover-open,
-.page-controls ::picker(select):popover-open {
-    opacity: 1;
-}
-
-@starting-style {
-    .endpoint-area ::picker(select):popover-open,
-    .page-controls ::picker(select):popover-open {
-        opacity: 0;
-    }
-}
 
 .endpoint-area .input-field {
     display: flex;
