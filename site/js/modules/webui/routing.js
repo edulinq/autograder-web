@@ -18,7 +18,7 @@ const PATH_PEEK = `${PATH_ASSIGNMENT}/peek`;
 const PATH_HISTORY = `${PATH_ASSIGNMENT}/history`;
 
 const PATH_SERVER = 'server';
-const PATH_SERVER_CALL_ENDPOINT = `${PATH_SERVER}/call-endpoint`;
+const PATH_SERVER_CALL_API = `${PATH_SERVER}/call-api`;
 
 // The current hash/location we are routed to.
 // Should be prefixed with a hash symbol.
@@ -345,5 +345,5 @@ export {
     PATH_HISTORY,
 
     PATH_SERVER,
-    PATH_SERVER_CALL_ENDPOINT,
+    PATH_SERVER_CALL_API,
 }

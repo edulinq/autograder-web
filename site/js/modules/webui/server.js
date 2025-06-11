@@ -14,7 +14,7 @@ const fieldPriority = [
 
 function init() {
     Routing.addRoute(/^server$/, handlerServer, 'Server Actions', undefined);
-    Routing.addRoute(/^server\/call-endpoint$/, handlerCallEndpoint, 'Call Endpoint', undefined);
+    Routing.addRoute(/^server\/call-api$/, handlerCallAPI, 'Call API', undefined);
 }
 
 function handlerServer(path, params, context, container) {
@@ -25,7 +25,7 @@ function handlerServer(path, params, context, container) {
     };
 
     let cards = [
-        Render.makeCardObject('server-action', 'Call Endpoint', Routing.formHashPath(Routing.PATH_SERVER_CALL_ENDPOINT, args)),
+        Render.makeCardObject('server-action', 'Call API', Routing.formHashPath(Routing.PATH_SERVER_CALL_API, args)),
     ];
 
     container.innerHTML = `
@@ -33,7 +33,7 @@ function handlerServer(path, params, context, container) {
     `;
 }
 
-function handlerCallEndpoint(path, params, context, container) {
+function handlerCallAPI(path, params, context, container) {
     Routing.loadingStart(container);
 
     Autograder.Server.describe()
@@ -67,7 +67,7 @@ function render(endpoints, selectedEndpoint, context, container) {
             [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
         };
 
-        let path = Routing.formHashPath(Routing.PATH_SERVER_CALL_ENDPOINT, newParams);
+        let path = Routing.formHashPath(Routing.PATH_SERVER_CALL_API, newParams);
         Routing.redirect(path);
     });
 
