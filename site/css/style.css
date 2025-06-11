@@ -480,10 +480,6 @@ fieldset {
     padding: 0.5em 1em;
 }
 
-.endpoint-area .call-endpoint {
-    justify-content: center;
-}
-
 .results-area .code {
     display: flex;
     flex-direction: column;
