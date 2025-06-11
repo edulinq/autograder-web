@@ -3,11 +3,13 @@ import * as Autograder from '../autograder/base.js'
 import * as Render from './render.js'
 import * as Routing from './routing.js'
 
+/* The priority of the field to show first. */
+/* Items later in the list have the highest priority. */
 const fieldPriority = [
-    "user-email",
-    "user-pass",
-    "course-id",
     "assignment-id",
+    "course-id",
+    "user-pass",
+    "user-email",
 ];
 
 function init() {
@@ -108,15 +110,7 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
         let aPriority = fieldPriority.indexOf(a.name);
         let bPriority = fieldPriority.indexOf(b.name);
 
-        if (aPriority === -1) {
-            aPriority = fieldPriority.length;
-        }
-
-        if (bPriority === -1) {
-            bPriority = fieldPriority.length;
-        }
-
-        return aPriority - bPriority;
+        return bPriority - aPriority;
     });
 
     let inputFields = [];

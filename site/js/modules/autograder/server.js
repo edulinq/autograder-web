@@ -26,14 +26,7 @@ function describe() {
     ;
 }
 
-function server() {
-    return Core.sendRequest({
-        endpoint: 'server',
-    });
-}
-
 export {
     callEndpoint,
     describe,
-    server,
 }
