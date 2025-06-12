@@ -69,8 +69,12 @@ function render(endpoints, selectedEndpoint, context, container) {
         Routing.redirect(path);
     });
 
-    let button = container.querySelector(".endpoint-area button");
-    button?.addEventListener("click", function(event) {
+    let fieldset = container.querySelector(".endpoint-area fieldset");
+    fieldset?.addEventListener("keydown", function(event) {
+        if (event.key != "Enter") {
+            return
+        }
+
         callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
     });
 }
@@ -139,10 +143,6 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
         <fieldset>
             ${inputFields.join("\n")}
         </fieldset>
-
-        <button class="call-endpoint">
-            Call Endpoint
-        </button>
     `;
 }
 
