@@ -69,6 +69,11 @@ function render(endpoints, selectedEndpoint, context, container) {
         Routing.redirect(path);
     });
 
+    let button = container.querySelector(".endpoint-area button");
+    button?.addEventListener("click", function(event) {
+        callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
+    });
+
     let fieldset = container.querySelector(".endpoint-area fieldset");
     fieldset?.addEventListener("keydown", function(event) {
         if (event.key != "Enter") {
@@ -125,6 +130,7 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
             inputType = "password";
         } else if (field.type.includes("SelfOr")) {
             placeholder = context.user.email;
+            inputType = "email";
         }
 
         inputFields.push(`
@@ -143,6 +149,10 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
         <fieldset>
             ${inputFields.join("\n")}
         </fieldset>
+
+        <button class="call-endpoint">
+            Call Endpoint
+        </button>
     `;
 }
 
@@ -159,8 +169,9 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
         if (field.type === "string") {
             params[field.name] = input.value;
         } else {
-            // Parse throws an error when the user inputs invalid json.
-            // Fallback to the raw input.
+            // Users can input complex types into text boxes.
+            // Attempt to parse the input string into JSON.
+            // Fallback to the raw input in case the input is not meant to be JSON.
             try {
                 params[field.name] = JSON.parse(`${input.value}`);
             } catch (error) {
