@@ -178,10 +178,6 @@ button {
     padding: 0.25em;
 }
 
-select {
-    max-width: 95vw;
-}
-
 /* Set basic relative font sizing. */
 h1 {
     font-size: 2.00rem;
@@ -420,6 +416,26 @@ fieldset {
     color: var(--color-text-primary);
 }
 
+.page-controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
+    font-size: var(--font-size-large);
+
+    padding-bottom: 1em;
+    border-bottom: 3px solid var(--color-text-secondary);
+    margin-bottom: 1em;
+}
+
+.page-controls select {
+    max-width: 95vw;
+}
+
 .endpoint-area {
     display: flex;
     flex-direction: column;
@@ -450,23 +466,6 @@ fieldset {
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
-.page-controls {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-
-    font-size: var(--font-size-large);
-
-    padding-bottom: 1em;
-    border-bottom: 3px solid var(--color-text-secondary);
-    margin-bottom: 1em;
-}
-
-
 .endpoint-area .input-field {
     display: flex;
     flex-direction: column;
@@ -477,7 +476,7 @@ fieldset {
 }
 
 .endpoint-area input {
-    padding: 0.5em 1em;
+    padding: 0.5em;
 }
 
 .results-area .code {

@@ -3,9 +3,9 @@ import * as Autograder from '../autograder/base.js'
 import * as Render from './render.js'
 import * as Routing from './routing.js'
 
-/* The priority of the field to show first. */
-/* Items later in the list have the highest priority. */
-const fieldPriority = [
+// The priority of the field to show first.
+// Items later in the list have the highest priority.
+const FIELD_PRIORITY = [
     "assignment-id",
     "course-id",
     "user-pass",
@@ -54,13 +54,11 @@ function render(endpoints, selectedEndpoint, context, container) {
     let selector = renderSelector(endpoints, selectedEndpoint);
     let endpointArea = renderEndpointArea(endpoints, selectedEndpoint, context);
 
-    let html = `
+    container.innerHTML = `
         <div class="page-controls">${selector}</div>
         <div class="endpoint-area">${endpointArea}</div>
         <div class="results-area"></div>
     `;
-
-    container.innerHTML = html;
 
     container.querySelector(".page-controls select").addEventListener("change", function(event) {
         let newParams = {
@@ -72,12 +70,9 @@ function render(endpoints, selectedEndpoint, context, container) {
     });
 
     let button = container.querySelector(".endpoint-area button");
-
-    if (button) {
-        button.addEventListener("click", function(event) {
-            callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
-        });
-    }
+    button?.addEventListener("click", function(event) {
+        callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
+    });
 }
 
 function renderSelector(endpoints, selectedEndpoint) {
@@ -107,8 +102,8 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 
     let sortedInputs = endpoints[selectedEndpoint]["input"];
     sortedInputs.sort(function(a, b) {
-        let aPriority = fieldPriority.indexOf(a.name);
-        let bPriority = fieldPriority.indexOf(b.name);
+        let aPriority = FIELD_PRIORITY.indexOf(a.name);
+        let bPriority = FIELD_PRIORITY.indexOf(b.name);
 
         return bPriority - aPriority;
     });
@@ -120,6 +115,7 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 
         if (field.name === "user-email") {
             placeholder = context.user.email;
+            inputType = "email";
         } else if (field.name === "user-pass") {
             placeholder = "<current token>";
             inputType = "password";
@@ -155,17 +151,21 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
 
     let params = {};
     for (let field of inputFields) {
-        let input = container.querySelector(`.endpoint-area fieldset #${field.name}`);
-        if (input && input.value != "") {
-            if (field.type === "string") {
+        let input = container.querySelector(`.endpoint-area fieldset [name="${field.name}"]`);
+        if (!input || input.value === "") {
+            continue
+        }
+
+        if (field.type === "string") {
+            params[field.name] = input.value;
+        } else {
+            // Parse throws an error when the user inputs invalid json.
+            // Fallback to the raw input.
+            try {
+                params[field.name] = JSON.parse(`${input.value}`);
+            } catch (error) {
+                console.error(error);
                 params[field.name] = input.value;
-            } else {
-                try {
-                    params[field.name] = JSON.parse(`${input.value}`);
-                } catch (error) {
-                    console.error(error);
-                    params[field.name] = input.value;
-                }
             }
         }
     }
