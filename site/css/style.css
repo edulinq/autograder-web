@@ -21,7 +21,7 @@
     --color-dark-bg-secondary: #294140;
     --color-dark-bg-tertiary: #b99d88;
 
-    --color-dark-text-primary: #f5f0e6;
+    --color-dark-text-primary: #d8ccbb;
     --color-dark-text-secondary: #d8ccbb;
     --color-dark-text-tertiary: #050505;
 
@@ -32,7 +32,7 @@
     --color-dark-text-tertiary-low: rgba(25, 17, 9, 0.45);
 
     --color-dark-bg-accent-primary: #a07b56;
-    --color-dark-text-accent: #214926;
+    --color-dark-text-accent: #f5f0e6;
     --color-dark-text-accent-low: rgba(24, 17, 9, 0.45);
 
     --color-bg-shadow: #000000;
@@ -438,7 +438,7 @@ fieldset {
 .card a {
     padding: 1.5em;
     text-decoration: none;
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
 }
 
 .page-controls {
@@ -453,7 +453,7 @@ fieldset {
     font-size: var(--font-size-large);
 
     padding-bottom: 1em;
-    border-bottom: 3px solid var(--color-text-secondary);
+    border-bottom: 3px solid var(--color-text-primary);
     margin-bottom: 1em;
 }
 
@@ -469,7 +469,7 @@ fieldset {
 
     padding-bottom: 1em;
     margin-bottom: 1em;
-    border-bottom: 3px solid var(--color-text-secondary);
+    border-bottom: 3px solid var(--color-text-primary);
 }
 
 .endpoint-area:empty {
