@@ -142,9 +142,11 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     }
 
     return `
-        <h2>
-            ${selectedEndpoint}
-        </h2>
+        <div class="title">
+            <h2>
+                ${selectedEndpoint}
+            </h2>
+        </div>
 
         <fieldset>
             ${inputFields.join("\n")}
@@ -191,7 +193,12 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
         })
         .catch(function(message) {
             console.error(message)
-            resultsArea.innerHTML = Render.autograderError(message);
+            let errorHTML = Render.autograderError(message);
+            resultsArea.innerHTML = `
+                <code class="code">
+                    ${errorHTML}
+                </code>
+            `;
         })
     ;
 }

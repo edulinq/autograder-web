@@ -452,8 +452,6 @@ fieldset {
 
     font-size: var(--font-size-large);
 
-    padding-bottom: 1em;
-    border-bottom: 3px solid var(--color-text-primary);
     margin-bottom: 1em;
 }
 
@@ -466,14 +464,30 @@ fieldset {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-    border-bottom: 3px solid var(--color-text-primary);
 }
 
 .endpoint-area:empty {
     display: none;
+}
+
+.endpoint-area .title {
+    display: flex;
+    flex: 1, 1, 100%;
+    flex-direction: column;
+    align-self: stretch;
+
+    gap: 1em;
+    padding: 1.5em;
+    margin-bottom: 1em;
+
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--curve-radius);
+    box-shadow: 2px 2px 1px var(--color-bg-shadow);
+}
+
+.endpoint-area h2 {
+    margin-bottom: 0em;
 }
 
 .endpoint-area fieldset {
@@ -528,6 +542,7 @@ fieldset {
 
     overflow-x: scroll;
     padding: 1.5em;
+    margin-top: 1em;
     margin-bottom: 1em;
 
     border-radius: var(--curve-radius);
