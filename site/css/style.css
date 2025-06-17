@@ -169,6 +169,12 @@ html {
     background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
     font-size: var(--font-size-normal);
+
+    /* Montserrat text font. */
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
 }
 
 a {
