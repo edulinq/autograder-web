@@ -15,7 +15,7 @@
 
     --color-light-text-primary-low: rgba(245, 243, 240, 0.45);
     --color-light-text-secondary-low: rgba(24, 17, 9, 0.35);
-    --color-light-text-tertiary-low: rgba(24, 17, 9, 0.20);
+    --color-light-text-tertiary-low: rgba(24, 17, 9, 0.35);
 
     --color-dark-bg-primary: #2d050c;
     --color-dark-bg-secondary: #294140;
@@ -29,7 +29,7 @@
 
     --color-dark-text-primary-low: rgba(245, 243, 240, 0.45);
     --color-dark-text-secondary-low: rgba(245, 243, 240, 0.35);
-    --color-dark-text-tertiary-low: rgba(25, 17, 9, 0.45);
+    --color-dark-text-tertiary-low: rgba(24, 17, 9, 0.35);
 
     --color-dark-bg-accent-primary: #a07b56;
     --color-dark-text-accent: #f5f0e6;
@@ -547,6 +547,7 @@ fieldset {
 
 .endpoint-area input::placeholder {
     color: var(--color-text-tertiary-low);
+    font-weight: 550;
 }
 
 .endpoint-area input[type="checkbox"] {
