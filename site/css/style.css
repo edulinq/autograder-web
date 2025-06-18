@@ -447,6 +447,19 @@ fieldset {
     color: var(--color-text-secondary);
 }
 
+.center-endpoint-page {
+    display: flex;
+    justify-content: center;
+}
+
+.endpoint-page {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    max-width: fit-content;
+}
+
 .page-controls {
     display: flex;
     flex-direction: row;
@@ -470,17 +483,19 @@ fieldset {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    max-width: 95vw;
 }
 
 .endpoint-area:empty {
     display: none;
 }
 
-.endpoint-area .title {
+.endpoint-area .endpoint-title {
     display: flex;
-    flex: 1, 1, 100%;
     flex-direction: column;
     align-self: stretch;
+    overflow-x: auto;
+    max-width: 95vw;
 
     gap: 1em;
     padding: 1.5em;
@@ -544,9 +559,11 @@ fieldset {
     display: flex;
     flex-direction: column;
     align-self: stretch;
+    overflow-x: auto;
+    max-width: 95vw;
     gap: 1em;
 
-    overflow-x: scroll;
+    overflow-x: auto;
     padding: 1.5em;
     margin-top: 1em;
     margin-bottom: 1em;

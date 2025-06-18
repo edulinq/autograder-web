@@ -55,9 +55,13 @@ function render(endpoints, selectedEndpoint, context, container) {
     let endpointArea = renderEndpointArea(endpoints, selectedEndpoint, context);
 
     container.innerHTML = `
-        <div class="page-controls">${selector}</div>
-        <div class="endpoint-area">${endpointArea}</div>
-        <div class="results-area"></div>
+        <div class="center-endpoint-page">
+            <div class="endpoint-page">
+                <div class="page-controls">${selector}</div>
+                <div class="endpoint-area">${endpointArea}</div>
+                <div class="results-area"></div>
+            </div>
+        </div>
     `;
 
     container.querySelector(".page-controls select").addEventListener("change", function(event) {
@@ -142,7 +146,7 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     }
 
     return `
-        <div class="title">
+        <div class="endpoint-title">
             <h2>
                 ${selectedEndpoint}
             </h2>
