@@ -515,7 +515,7 @@ fieldset {
     flex-direction: column;
     align-self: stretch;
     max-width: 95vw;
-    overflow-x: auto;
+    overflow-x: scroll;
 
     gap: 1em;
     padding: 1.5em;
@@ -545,10 +545,6 @@ fieldset {
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
-.endpoint-area .required {
-    color: red;
-}
-
 .endpoint-area .input-field {
     display: flex;
     flex-direction: column;
@@ -568,7 +564,12 @@ fieldset {
 }
 
 .endpoint-area button {
+    border-color: var(--color-bg-accent-primary);
     padding: 1em;
+}
+
+.endpoint-controls select {
+    border-color: var(--color-bg-accent-primary);
 }
 
 .results-area .code {
