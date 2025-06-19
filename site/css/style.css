@@ -37,7 +37,8 @@
 
     --color-bg-shadow: #000000;
 
-    --curve-radius: 5px;
+    --curve-radius-small: 20px;
+    --curve-radius-large: 40px;
 
     --font-size-larger: 1.25rem;
     --font-size-large: 1.15rem;
@@ -186,9 +187,14 @@ input,
 select {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary);
+
+    border-color: var(--color-text-secondary);
     border-width: medium;
+    border-radius: var(--curve-radius-small);
+    box-shadow: 2px 2px 1px var(--color-bg-shadow);
+
     cursor: pointer;
-    padding: 0.5em;
+    padding: 0.75em;
 }
 
 button:disabled,
@@ -196,22 +202,30 @@ input:disabled,
 select:disabled {
     background-color: var(--color-bg-secondary-low);
     color: var(--color-text-secondary-low);
+    border-color: var(--color-text-secondary-low);
     cursor: no-drop;
 }
 
-/* TODO: Style invalid inputs
 input:invalid {
-    box-shadow: 0 0 0 0.25em var(--color-bg-accent-primary),
-                0 0 0.75em 0.5em var(--color-bg-accent-primary);
+    border-color: red;
 }
-*/
+
+button:focus,
+button:focus-visible,
+select:focus,
+select:focus-visible,
+input:focus,
+input:focus-visible {
+    accent-color: var(--color-bg-accent-primary);
+    border-color: var(--color-bg-accent-primary);
+}
 
 select {
 	padding: 1em;
 }
 
 button {
-    border-radius: 5px;
+    border-radius: var(--curve-radius-small);
 }
 
 /* Set basic relative font sizing. */
@@ -407,7 +421,7 @@ fieldset {
 .content {
     flex-grow: 1000;
     padding: 1.0em;
-    border-radius: 10px;
+    border-radius: var(--curve-radius-large);
 }
 
 .content h2 {
@@ -437,7 +451,7 @@ fieldset {
     flex-direction: column;
     justify-content: center;
 
-    border-radius: 10px;
+    border-radius: var(--curve-radius-large);
     background-color: var(--color-bg-secondary);
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
     font-size: var(--font-size-larger);
@@ -522,7 +536,7 @@ fieldset {
 
     color: var(--color-text-secondary);
     background-color: var(--color-bg-secondary);
-    border-radius: var(--curve-radius);
+    border-radius: var(--curve-radius-small);
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
@@ -541,7 +555,7 @@ fieldset {
 
     color: var(--color-text-primary);
     background-color: var(--color-bg-secondary);
-    border-radius: var(--curve-radius);
+    border-radius: var(--curve-radius-small);
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
@@ -564,12 +578,7 @@ fieldset {
 }
 
 .endpoint-area button {
-    border-color: var(--color-bg-accent-primary);
     padding: 1em;
-}
-
-.endpoint-controls select {
-    border-color: var(--color-bg-accent-primary);
 }
 
 .results-area .code {
@@ -582,7 +591,7 @@ fieldset {
     padding: 1.5em;
     margin-bottom: 1em;
 
-    border-radius: var(--curve-radius);
+    border-radius: var(--curve-radius-small);
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 
     color: var(--color-text-secondary);
