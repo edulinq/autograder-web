@@ -1,39 +1,39 @@
 :root {
-    --color-light-bg-primary: #f5f2ea;
-    --color-light-bg-secondary: #294140;
-    --color-light-bg-tertiary: #b99d88;
+    --color-light-bg-primary: #f0f0f0;
+    --color-light-bg-secondary: #f5f5f5;
+    --color-light-bg-tertiary: #ffffff;
 
-    --color-light-bg-accent-primary: #4c2f2e;
-    --color-light-text-accent: #f5f2ea;
-    --color-light-text-accent-low: rgba(245, 243, 240, 0.45);
+    --color-light-bg-accent-primary: rgb(130, 130, 255);
 
-    --color-light-text-primary: #4c2f2e;
-    --color-light-text-secondary: #f5f2ea;
-    --color-light-text-tertiary: #050505;
+    --color-light-text-primary: rgba(0, 0, 0, 0.90);
+    --color-light-text-secondary: rgba(0, 0, 0, 0.70);
+    --color-light-text-tertiary: rgba(0, 0, 0, 0.50);
+    --color-light-text-accent: rgba(0, 0, 0, 0.90);
 
-    --color-light-text-link: #214926;
+    --color-light-text-link: rgba(40, 40, 255, 0.75);
 
-    --color-light-text-primary-low: rgba(245, 243, 240, 0.45);
-    --color-light-text-secondary-low: rgba(24, 17, 9, 0.35);
-    --color-light-text-tertiary-low: rgba(24, 17, 9, 0.35);
+    --color-light-text-primary-low: rgba(0, 0, 0, 0.45);
+    --color-light-text-secondary-low: rgba(0, 0, 0, 0.35);
+    --color-light-text-tertiary-low: rgba(0, 0, 0, 0.20);
+    --color-light-text-accent-low: rgba(0, 0, 0, 0.45);
 
-    --color-dark-bg-primary: #2d050c;
-    --color-dark-bg-secondary: #294140;
-    --color-dark-bg-tertiary: #b99d88;
+    --color-dark-bg-primary: #303030;
+    --color-dark-bg-secondary: #151515;
+    --color-dark-bg-tertiary: #000000;
 
-    --color-dark-text-primary: #d8ccbb;
-    --color-dark-text-secondary: #d8ccbb;
-    --color-dark-text-tertiary: #050505;
+    --color-dark-text-primary: rgba(255, 255, 255, 0.90);
+    --color-dark-text-secondary: rgba(255, 255, 255, 0.80);
+    --color-dark-text-tertiary: rgba(255, 255, 255, 0.70);
+    --color-dark-text-accent: rgba(255, 255, 255, 0.90);
 
-    --color-dark-text-link: #9ece9a;
+    --color-dark-text-link: rgba(130, 130, 255, 0.85);
 
-    --color-dark-text-primary-low: rgba(245, 243, 240, 0.45);
-    --color-dark-text-secondary-low: rgba(245, 243, 240, 0.35);
-    --color-dark-text-tertiary-low: rgba(24, 17, 9, 0.35);
+    --color-dark-text-primary-low: rgba(255, 255, 255, 0.45);
+    --color-dark-text-secondary-low: rgba(255, 255, 255, 0.40);
+    --color-dark-text-tertiary-low: rgba(255, 255, 255, 0.35);
+    --color-dark-text-accent-low: rgba(255, 255, 255, 0.45);
 
-    --color-dark-bg-accent-primary: #a07b56;
-    --color-dark-text-accent: #f5f0e6;
-    --color-dark-text-accent-low: rgba(24, 17, 9, 0.45);
+    --color-dark-bg-accent-primary: rgb(130, 130, 255);
 
     --color-bg-shadow: #000000;
 
@@ -188,6 +188,7 @@ select {
     color: var(--color-text-secondary);
     border-width: medium;
     cursor: pointer;
+    padding: 0.5em;
 }
 
 button:disabled,
@@ -198,14 +199,19 @@ select:disabled {
     cursor: no-drop;
 }
 
+/* TODO: Style invalid inputs
 input:invalid {
     box-shadow: 0 0 0 0.25em var(--color-bg-accent-primary),
                 0 0 0.75em 0.5em var(--color-bg-accent-primary);
 }
+*/
+
+select {
+	padding: 1em;
+}
 
 button {
     border-radius: 5px;
-    padding: 0.25em;
 }
 
 /* Set basic relative font sizing. */
@@ -449,6 +455,7 @@ fieldset {
 
 .center-endpoint-page {
     display: flex;
+    flex-direction: row;
     justify-content: center;
 }
 
@@ -478,12 +485,25 @@ fieldset {
     max-width: 95vw;
 }
 
+.endpoint-page > * {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    max-width: 95vw;
+
+    gap: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
 .endpoint-area {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    max-width: 95vw;
 }
 
 .endpoint-area:empty {
@@ -494,12 +514,11 @@ fieldset {
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    overflow-x: auto;
     max-width: 95vw;
+    overflow-x: auto;
 
     gap: 1em;
     padding: 1.5em;
-    margin-bottom: 1em;
 
     color: var(--color-text-secondary);
     background-color: var(--color-bg-secondary);
@@ -515,12 +534,12 @@ fieldset {
     display: flex;
     flex-direction: column;
     align-self: stretch;
+    max-width: 95vw;
 
     gap: 1em;
     padding: 1.5em;
-    margin-bottom: 1em;
 
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     background-color: var(--color-bg-secondary);
     border-radius: var(--curve-radius);
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
@@ -533,40 +552,33 @@ fieldset {
 .endpoint-area .input-field {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0.5em;
 }
 
 .endpoint-area label {
-    margin-bottom: 0.25em;
+    margin-bottom: 0.5em;
 }
 
 .endpoint-area input {
-    padding: 0.5em;
-    color: var(--color-text-tertiary);
     background-color: var(--color-bg-tertiary);
 }
 
 .endpoint-area input::placeholder {
-    color: var(--color-text-tertiary-low);
     font-weight: 550;
 }
 
-.endpoint-area input[type="checkbox"] {
-    align-self: flex-start;
-    height: 1em;
-    width: 1em;
+.endpoint-area button {
+    padding: 1em;
 }
 
 .results-area .code {
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    overflow-x: auto;
-    max-width: 95vw;
     gap: 1em;
 
-    overflow-x: auto;
+    overflow-x: scroll;
     padding: 1.5em;
-    margin-top: 1em;
     margin-bottom: 1em;
 
     border-radius: var(--curve-radius);

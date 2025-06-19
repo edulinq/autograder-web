@@ -57,14 +57,14 @@ function render(endpoints, selectedEndpoint, context, container) {
     container.innerHTML = `
         <div class="center-endpoint-page">
             <div class="endpoint-page">
-                <div class="page-controls">${selector}</div>
+                <div class="endpoint-controls">${selector}</div>
                 <div class="endpoint-area">${endpointArea}</div>
                 <div class="results-area"></div>
             </div>
         </div>
     `;
 
-    container.querySelector(".page-controls select").addEventListener("change", function(event) {
+    container.querySelector(".endpoint-controls select").addEventListener("change", function(event) {
         let newParams = {
             [Routing.PARAM_TARGET_ENDPOINT]: event.target.value,
         };
