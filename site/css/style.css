@@ -36,9 +36,11 @@
     --color-dark-bg-accent-primary: rgb(130, 130, 255);
 
     --color-bg-shadow: #000000;
+    --color-bg-error: #ff0033;
+    --color-text-error: #ee1144;
 
-    --curve-radius-small: 20px;
-    --curve-radius-large: 40px;
+    --curve-radius-small: 10px;
+    --curve-radius-large: 20px;
 
     --font-size-larger: 1.25rem;
     --font-size-large: 1.15rem;
@@ -171,7 +173,6 @@ html {
     color: var(--color-text-primary);
     font-size: var(--font-size-normal);
 
-    /* Montserrat text font. */
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 450;
@@ -194,7 +195,7 @@ select {
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 
     cursor: pointer;
-    padding: 0.75em;
+    padding: 0.25em 0.50em;
 }
 
 button:disabled,
@@ -221,7 +222,7 @@ input:focus-visible {
 }
 
 select {
-	padding: 1em;
+	padding: 0.75em 0.5em;
 }
 
 button {
@@ -467,13 +468,13 @@ fieldset {
     color: var(--color-text-secondary);
 }
 
-.center-endpoint-page {
+.endpoint-page {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.endpoint-page {
+.endpoint-content {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -499,7 +500,7 @@ fieldset {
     max-width: 95vw;
 }
 
-.endpoint-page > * {
+.endpoint-content > div {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -529,7 +530,7 @@ fieldset {
     flex-direction: column;
     align-self: stretch;
     max-width: 95vw;
-    overflow-x: scroll;
+    overflow-x: auto;
 
     gap: 1em;
     padding: 1.5em;
@@ -567,6 +568,8 @@ fieldset {
 
 .endpoint-area label {
     margin-bottom: 0.5em;
+    /* TODO: Ask Sam how he feels about the shift. */
+    padding-left: 0.75em;
 }
 
 .endpoint-area input {
@@ -578,7 +581,7 @@ fieldset {
 }
 
 .endpoint-area button {
-    padding: 1em;
+    padding: 0.50em 0.75em;
 }
 
 .results-area .code {
@@ -587,7 +590,7 @@ fieldset {
     align-self: stretch;
     gap: 1em;
 
-    overflow-x: scroll;
+    overflow-x: auto;
     padding: 1.5em;
     margin-bottom: 1em;
 

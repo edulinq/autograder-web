@@ -55,8 +55,8 @@ function render(endpoints, selectedEndpoint, context, container) {
     let endpointArea = renderEndpointArea(endpoints, selectedEndpoint, context);
 
     container.innerHTML = `
-        <div class="center-endpoint-page">
-            <div class="endpoint-page">
+        <div class="endpoint-page">
+            <div class="endpoint-content">
                 <div class="endpoint-controls">${selector}</div>
                 <div class="endpoint-area">${endpointArea}</div>
                 <div class="results-area"></div>
