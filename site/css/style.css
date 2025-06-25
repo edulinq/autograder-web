@@ -1,6 +1,6 @@
 :root {
-    --color-light-bg-primary: #f0f0f0;
-    --color-light-bg-secondary: #f5f5f5;
+    --color-light-bg-primary: #e7e7ff;
+    --color-light-bg-secondary: #f3f3ff;
     --color-light-bg-tertiary: #ffffff;
 
     --color-light-bg-accent-primary: rgb(130, 130, 255);
@@ -171,14 +171,22 @@ html.dark .light-only {
 }
 
 html {
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
     font-size: var(--font-size-normal);
 
     font-family: "Montserrat", Verdana, sans-serif;
     font-optical-sizing: auto;
     font-weight: var(--font-weight-normal);
     font-style: normal;
+}
+
+.primary-color {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.primary-color-low {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary-low);
 }
 
 .secondary-color {
@@ -191,7 +199,7 @@ html {
 }
 
 .secondary-color-low {
-    background-color: var(--color-bg-secondary-low);
+    background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary-low);
 }
 
@@ -209,7 +217,7 @@ html {
 }
 
 .tertiary-color-low {
-    background-color: var(--color-bg-tertiary-low);
+    background-color: var(--color-bg-tertiary);
     color: var(--color-text-tertiary-low);
 }
 
@@ -275,7 +283,7 @@ button {
 }
 
 select {
-	padding: 0.75em 1em;
+    padding: 0.75em 1em;
 }
 
 input:invalid {
@@ -375,7 +383,7 @@ fieldset {
 }
 
 .bright-mode-toggle span.active {
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     text-decoration: underline;
     color: var(--color-text-accent);
 }
@@ -615,10 +623,6 @@ fieldset {
 
 .endpoint-area label {
     margin-bottom: 0.5em;
-}
-
-.endpoint-area input::placeholder {
-    font-weight: var(--font-weight-bold);
 }
 
 .endpoint-area button {
