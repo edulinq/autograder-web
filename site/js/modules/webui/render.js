@@ -12,7 +12,7 @@ function makeCardObject(type = 'unknown', text = '', link = '#') {
 
 function card(card = {type: 'unknown', text: '', link: '#'}) {
     return `
-        <div class='card card-${card.type}'>
+        <div class='card card-${card.type} secondary-color drop-shadow'>
             <a href='${card.link}' alt='${card.text}'>
                 <span>${card.text}</span>
             </a>

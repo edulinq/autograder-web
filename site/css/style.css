@@ -36,8 +36,7 @@
     --color-dark-bg-accent-primary: rgb(130, 130, 255);
 
     --color-bg-shadow: #000000;
-    --color-bg-error: #ff0033;
-    --color-text-error: #ee1144;
+    --color-text-error: #f40055;
 
     --curve-radius-small: 10px;
     --curve-radius-large: 20px;
@@ -47,6 +46,9 @@
     --font-size-normal: 1.00rem;
     --font-size-small: 0.85rem;
     --font-size-smaller: 0.75rem;
+
+    --font-weight-normal: 450;
+    --font-weight-bold: 650;
 }
 
 /* Default to light colors. */
@@ -173,10 +175,68 @@ html {
     color: var(--color-text-primary);
     font-size: var(--font-size-normal);
 
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", Verdana, sans-serif;
     font-optical-sizing: auto;
-    font-weight: 450;
+    font-weight: var(--font-weight-normal);
     font-style: normal;
+}
+
+.secondary-color {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+}
+
+.secondary-color a {
+    color: var(--color-text-secondary);
+}
+
+.secondary-color-low {
+    background-color: var(--color-bg-secondary-low);
+    color: var(--color-text-secondary-low);
+}
+
+.secondary-color-low a {
+    color: var(--color-text-secondary-low);
+}
+
+.tertiary-color {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
+}
+
+.tertiary-color a {
+    color: var(--color-text-tertiary);
+}
+
+.tertiary-color-low {
+    background-color: var(--color-bg-tertiary-low);
+    color: var(--color-text-tertiary-low);
+}
+
+.tertiary-color-low a {
+    color: var(--color-text-tertiary-low);
+}
+
+.accent-color {
+    background-color: var(--color-bg-accent-primary);
+    color: var(--color-text-accent);
+}
+
+.accent-color a {
+    color: var(--color-text-accent);
+}
+
+.accent-color-low {
+    background-color: var(--color-bg-accent-primary);
+    color: var(--color-text-accent-low);
+}
+
+.accent-color-low a {
+    color: var(--color-text-accent-low);
+}
+
+.drop-shadow {
+    box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
 a {
@@ -195,7 +255,6 @@ select {
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 
     cursor: pointer;
-    padding: 0.25em 0.50em;
 }
 
 button:disabled,
@@ -207,26 +266,27 @@ select:disabled {
     cursor: no-drop;
 }
 
-input:invalid {
-    border-color: red;
-}
-
-button:focus,
-button:focus-visible,
-select:focus,
-select:focus-visible,
-input:focus,
-input:focus-visible {
-    accent-color: var(--color-bg-accent-primary);
-    border-color: var(--color-bg-accent-primary);
-}
-
-select {
-	padding: 0.75em 0.5em;
+input {
+    padding: 0.25em 0.5em;
 }
 
 button {
-    border-radius: var(--curve-radius-small);
+    padding: 0.5em 0.25em;
+}
+
+select {
+	padding: 0.75em 1em;
+}
+
+input:invalid {
+    border-color: var(--color-text-error);
+}
+
+button:focus,
+select:focus,
+input:focus {
+    accent-color: var(--color-bg-accent-primary);
+    border-color: var(--color-bg-accent-primary);
 }
 
 /* Set basic relative font sizing. */
@@ -330,8 +390,6 @@ fieldset {
 .header {
     padding: 0.5em;
     text-align: center;
-    color: var(--color-text-accent);
-    background-color: var(--color-bg-accent-primary);
 
     display: flex;
     flex-direction: row;
@@ -361,7 +419,6 @@ fieldset {
 
 .header a {
     text-decoration: none;
-    color: var(--color-text-accent);
 }
 
 .header .user-info {
@@ -379,7 +436,6 @@ fieldset {
 
 .footer {
     height: 1.5em;
-    background-color: var(--color-bg-accent-primary);
     padding: 0.5em 1em 0.5em 1em;
 
     display: flex;
@@ -453,8 +509,6 @@ fieldset {
     justify-content: center;
 
     border-radius: var(--curve-radius-large);
-    background-color: var(--color-bg-secondary);
-    box-shadow: 2px 2px 1px var(--color-bg-shadow);
     font-size: var(--font-size-larger);
     text-align: center;
 
@@ -465,7 +519,6 @@ fieldset {
 .card a {
     padding: 1.5em;
     text-decoration: none;
-    color: var(--color-text-secondary);
 }
 
 .endpoint-page {
@@ -535,10 +588,7 @@ fieldset {
     gap: 1em;
     padding: 1.5em;
 
-    color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
     border-radius: var(--curve-radius-small);
-    box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
 .endpoint-area h2 {
@@ -554,10 +604,7 @@ fieldset {
     gap: 1em;
     padding: 1.5em;
 
-    color: var(--color-text-primary);
-    background-color: var(--color-bg-secondary);
     border-radius: var(--curve-radius-small);
-    box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
 .endpoint-area .input-field {
@@ -568,23 +615,17 @@ fieldset {
 
 .endpoint-area label {
     margin-bottom: 0.5em;
-    /* TODO: Ask Sam how he feels about the shift. */
-    padding-left: 0.75em;
-}
-
-.endpoint-area input {
-    background-color: var(--color-bg-tertiary);
 }
 
 .endpoint-area input::placeholder {
-    font-weight: 550;
+    font-weight: var(--font-weight-bold);
 }
 
 .endpoint-area button {
     padding: 0.50em 0.75em;
 }
 
-.results-area .code {
+.results-area .result {
     display: flex;
     flex-direction: column;
     align-self: stretch;
@@ -595,10 +636,6 @@ fieldset {
     margin-bottom: 1em;
 
     border-radius: var(--curve-radius-small);
-    box-shadow: 2px 2px 1px var(--color-bg-shadow);
-
-    color: var(--color-text-secondary);
-    background-color: var(--color-bg-secondary);
 }
 
 .submission table,

@@ -140,19 +140,19 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
         inputFields.push(`
             <div class="input-field">
                 <label for="${field.name}">${field.name} (expects: ${field.type})</label>
-                <input type="${inputType}" id="${field.name}" name="${field.name}" placeholder="${placeholder}">
+                <input class="tertiary-color drop-shadow" type="${inputType}" id="${field.name}" name="${field.name}" placeholder="${placeholder}">
             </div>
         `);
     }
 
     return `
-        <div class="endpoint-title">
+        <div class="endpoint-title secondary-color drop-shadow">
             <h2>
                 ${selectedEndpoint}
             </h2>
         </div>
 
-        <fieldset>
+        <fieldset class="secondary-color drop-shadow">
             ${inputFields.join("\n")}
         </fieldset>
 
@@ -192,16 +192,16 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
     Autograder.Server.callEndpoint(targetEndpoint, params)
         .then(function(result) {
             resultsArea.innerHTML = `
-                <pre><code class="code code-block" data-lang="json">${JSON.stringify(result, null, 4)}</code></pre>
+                <pre><code class="result code code-block secondary-color drop-shadow" data-lang="json">${JSON.stringify(result, null, 4)}</code></pre>
             `;
         })
         .catch(function(message) {
             console.error(message)
             let errorHTML = Render.autograderError(message);
             resultsArea.innerHTML = `
-                <code class="code">
+                <div class="result secondary-color drop-shadow">
                     ${errorHTML}
-                </code>
+                </div>
             `;
         })
     ;
