@@ -58,7 +58,7 @@ function render(endpoints, selectedEndpoint, context, container) {
         <div class="endpoint-page">
             <div class="endpoint-content">
                 <div class="endpoint-controls">${selector}</div>
-                <div class="endpoint-area">${endpointArea}</div>
+                <div class="endpoint-input">${endpointArea}</div>
                 <div class="results-area"></div>
             </div>
         </div>
@@ -73,12 +73,12 @@ function render(endpoints, selectedEndpoint, context, container) {
         Routing.redirect(path);
     });
 
-    let button = container.querySelector(".endpoint-area button");
+    let button = container.querySelector(".endpoint-input button");
     button?.addEventListener("click", function(event) {
         callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
     });
 
-    let fieldset = container.querySelector(".endpoint-area fieldset");
+    let fieldset = container.querySelector(".endpoint-input fieldset");
     fieldset?.addEventListener("keydown", function(event) {
         if (event.key != "Enter") {
             return
@@ -152,9 +152,11 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
             </h2>
         </div>
 
-        <fieldset class="secondary-color drop-shadow">
-            ${inputFields.join("\n")}
-        </fieldset>
+        <div class="user-input-fields secondary-color drop-shadow">
+            <fieldset>
+                ${inputFields.join("\n")}
+            </fieldset>
+        </div>
 
         <button class="call-endpoint">
             Call Endpoint
@@ -167,7 +169,7 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
 
     let params = {};
     for (let field of inputFields) {
-        let input = container.querySelector(`.endpoint-area fieldset [name="${field.name}"]`);
+        let input = container.querySelector(`.endpoint-input fieldset [name="${field.name}"]`);
         if (!input || input.value === "") {
             continue
         }

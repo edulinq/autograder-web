@@ -336,6 +336,12 @@ fieldset {
     border: none;
 }
 
+fieldset > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+}
+
 .loading-container {
     position: relative;
 }
@@ -561,6 +567,28 @@ fieldset {
     max-width: 95vw;
 }
 
+.user-input-fields {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    max-width: 95vw;
+
+    gap: 1em;
+    padding: 1.5em;
+
+    border-radius: var(--curve-radius-small);
+}
+
+.user-input-fields fieldset {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+.user-input-fields label {
+    margin-bottom: 0.5em;
+}
+
 .endpoint-content > div {
     display: flex;
     flex-direction: column;
@@ -575,18 +603,18 @@ fieldset {
     margin-left: 0.5em;
 }
 
-.endpoint-area {
+.endpoint-input {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
 
-.endpoint-area:empty {
+.endpoint-input:empty {
     display: none;
 }
 
-.endpoint-area .endpoint-title {
+.endpoint-input .endpoint-title {
     display: flex;
     flex-direction: column;
     align-self: stretch;
@@ -599,34 +627,12 @@ fieldset {
     border-radius: var(--curve-radius-small);
 }
 
-.endpoint-area h2 {
+.endpoint-input h2 {
     margin-bottom: 0em;
 }
 
-.endpoint-area fieldset {
-    display: flex;
-    flex-direction: column;
-    align-self: stretch;
-    max-width: 95vw;
-
-    gap: 1em;
-    padding: 1.5em;
-
-    border-radius: var(--curve-radius-small);
-}
-
-.endpoint-area .input-field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5em;
-}
-
-.endpoint-area label {
-    margin-bottom: 0.5em;
-}
-
-.endpoint-area button {
-    padding: 0.50em 0.75em;
+.endpoint-input button {
+    padding: 0.5em 0.75em;
 }
 
 .results-area .result {
