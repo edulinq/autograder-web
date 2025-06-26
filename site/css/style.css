@@ -336,12 +336,6 @@ fieldset {
     border: none;
 }
 
-fieldset > div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5em;
-}
-
 .loading-container {
     position: relative;
 }
@@ -583,6 +577,12 @@ fieldset > div {
     display: flex;
     flex-direction: column;
     align-self: stretch;
+}
+
+.user-input-fields fieldset > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
 }
 
 .user-input-fields label {
