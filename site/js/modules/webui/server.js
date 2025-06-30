@@ -160,7 +160,11 @@ function getInputField(field, context) {
     let inputType = "text";
     let placeholder = "";
     let extraFields = "";
-    let displayName = `${field.name} (expects: ${field.type})`;
+    let displayName = `${field.name}`;
+
+    if (field.type != "bool") {
+        displayName += ` (expects: ${field.type})`;
+    }
 
     if (field.type.includes("SelfOr")) {
         placeholder = context.user.email;
