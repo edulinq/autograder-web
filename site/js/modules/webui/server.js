@@ -12,6 +12,12 @@ const FIELD_PRIORITY = [
     "user-email",
 ];
 
+const PATTERN_BOOL = /^bool$/;
+const PATTERN_INT = /^int\d*$/;
+const PATTERN_TARGET_SELF_OR = /^core\.Target((Course)|(Server))UserSelfOr[a-zA-Z]+$/;
+const PATTERN_USER_EMAIL = /^user-email$/;
+const PATTERN_USER_PASS = /^user-pass$/;
+
 function init() {
     Routing.addRoute(/^server$/, handlerServer, 'Server Actions', undefined);
     Routing.addRoute(/^server\/call-api$/, handlerCallAPI, 'Call API', undefined);
@@ -87,8 +93,7 @@ function render(endpoints, selectedEndpoint, context, container) {
         callEndpoint(selectedEndpoint, endpoints[selectedEndpoint]["input"], context, container);
     });
 
-    let allInputFields = container.querySelectorAll(".endpoint-input fieldset input");
-    allInputFields?.forEach(function(input) {
+    container.querySelectorAll(".endpoint-input fieldset input")?.forEach(function(input) {
         input.addEventListener("blur", function(event) {
             input.classList.add("touched");
         });
@@ -130,9 +135,12 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 
     let inputFields = [];
     for (const field of sortedInputs) {
-        const inputField = getInputField(field, context);
-
-        inputFields.push(`${inputField}`);
+        inputFields.push(`${getInputField({
+            fieldName: field.name,
+            fieldType: field.type,
+            requiredField: field.required,
+            context: context,
+        })}`);
     }
 
     return `
@@ -154,49 +162,61 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     `;
 }
 
-function getInputField(field, context) {
+// Given field information, the context, and optional styling classes,
+// returns the HTML to display a field for user input.
+function getInputField(
+        {fieldName, fieldType, requiredField, context},
+        {stylingClasses = "tertiary-color", dropShadow = true} = {},
+        ) {
     let fieldClass = "input-field";
 
     let inputType = "text";
     let placeholder = "";
     let extraFields = "";
-    let displayName = `${field.name}`;
+    let displayName = `${fieldName}`;
+    let labelFirst = true;
 
-    if (field.type != "bool") {
-        displayName += ` (expects: ${field.type})`;
+    if (!PATTERN_BOOL.test(fieldType)) {
+        displayName += ` (expects: ${fieldType})`;
     }
 
-    if (field.type.includes("SelfOr")) {
+    if (PATTERN_TARGET_SELF_OR.test(fieldType)) {
         placeholder = context.user.email;
         inputType = "email";
-    } else if (field.type.includes("int")) {
+    } else if (PATTERN_INT.test(fieldType)) {
         inputType = "number";
         extraFields += ` pattern="\d*"`;
-    } else if (field.type === "bool") {
-        fieldClass = "checkbox-field";
+    } else if (PATTERN_BOOL.test(fieldType)) {
+        fieldClass += " checkbox-field";
+        labelFirst = false;
 
         inputType = "checkbox";
         extraFields += ` value="true"`;
     }
 
-    if (field.name === "user-email") {
+    if (PATTERN_USER_EMAIL.test(fieldName)) {
         placeholder = context.user.email;
         inputType = "email";
-    } else if (field.name === "user-pass") {
+    } else if (PATTERN_USER_PASS.test(fieldName)) {
         placeholder = "<current token>";
         inputType = "password";
     }
 
-    if ((field.required) && (placeholder === "")) {
+    if ((requiredField) && (placeholder === "")) {
         extraFields += " required";
-        displayName += ` <span class="required">*</span>`;
+        displayName += ` <span class="required-color">*</span>`;
     }
 
-    const label = `<label for="${field.name}">${displayName}</label>`;
-    const input = `<input class="tertiary-color drop-shadow" type="${inputType}" id="${field.name}" name="${field.name}" placeholder="${placeholder}"${extraFields}>`;
+    let inputClass = stylingClasses;
+    if (dropShadow) {
+        inputClass += " drop-shadow";
+    }
+
+    const label = `<label for="${fieldName}">${displayName}</label>`;
+    const input = `<input class="${inputClass}" type="${inputType}" id="${fieldName}" name="${fieldName}" placeholder="${placeholder}"${extraFields}>`;
 
     let fieldHTML = "";
-    if (fieldClass != "checkbox-field") {
+    if (labelFirst) {
         fieldHTML = `
             ${label}
             ${input}
@@ -267,10 +287,12 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
     let resultsArea = container.querySelector(".results-area");
 
     if (errorMessages.length > 0) {
-        let errorHTML = "<p>The request was not submitted to the autograder due to the following errors:</p>";
-        errorHTML += errorMessages.join("\n");
-
-        resultsArea.innerHTML = `<div class="result secondary-color drop-shadow">${errorHTML}</div>`;
+        resultsArea.innerHTML = `
+            <div class="result secondary-color drop-shadow">
+                <p>The request was not submitted to the autograder due to the following errors:</p>
+                ${errorMessages.join("\n")}
+            </div>
+        `;
         return;
     }
 

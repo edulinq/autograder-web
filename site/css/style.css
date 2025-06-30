@@ -247,7 +247,7 @@ html {
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
-.required {
+.required-color {
     color: var(--color-text-error);
 }
 
@@ -607,6 +607,7 @@ fieldset {
 }
 
 .user-input-fields .checkbox-field label {
+    margin-bottom: 0em;
     margin-left: 0.5em;
 }
 
