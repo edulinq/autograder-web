@@ -257,7 +257,8 @@ a {
 
 button,
 input,
-select {
+select,
+textarea {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary);
 
@@ -542,13 +543,15 @@ fieldset {
     text-decoration: none;
 }
 
-.endpoint-page {
+.endpoint-page,
+.email-page {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.endpoint-content {
+.endpoint-content,
+.email-content {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -598,11 +601,21 @@ fieldset {
     margin-bottom: 0.5em;
 }
 
-.user-input-fields label {
+.user-input-fields fieldset > div.checkbox-field {
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-input-fields .input-field label {
     margin-bottom: 0.5em;
 }
 
-.endpoint-content > div {
+.user-input-fields .checkbox-field label {
+    margin-left: 0.5em;
+}
+
+.endpoint-content > div,
+.email-content > div {
     display: flex;
     flex-direction: column;
     align-content: center;

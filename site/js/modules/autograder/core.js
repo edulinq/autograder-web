@@ -60,13 +60,15 @@ function deleteToken(credentials) {
     });
 }
 
-async function resolveAPIResponse(response) {
+async function resolveAPIResponse(response, clearContextUser = true) {
     let body = await response.json();
 
     if (!body.success) {
         if (response.status == 401) {
-            // Clear any credentials in the cache.
-            clearCredentials(false);
+            if (clearContextUser) {
+                // Clear any credentials in the cache when the context user has an auth error.
+                clearCredentials(false);
+            }
 
             // Shorten the message for auth error.
             return Promise.reject(body.message);
@@ -95,7 +97,8 @@ async function resolveAPIError(response) {
 function sendRequest({
         endpoint = undefined,
         payload = {}, files = [],
-        override_email = undefined, override_cleartext = undefined,
+        overrideEmail = undefined, overrideCleartext = undefined,
+        clearContextUser = true,
         }) {
     if (!endpoint) {
         throw new Error("Endpoint not specified.")
@@ -107,12 +110,12 @@ function sendRequest({
         payload[REQUEST_USER_PASS_KEY] = credentials.token;
     }
 
-    if (override_email) {
-        payload[REQUEST_USER_EMAIL_KEY] = override_email;
+    if (overrideEmail) {
+        payload[REQUEST_USER_EMAIL_KEY] = overrideEmail;
     }
 
-    if (override_cleartext) {
-        payload[REQUEST_USER_PASS_KEY] = Util.sha256(override_cleartext);
+    if (overrideCleartext) {
+        payload[REQUEST_USER_PASS_KEY] = Util.sha256(overrideCleartext);
     }
 
     let url = `${BASE_URL}/${API_VESION}/${endpoint}`;
@@ -129,7 +132,9 @@ function sendRequest({
         'body': body,
     });
 
-    return response.then(resolveAPIResponse, resolveAPIError);
+    return response.then(function(result) {
+        return resolveAPIResponse(result, clearContextUser);
+    }, resolveAPIError);
 }
 
 export {
