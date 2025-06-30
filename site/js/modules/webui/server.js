@@ -208,8 +208,8 @@ function callEndpoint(targetEndpoint, inputFields, context, container) {
     Autograder.Server.callEndpoint({
             targetEndpoint: targetEndpoint,
             params: params,
-            override_email: overrideEmail,
-            override_cleartext: overrideCleartext,
+            overrideEmail: overrideEmail,
+            overrideCleartext: overrideCleartext,
             clearContextUser: false,
         }).then(function(result) {
             resultsArea.innerHTML = `

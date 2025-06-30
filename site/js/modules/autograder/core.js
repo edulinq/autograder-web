@@ -97,7 +97,7 @@ async function resolveAPIError(response) {
 function sendRequest({
         endpoint = undefined,
         payload = {}, files = [],
-        override_email = undefined, override_cleartext = undefined,
+        overrideEmail = undefined, overrideCleartext = undefined,
         clearContextUser = true,
         }) {
     if (!endpoint) {
@@ -110,12 +110,12 @@ function sendRequest({
         payload[REQUEST_USER_PASS_KEY] = credentials.token;
     }
 
-    if (override_email) {
-        payload[REQUEST_USER_EMAIL_KEY] = override_email;
+    if (overrideEmail) {
+        payload[REQUEST_USER_EMAIL_KEY] = overrideEmail;
     }
 
-    if (override_cleartext) {
-        payload[REQUEST_USER_PASS_KEY] = Util.sha256(override_cleartext);
+    if (overrideCleartext) {
+        payload[REQUEST_USER_PASS_KEY] = Util.sha256(overrideCleartext);
     }
 
     let url = `${BASE_URL}/${API_VESION}/${endpoint}`;

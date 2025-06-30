@@ -4,14 +4,14 @@ let apiDescription = undefined;
 
 function callEndpoint({
         targetEndpoint, params,
-        override_email = undefined, override_cleartext = undefined,
+        overrideEmail = undefined, overrideCleartext = undefined,
         clearContextUser = true,
         }) {
     return Core.sendRequest({
         endpoint: targetEndpoint,
         payload: params,
-        override_email: override_email,
-        override_cleartext: override_cleartext,
+        overrideEmail: overrideEmail,
+        overrideCleartext: overrideCleartext,
         clearContextUser: clearContextUser,
     });
 }
