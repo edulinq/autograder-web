@@ -130,13 +130,9 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 
     let inputFields = [];
     for (const field of sortedInputs) {
-        let inputField = getInputField(field, context);
+        const inputField = getInputField(field, context);
 
-        inputFields.push(`
-            <div class="input-field">
-                ${inputField}
-            </div>
-        `);
+        inputFields.push(`${inputField}`);
     }
 
     return `
@@ -159,6 +155,8 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 }
 
 function getInputField(field, context) {
+    let fieldClass = "input-field";
+
     let inputType = "text";
     let placeholder = "";
     let extraFields = "";
@@ -171,6 +169,8 @@ function getInputField(field, context) {
         inputType = "number";
         extraFields += ` pattern="\d*"`;
     } else if (field.type === "bool") {
+        fieldClass = "checkbox-field";
+
         inputType = "checkbox";
         extraFields += ` value="true"`;
     }
@@ -188,9 +188,26 @@ function getInputField(field, context) {
         displayName += ` <span class="required">*</span>`;
     }
 
+    const label = `<label for="${field.name}">${displayName}</label>`;
+    const input = `<input class="tertiary-color drop-shadow" type="${inputType}" id="${field.name}" name="${field.name}" placeholder="${placeholder}"${extraFields}>`;
+
+    let fieldHTML = "";
+    if (fieldClass != "checkbox-field") {
+        fieldHTML = `
+            ${label}
+            ${input}
+        `;
+    } else {
+        fieldHTML = `
+            ${input}
+            ${label}
+        `;
+    }
+
     return `
-        <label for="${field.name}">${displayName}</label>
-        <input class="tertiary-color drop-shadow" type="${inputType}" id="${field.name}" name="${field.name}" placeholder="${placeholder}"${extraFields}>
+        <div class="${fieldClass}">
+            ${fieldHTML}
+        </div>
     `;
 }
 

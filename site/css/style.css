@@ -303,10 +303,6 @@ input:focus {
 }
 
 input[type="checkbox"] {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-
     height: 1.25em;
     width: 1.25em;
 }
