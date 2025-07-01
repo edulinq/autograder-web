@@ -12,11 +12,8 @@ const FIELD_PRIORITY = [
     "user-email",
 ];
 
-const PATTERN_BOOL = /^bool$/;
 const PATTERN_INT = /^int\d*$/;
 const PATTERN_TARGET_SELF_OR = /^core\.Target((Course)|(Server))UserSelfOr[a-zA-Z]+$/;
-const PATTERN_USER_EMAIL = /^user-email$/;
-const PATTERN_USER_PASS = /^user-pass$/;
 
 function init() {
     Routing.addRoute(/^server$/, handlerServer, 'Server Actions', undefined);
@@ -135,11 +132,10 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
 
     let inputFields = [];
     for (const field of sortedInputs) {
-        inputFields.push(`${getInputField({
+        inputFields.push(`${getInputField(context, {
             fieldName: field.name,
             fieldType: field.type,
             requiredField: field.required,
-            context: context,
         })}`);
     }
 
@@ -162,10 +158,11 @@ function renderEndpointArea(endpoints, selectedEndpoint, context) {
     `;
 }
 
-// Given field information, the context, and optional styling classes,
+// Given field information, the context, and optional styling information,
 // returns the HTML to display a field for user input.
 function getInputField(
-        {fieldName, fieldType, requiredField, context},
+        context,
+        {fieldName = "", fieldType = "", requiredField = false},
         {stylingClasses = "tertiary-color", dropShadow = true} = {},
         ) {
     let fieldClass = "input-field";
@@ -176,28 +173,29 @@ function getInputField(
     let displayName = `${fieldName}`;
     let labelFirst = true;
 
-    if (!PATTERN_BOOL.test(fieldType)) {
-        displayName += ` (expects: ${fieldType})`;
-    }
-
     if (PATTERN_TARGET_SELF_OR.test(fieldType)) {
         placeholder = context.user.email;
         inputType = "email";
+        displayName += ` (expects: ${fieldType})`;
     } else if (PATTERN_INT.test(fieldType)) {
         inputType = "number";
         extraFields += ` pattern="\d*"`;
-    } else if (PATTERN_BOOL.test(fieldType)) {
+        displayName += ` (expects: ${fieldType})`;
+    } else if (fieldType === "bool") {
         fieldClass += " checkbox-field";
         labelFirst = false;
 
         inputType = "checkbox";
         extraFields += ` value="true"`;
+    } else {
+        displayName += ` (expects: ${fieldType})`;
     }
 
-    if (PATTERN_USER_EMAIL.test(fieldName)) {
+    // Due to the context credentials, remind the user the email and pass fields are optional.
+    if (fieldName === "user-email") {
         placeholder = context.user.email;
         inputType = "email";
-    } else if (PATTERN_USER_PASS.test(fieldName)) {
+    } else if (fieldName === "user-pass") {
         placeholder = "<current token>";
         inputType = "password";
     }
