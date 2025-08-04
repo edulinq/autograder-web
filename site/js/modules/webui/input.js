@@ -359,6 +359,16 @@ function getSelectChoicesHTML(choices, defaultValue) {
 }
 
 export {
+    INPUT_TYPE_BOOL,
+    INPUT_TYPE_CHECKBOX,
+    INPUT_TYPE_EMAIL,
+    INPUT_TYPE_JSON,
+    INPUT_TYPE_NUMBER,
+    INPUT_TYPE_PASSWORD,
+    INPUT_TYPE_SELECT,
+    INPUT_TYPE_STRING,
+    INPUT_TYPE_TEXT,
+
     FieldInstance,
     FieldType,
     SelectOption,
