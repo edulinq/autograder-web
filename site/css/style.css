@@ -3,7 +3,7 @@
     --color-light-bg-secondary: #f3f3ff;
     --color-light-bg-tertiary: #ffffff;
 
-    --color-light-bg-accent-primary: rgb(130, 130, 255);
+    --color-light-bg-accent-primary: #8672e7;
 
     --color-light-text-primary: rgba(0, 0, 0, 0.90);
     --color-light-text-secondary: rgba(0, 0, 0, 0.70);
@@ -17,9 +17,9 @@
     --color-light-text-tertiary-low: rgba(0, 0, 0, 0.20);
     --color-light-text-accent-low: rgba(0, 0, 0, 0.45);
 
-    --color-dark-bg-primary: #303030;
-    --color-dark-bg-secondary: #151515;
-    --color-dark-bg-tertiary: #000000;
+    --color-dark-bg-primary: #383640;
+    --color-dark-bg-secondary: #110d1b;
+    --color-dark-bg-tertiary: #0c0814;
 
     --color-dark-text-primary: rgba(255, 255, 255, 0.90);
     --color-dark-text-secondary: rgba(255, 255, 255, 0.80);
@@ -33,9 +33,9 @@
     --color-dark-text-tertiary-low: rgba(255, 255, 255, 0.35);
     --color-dark-text-accent-low: rgba(255, 255, 255, 0.45);
 
-    --color-dark-bg-accent-primary: rgb(130, 130, 255);
+    --color-dark-bg-accent-primary: #8672e7;
 
-    --color-bg-shadow: #000000;
+    --color-bg-shadow: #0c0814;
     --color-text-error: #f40055;
 
     --curve-radius-small: 10px;
@@ -411,7 +411,7 @@ fieldset {
 }
 
 .header {
-    padding: 0.5em;
+    padding: 1.0em;
     text-align: center;
 
     display: flex;
@@ -435,7 +435,8 @@ fieldset {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 1em;
+    gap: 1.5em;
+    word-break: keep-all;
 
     font-size: var(--font-size-large);
 }
