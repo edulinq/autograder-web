@@ -99,7 +99,7 @@ function renderSelector(context, endpoints, selectedEndpoint) {
     }
 
     let selector = new Input.FieldType(context, "endpoint-dropdown", "Select an endpoint...", {
-        type: "select",
+        type: Input.INPUT_TYPE_SELECT,
         choices: optionsList,
         defaultValue: selectedEndpoint,
     });
