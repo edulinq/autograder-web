@@ -221,7 +221,7 @@ function setContextUserDisplay() {
     } else {
         currentUserHTML = '';
         loginAreaHTML = `
-            <a href='#login'>Log In</span>
+            <a href='#login'>Login</span>
         `;
     }
 

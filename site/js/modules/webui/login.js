@@ -1,6 +1,7 @@
 import * as Autograder from '../autograder/base.js'
 
 import * as Context from './context.js'
+import * as Input from './input.js'
 import * as Render from './render.js'
 import * as Routing from './routing.js'
 
@@ -10,57 +11,48 @@ function init() {
 }
 
 function handlerLogin(path, params, context, container) {
-    container.innerHTML = `
-        <div class='login'>
-            <div class='login-controls page-controls'>
-                <div>
-                    <label for='email'>Email:</label>
-                    <input type='email' name='email' placeholder='email' autofocus />
-                </div>
-                <div>
-                    <label for='password'>Password:</label>
-                    <input type='password' name='password' placeholder='password' />
-                </div>
-                <button>Login</button>
-            </div>
-            <div class='login-results'>
-            </div>
-        </div>
-    `;
+    let inputFields = [
+        new Input.FieldType(context, 'email', 'Email', {
+            type: Input.INPUT_TYPE_EMAIL,
+            required: true,
+            placeholder: 'email',
+        }),
+        new Input.FieldType(context, 'cleartext', 'Password', {
+            type: Input.INPUT_TYPE_PASSWORD,
+            required: true,
+            placeholder: 'password / token',
+        }),
+    ];
 
-    let button = container.querySelector('.login-controls button');
-    let emailInput = container.querySelector('.login-controls input[name="email"]');
-    let passwordInput = container.querySelector('.login-controls input[name="password"]');
-    let results = container.querySelector('.login-results');
+    Render.makePage(
+            params, context, container, login,
+            {
+                inputs: inputFields,
+                buttonName: 'Login',
+            },
+        )
+    ;
+}
 
-    function doLogin() {
-        let email = emailInput.value;
-        let password = passwordInput.value;
-
-        if (!email || !password) {
-            return;
-        }
-
-        // Avoid duplicate submissions.
-        emailInput.value = '';
-        passwordInput.value = '';
-
-        login(email, password, results);
+function login(params, context, container, inputParams) {
+    if (Autograder.hasCredentials()) {
+        return Promise.resolve(`
+            <p>Already logged in.</p>
+            <p>Logout first to login again.</p>
+        `);
     }
 
-    container.querySelectorAll('.login-controls input').forEach(function(element) {
-        element.addEventListener('keydown', function(event) {
-            if (!['Enter', 'NumpadEnter'].includes(event.code)) {
-                return
-            }
-
-            doLogin()
-        });
-    });
-
-    button.addEventListener('click', function(event) {
-        doLogin()
-    });
+    return Autograder.Users.createToken(inputParams.email, inputParams.cleartext)
+        .then(function(token) {
+            Autograder.setCredentials(inputParams.email, token['token-id'], token['token-cleartext']);
+            Routing.redirectHome();
+            return `<p>Successfully logged in.</p>`;
+        })
+        .catch(function(message) {
+            console.error(message);
+            return message;
+        })
+    ;
 }
 
 function handlerLogout(path, params, context, container) {
@@ -69,40 +61,6 @@ function handlerLogout(path, params, context, container) {
     Routing.redirectLogin();
 }
 
-function login(email, cleartext, container) {
-    if (Autograder.hasCredentials()) {
-        container.innerHTML = `
-            <p>Already logged in.</p>
-            <p>Logout first to login again.</p>
-        `;
-        return;
-    }
-
-    if (email.length < 1) {
-        container.innerHTML = `<p>No email provided for login.</p>`;
-        return;
-    }
-
-    if (cleartext.length < 1) {
-        container.innerHTML = `<p>No password provided for login.</p>`;
-        return;
-    }
-
-    Routing.loadingStart(container);
-
-    Autograder.Users.createToken(email, cleartext)
-        .then(function(token) {
-            Autograder.setCredentials(email, token['token-id'], token['token-cleartext']);
-            container.innerHTML = `<p>Successfully logged in.</p>`;
-            Routing.redirectHome();
-        })
-        .catch(function(message) {
-            container.innerHTML = Render.autograderError(message);
-        })
-    ;
-}
-
 export {
     init,
-    login,
 }
