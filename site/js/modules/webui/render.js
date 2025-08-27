@@ -5,6 +5,63 @@ import * as Event from './event.js';
 import * as Routing from './routing.js';
 import * as Util from './util.js';
 
+// Options to control how to values that come from the API are rendered.
+class APIValueRenderOptions {
+    constructor({
+            keyDisplayTransformer = Util.titleCase,
+            valueDisplayTransformer = apiValueToText,
+            skipKeys = [],
+            keyCompare = Util.caseInsensitiveStringCompare,
+            keyOrdering = [],
+            keyValueDelim = ': ',
+            rowDelim = "\n",
+            entityDelim = "\n",
+            indent = '    ',
+            } = {}) {
+        // How to transform keys for display purposes.
+        // Keys are transformed after any comparisons, e.g., sorting.
+        this.keyDisplayTransformer = keyDisplayTransformer;
+
+        // How to transform values for display purposes.
+        this.valueDisplayTransformer = valueDisplayTransformer;
+
+        // When the rendered value is an object, skip rendering these keys.
+        // Keys to skip are checked before any transformations are applied.
+        this.skipKeys = skipKeys;
+
+        // A function to compare keys.
+        // Keys are compared before any transformations.
+        this.keyCompare = keyCompare;
+
+        // The ordering the keys should appear.
+        // Keys that exist here will always appear before non-extant keys.
+        // May be left empty to just let the key comparison handle all sorting.
+        this.keyOrdering = keyOrdering;
+
+        // A delimiter to use between keys and values.
+        this.keyValueDelim = keyValueDelim;
+
+        // A delimiter to use between rows.
+        this.rowDelim = rowDelim;
+
+        // A delimiter to use between entities.
+        this.entityDelim = entityDelim;
+
+        // The spacing to use for a single level of indentation.
+        this.indent = indent;
+    }
+
+    // Sort the given keys in-place according to the given ordering and comparison.
+    // They keys should not have been transformed prior to this call.
+    sortKeys(keys) {
+        let options = this;
+        let comparison = function(a, b) {
+            return Util.orderingCompare(a, b, options.keyOrdering, options.keyCompare);
+        };
+        keys.sort(comparison);
+    }
+}
+
 class Card {
     constructor(
         type = 'unknown', text = '', link = '#',
@@ -528,6 +585,81 @@ function autograderError(message) {
     return result;
 }
 
+// TEST
+function apiValueToText(value, renderOptions = new APIValueRenderOptions()) {
+    if (value === undefined) {
+        return 'undefined';
+    }
+
+    if (value === null) {
+        return 'null';
+    }
+
+    // TEST
+    return JSON.stringify(value);
+
+    /* TEST
+    if (
+
+    switch (typeof(value)) {
+        case 'object':
+    }
+    */
+}
+
+// Convert a list of objects (coming from the API) into a text representation.
+// This representation is generally meant for human consumption and to be the "pretty" alternative,
+// while still be general.
+function apiListToText(results, renderOptions = new APIValueRenderOptions(), indentLevel = 0) {
+    // TEST
+    console.log(renderOptions);
+
+    let rows = [];
+    for (const result of results) {
+        // TEST
+        console.log(result);
+
+        if (!Util.isObject(result)) {
+            throw new TypeError(`Array entry item must be JS object, found (${typeof(result)}).`);
+        }
+
+        let keys = Object.keys(result);
+        renderOptions.sortKeys(keys);
+
+        for (const key of keys) {
+            if (renderOptions.skipKeys.includes(key)) {
+                continue;
+            }
+
+            let displayKey = key;
+            if (renderOptions.keyDisplayTransformer) {
+                displayKey = renderOptions.keyDisplayTransformer(key);
+            }
+
+            let displayValue = result[key];
+            if (renderOptions.valueDisplayTransformer) {
+                displayValue = renderOptions.valueDisplayTransformer(result[key]);
+            }
+
+            let row = [
+                renderOptions.indent.repeat(indentLevel),
+                displayKey,
+                renderOptions.keyValueDelim,
+                displayValue,
+            ];
+            rows.push(row.join(''));
+        }
+    }
+
+    let text = rows.join(renderOptions.rowDelim);
+
+    // TEST
+    console.log(rows);
+    console.log(text);
+
+    return text;
+}
+
 // Create a table using an array of arrays.
 // Each header is a string.
 // Each row is an array of strings.
@@ -580,8 +712,10 @@ function displayJSON(json) {
 }
 
 export {
+    APIValueRenderOptions,
     Card,
 
+    apiListToText,
     autograderError,
     cards,
     displayJSON,

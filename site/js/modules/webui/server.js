@@ -318,7 +318,7 @@ function displayTypes(typeData) {
 }
 
 function handlerUsers(path, params, context, container) {
-    Render.makeTitle("List Users"); 
+    Render.makeTitle("List Users");
 
     let inputFields = [
         new Input.FieldType(context, 'users', 'Target Users', {
@@ -341,6 +341,12 @@ function handlerUsers(path, params, context, container) {
 function listServerUsers(params, context, container, inputParams) {
     return Autograder.Server.users(inputParams.users)
         .then(function(result) {
+            // TEST
+            console.log(result);
+            Render.apiListToText(result.users, new Render.APIValueRenderOptions({
+                keyOrdering: ['email', 'name', 'role', 'type', 'courses'],
+            }));
+
             if (result.users.length === 0) {
                 return '<p>Unable to find target users.</p>';
             }

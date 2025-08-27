@@ -8,8 +8,42 @@ function setTesting(value) {
     _testing = value;
 }
 
+function stringCompare(a, b) {
+    return a.localeCompare(b);
+}
+
 function caseInsensitiveStringCompare(a, b) {
-    return a.localeCompare(b, undefined, { sensitivity: 'base' });
+    return a.localeCompare(b, undefined, {sensitivity: 'base'});
+}
+
+// Compare two values based on where they appear in a given list.
+// In one item does not appear in the list, than it will appear latter.
+// If neither appear in the list, then fallback to the given comparison function.
+function orderingCompare(a, b, ordering = [], fallback = stringCompare) {
+    let aIndex = ordering.indexOf(a);
+    let bIndex = ordering.indexOf(b);
+
+    if ((aIndex === -1) && (bIndex === -1)) {
+        return fallback(a, b);
+    }
+
+    if (bIndex === -1) {
+        return -1;
+    }
+
+    if (aIndex === -1) {
+        return 1;
+    }
+
+    if (aIndex === bIndex) {
+        return 0;
+    }
+
+    if (aIndex < bIndex) {
+        return -1;
+    }
+
+    return 1;
 }
 
 function timestampToPretty(timestamp) {
@@ -90,6 +124,7 @@ export {
     cleanText,
     downloadFile,
     isObject,
+    orderingCompare,
     setTesting,
     timestampToPretty,
     titleCase,
