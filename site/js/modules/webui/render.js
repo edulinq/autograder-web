@@ -5,6 +5,14 @@ import * as Event from './event.js';
 import * as Routing from './routing.js';
 import * as Util from './util.js';
 
+const API_OUTPUT_SWITCHER_JSON = 'JSON';
+const API_OUTPUT_SWITCHER_TEXT = 'Text';
+
+const API_OUTPUT_SWITCHER_MODES = {
+    [API_OUTPUT_SWITCHER_JSON]: apiOutputJSON,
+    [API_OUTPUT_SWITCHER_TEXT]: apiOutputText,
+};
+
 // Options to control how to values that come from the API are rendered.
 class APIValueRenderOptions {
     constructor({
@@ -17,6 +25,8 @@ class APIValueRenderOptions {
             rowDelim = "\n",
             entityDelim = "\n",
             indent = '    ',
+            initialIndentLevel = 0,
+            finalTrim = true,
             } = {}) {
         // How to transform keys for display purposes.
         // Keys are transformed after any comparisons, e.g., sorting.
@@ -49,6 +59,17 @@ class APIValueRenderOptions {
 
         // The spacing to use for a single level of indentation.
         this.indent = indent;
+
+        // The initial indentation level to use.
+        this.initialIndentLevel = initialIndentLevel;
+
+        // Trim extra whitespace after processing.
+        this.finalTrim = finalTrim;
+    }
+
+    // Get an indent level, but treat negative levels as zero.
+    getIndent(level) {
+        return this.indent.repeat(Math.max(0, level));
     }
 
     // Sort the given keys in-place according to the given ordering and comparison.
@@ -381,9 +402,14 @@ function submitInputs(params, context, container, inputs, onSubmitFunc, postResu
         button.disabled = true;
     }
 
-    onSubmitFunc(params, context, container, inputParams)
+    resultsArea.innerHTML = `<div class="result secondary-color drop-shadow"></div>`;
+    let resultsElement = resultsArea.firstChild;
+
+    onSubmitFunc(params, context, resultsElement, inputParams)
         .then(function(result) {
-            resultsArea.innerHTML = `<div class="result secondary-color drop-shadow">${result}</div>`;
+            if (result != undefined) {
+                resultsElement.innerHTML = result;
+            }
 
             if (postResultsFunc) {
                 postResultsFunc(params, context, container, inputParams, result)
@@ -391,7 +417,10 @@ function submitInputs(params, context, container, inputs, onSubmitFunc, postResu
         })
         .catch(function(message) {
             console.error(message);
-            resultsArea.innerHTML = `<div class="result secondary-color drop-shadow">${message}</div>`;
+
+            if (message != undefined) {
+                resultsElement.innerHTML = message;
+            }
         })
         .finally(function() {
             if (button) {
@@ -585,77 +614,97 @@ function autograderError(message) {
     return result;
 }
 
-// TEST
-function apiValueToText(value, renderOptions = new APIValueRenderOptions()) {
+// Convert a value (of any type) into a text representation.
+// These values are generally understood to have come from the autograder API,
+// and may have specific semantics.
+// The text/output representation is generally meant for human consumption and to be the "pretty" alternative,
+// while still be general.
+function apiValueToText(value, indentLevel = 0, renderOptions = new APIValueRenderOptions()) {
     if (value === undefined) {
-        return 'undefined';
+        return '< null >';
     }
 
     if (value === null) {
-        return 'null';
+        return '< null >';
     }
-
-    // TEST
-    return JSON.stringify(value);
-
-    /* TEST
-    if (
 
     switch (typeof(value)) {
         case 'object':
+            // Object or Array
+            if (Array.isArray(value)) {
+                if (value.length == 0) {
+                    return '';
+                }
+
+                let content = apiArrayToText(value, indentLevel + 1, renderOptions);
+                return renderOptions.rowDelim + content;
+            } else {
+                if (Object.keys(value).length == 0) {
+                    return '';
+                }
+
+                let content = apiObjectToText(value, indentLevel + 1, renderOptions);
+                return renderOptions.rowDelim + content;
+            }
+        case 'string':
+            return value;
+        default:
+            return JSON.stringify(value);
     }
-    */
 }
 
-// Convert a list of objects (coming from the API) into a text representation.
-// This representation is generally meant for human consumption and to be the "pretty" alternative,
-// while still be general.
-function apiListToText(results, renderOptions = new APIValueRenderOptions(), indentLevel = 0) {
-    // TEST
-    console.log(renderOptions);
+// Convert a JS object into a text representation.
+// See apiValueToText().
+function apiObjectToText(object, indentLevel = 0, renderOptions = new APIValueRenderOptions()) {
+    let keys = Object.keys(object);
+    renderOptions.sortKeys(keys);
 
     let rows = [];
-    for (const result of results) {
-        // TEST
-        console.log(result);
-
-        if (!Util.isObject(result)) {
-            throw new TypeError(`Array entry item must be JS object, found (${typeof(result)}).`);
+    for (const key of keys) {
+        if (renderOptions.skipKeys.includes(key)) {
+            continue;
         }
 
-        let keys = Object.keys(result);
-        renderOptions.sortKeys(keys);
-
-        for (const key of keys) {
-            if (renderOptions.skipKeys.includes(key)) {
-                continue;
-            }
-
-            let displayKey = key;
-            if (renderOptions.keyDisplayTransformer) {
-                displayKey = renderOptions.keyDisplayTransformer(key);
-            }
-
-            let displayValue = result[key];
-            if (renderOptions.valueDisplayTransformer) {
-                displayValue = renderOptions.valueDisplayTransformer(result[key]);
-            }
-
-            let row = [
-                renderOptions.indent.repeat(indentLevel),
-                displayKey,
-                renderOptions.keyValueDelim,
-                displayValue,
-            ];
-            rows.push(row.join(''));
+        let displayKey = key;
+        if (renderOptions.keyDisplayTransformer) {
+            displayKey = renderOptions.keyDisplayTransformer(key);
         }
+
+        let displayValue = object[key];
+        if (renderOptions.valueDisplayTransformer) {
+            displayValue = renderOptions.valueDisplayTransformer(object[key], indentLevel, renderOptions);
+        }
+
+        let row = [
+            renderOptions.getIndent(indentLevel),
+            displayKey,
+            renderOptions.keyValueDelim,
+            displayValue,
+        ];
+        rows.push(row.join(''));
     }
 
-    let text = rows.join(renderOptions.rowDelim);
+    return rows.join(renderOptions.rowDelim);
+}
 
-    // TEST
-    console.log(rows);
-    console.log(text);
+// Convert a JS array into a text representation.
+// See apiValueToText().
+function apiArrayToText(items, indentLevel = 0, renderOptions = new APIValueRenderOptions()) {
+    let rows = [];
+    for (const item of items) {
+        let displayValue = item;
+        if (renderOptions.valueDisplayTransformer) {
+            displayValue = renderOptions.valueDisplayTransformer(item, indentLevel, renderOptions);
+        }
+
+        let row = [
+            renderOptions.getIndent(indentLevel),
+            displayValue,
+        ];
+        rows.push(row.join(''));
+    }
+
+    let text = rows.join(renderOptions.entityDelim);
 
     return text;
 }
@@ -707,18 +756,82 @@ function tableFromDictionaries(headers, rows, classes = []) {
     return tableFromLists(tableHead, tableBody, classes);
 }
 
-function displayJSON(json) {
-    return `<pre><code class="code code-block" data-lang="json">${JSON.stringify(json, null, 4)}</code></pre>`;
+function codeBlockJSON(json) {
+    return `<pre><code class="code code-block" data-lang="json">${Util.displayJSON(json)}</code></pre>`;
+}
+
+// Render an area that can switch between rendering an object in different output "modes".
+function apiOutputSwitcher(value, container, {
+        modes = [API_OUTPUT_SWITCHER_TEXT, API_OUTPUT_SWITCHER_JSON],
+        renderOptions = new APIValueRenderOptions()
+        } = {}) {
+    if (modes.length == 0) {
+        throw new Error("No output modes provided.");
+    }
+
+    let html = `
+        <div class='output-switcher'>
+            <div class='controls'>
+            </div>
+            <hr />
+            <div class='output'>
+            </div>
+        <div>
+    `;
+
+    container.innerHTML = html;
+
+    let controlArea = container.querySelector('.controls');
+    let outputArea = container.querySelector('.output');
+
+    let prerendered = false;
+    for (const mode of modes) {
+        let outputFunc = API_OUTPUT_SWITCHER_MODES[mode];
+        if (!outputFunc) {
+            throw new Error(`Unknown output mode: '${mode}'.`);
+        }
+
+        let button = document.createElement('button');
+        button.innerHTML = `Show as ${mode}`;
+        button.onclick = function(event) {
+            outputFunc(value, outputArea, renderOptions);
+        };
+
+        controlArea.appendChild(button);
+
+        // Render the first mode listed.
+        if (!prerendered) {
+            outputFunc(value, outputArea, renderOptions);
+            prerendered = true;
+        }
+    }
+}
+
+// Render an API output as JSON.
+function apiOutputJSON(value, container, renderOptions) {
+    container.innerHTML = codeBlockJSON(value);
+}
+
+// Render an API output as (pretty) text.
+function apiOutputText(value, container, renderOptions) {
+    let text = apiArrayToText(value, renderOptions.initialIndentLevel, renderOptions);
+
+    if (renderOptions.finalTrim) {
+        text = text.trim();
+    }
+
+    container.innerHTML = `<pre>${text}</pre>`;
 }
 
 export {
     APIValueRenderOptions,
     Card,
 
-    apiListToText,
+    apiArrayToText,
+    apiOutputSwitcher,
     autograderError,
     cards,
-    displayJSON,
+    codeBlockJSON,
     makeCardSection,
     makeCardSections,
     makePage,

@@ -3,6 +3,7 @@ import * as Autograder from '../autograder/base.js';
 import * as Input from './input.js';
 import * as Render from './render.js';
 import * as Routing from './routing.js';
+import * as Util from './util.js';
 
 // The priority of the field to show first.
 // Items later in the list have the highest priority.
@@ -170,7 +171,7 @@ function callEndpoint(params, context, container, inputParams) {
         })
         .then(function(result) {
             return `
-                <pre><code class="code code-block" data-lang="json">${JSON.stringify(result, null, 4)}</code></pre>
+                <pre><code class="code code-block" data-lang="json">${Util.displayJSON(result)}</code></pre>
             `;
         })
         .catch(function(message) {
@@ -341,51 +342,25 @@ function handlerUsers(path, params, context, container) {
 function listServerUsers(params, context, container, inputParams) {
     return Autograder.Server.users(inputParams.users)
         .then(function(result) {
-            // TEST
-            console.log(result);
-            Render.apiListToText(result.users, new Render.APIValueRenderOptions({
-                keyOrdering: ['email', 'name', 'role', 'type', 'courses'],
-            }));
-
             if (result.users.length === 0) {
                 return '<p>Unable to find target users.</p>';
             }
 
-            return `<pre>${styleServerUsers(result.users)}</pre>`;
+            let options = new Render.APIValueRenderOptions({
+                keyOrdering: ['id', 'email', 'name', 'role', 'type', 'courses'],
+                initialIndentLevel: -1,
+            });
+            Render.apiOutputSwitcher(result.users, container, {
+                renderOptions: options,
+            });
+
+            return undefined;
         })
         .catch(function(message) {
             console.error(message);
             return message;
         })
     ;
-}
-
-function styleServerUsers(users) {
-    let messages = [];
-    for (const user of users) {
-        let courses = [];
-        Object.entries(user.courses).forEach(function([course, data]) {
-            let courseContent = [
-                `${INDENT}ID: ${course}`,
-                `${INDENT}Role: ${data.role}`,
-            ];
-
-            courses.push(courseContent.join("\n"));
-        });
-
-        let userParts = [
-            `Email: ${user.email}`,
-            `Name: ${user.name}`,
-            `Role: ${user.role}`,
-            `Type: ${user.type}`,
-            `Courses:`,
-            courses.join("\n\n"),
-        ];
-
-        messages.push(`${userParts.join("\n")}`);
-    }
-
-    return messages.join("\n\n");
 }
 
 export {

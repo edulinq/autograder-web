@@ -427,7 +427,7 @@ function fetchCourseScores(params, context, container, inputParams) {
 
     return Autograder.Submissions.fetchCourseScores(course.id, assignment.id, inputParams['target-users'])
         .then(function(result) {
-            return Render.displayJSON(result);
+            return Render.codeBlockJSON(result);
         })
         .catch(function(message) {
             console.error(message);
@@ -461,7 +461,7 @@ function handlerFetchUserAttempt(path, params, context, container) {
         return Autograder.Submissions.fetchUserAttempt(course.id, assignment.id, inputParams.targetSubmission, inputParams.targetEmail)
             .then(function(result) {
                 if (!result['found-submission']) {
-                    return Render.displayJSON(result);
+                    return Render.codeBlockJSON(result);
                 }
 
                 // Stash the result for later use.
@@ -473,7 +473,7 @@ function handlerFetchUserAttempt(path, params, context, container) {
                     </div>
                     <hr />
                     <div>
-                        ${Render.displayJSON(result)}
+                        ${Render.codeBlockJSON(result)}
                     </div>
                 `;
             })
@@ -574,7 +574,7 @@ function proxyRegrade(params, context, container, inputParams) {
             inputParams.cutoff, inputParams.target, inputParams.wait
         )
         .then(function(result) {
-            return Render.displayJSON(result);
+            return Render.codeBlockJSON(result);
         })
         .catch(function(message) {
             console.error(message);
@@ -690,7 +690,7 @@ function analysisIndividual(params, context, container, inputParams) {
             inputParams.wait, inputParams.dryRun,
         )
         .then(function(result) {
-            return Render.displayJSON(result);
+            return Render.codeBlockJSON(result);
         })
         .catch(function(message) {
             console.error(message);
@@ -739,7 +739,7 @@ function analysisPairwise(params, context, container, inputParams) {
             inputParams.wait, inputParams.dryRun,
         )
         .then(function(result) {
-            return Render.displayJSON(result);
+            return Render.codeBlockJSON(result);
         })
         .catch(function(message) {
             console.error(message);

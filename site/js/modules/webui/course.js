@@ -172,7 +172,7 @@ function sendEmail(params, context, container, inputParams) {
         .then(function(result) {
             return `
                 <p>Email sent successfully.</p>
-                <pre><code data-lang="json">${JSON.stringify(result, null, 4)}</code></pre>
+                ${Render.codeBlockJSON(result)}
             `;
         })
         .catch(function(message) {

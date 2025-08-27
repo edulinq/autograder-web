@@ -1,11 +1,17 @@
 import * as Event from './event.js';
 
 const WORD_BREAK_RE = /[\-_]+/
+const JSON_INDENT = 4;
 
 let _testing = false;
 
 function setTesting(value) {
     _testing = value;
+}
+
+// Generate a "pretty" JSON string representation meant for user display.
+function displayJSON(value) {
+    return JSON.stringify(value, null, JSON_INDENT);
 }
 
 function stringCompare(a, b) {
@@ -122,6 +128,7 @@ function isObject(value) {
 export {
     caseInsensitiveStringCompare,
     cleanText,
+    displayJSON,
     downloadFile,
     isObject,
     orderingCompare,

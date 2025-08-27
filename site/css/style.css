@@ -834,3 +834,11 @@ table.standard-table tr:not(:last-child) {
     flex-direction: column;
     gap: 1em;
 }
+
+.output-switcher .controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
