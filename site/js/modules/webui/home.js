@@ -13,7 +13,7 @@ function handlerHome(path, params, context, container) {
                 <div class='home-title secondary-color drop-shadow'>
                     ${Icon.getIconHTML(Icon.ICON_NAME_HOME)}
                     <h1>
-                        Welcome to the EduLinq LynxGrader!
+                        Welcome to the LynxGrader!
                     </h1>
                 </div>
 
@@ -30,11 +30,12 @@ function handlerHome(path, params, context, container) {
                 </div>
 
                 <div class='secondary-color drop-shadow'>
-                    <span>Other EduLinq LynxGrader Resources:</span>
+                    <span>Other EduLinq Resources:</span>
                     <ul>
                         <li><a href='https://github.com/edulinq/autograder-server'>LynxGrader Server</a></li>
                         <li><a href='https://github.com/edulinq/autograder-web'>Web Frontend</a></li>
                         <li><a href='https://github.com/edulinq/autograder-py'>Python Interface</a></li>
+                        <li><a href='https://discord.gg/xRxdbWqtWS'>Community Discord</a></li>
                     </ul>
                 </div>
             </div>

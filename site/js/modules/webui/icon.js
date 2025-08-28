@@ -59,11 +59,11 @@ function getIconHTML(iconName, additionalClasses = 'secondary-accent-color-bg-lo
     return `
         <div class='icon ${additionalClasses}'>
             <svg class='light-only' role='img' aria-labelledby='${labelName}'>
-                <title id='${labelName}'>${iconName} icon</title>
+                <title id='${labelName}'>${iconName}</title>
                 <use href="images/edulinq-icon-sheet.svg#icon-${iconName}-light"></use>
             </svg>
             <svg class='dark-only' role='img' aria-labelledby='${labelName}'>
-                <title id='${labelName}'>${iconName} icon</title>
+                <title id='${labelName}'>${iconName}</title>
                 <use href="images/edulinq-icon-sheet.svg#icon-${iconName}-dark"></use>
             </svg>
         </div>

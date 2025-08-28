@@ -391,6 +391,12 @@ textarea {
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 
     cursor: pointer;
+    max-width: 80vw;
+}
+
+textarea {
+    min-height: 5vw;
+    min-width: 20vw;
 }
 
 button:disabled,
@@ -548,8 +554,8 @@ svg {
 }
 
 @media (max-width: 700px) {
-    .header .nav-link .icon,
-    .header .page-branding .icon {
+    .header .nav-link svg,
+    .header .page-branding svg {
         display: none;
     }
 }
@@ -940,11 +946,6 @@ table.standard-table tr:not(:last-child) {
 .template-content .template-control-area .checkbox-field label {
     margin-bottom: 0em;
     margin-left: 0.5em;
-}
-
-.template-content .template-control-area .input-field label,
-.template-content .template-control-area .input-field select {
-    max-width: 80vw;
 }
 
 .user-input-fields .input-field .error-message,
