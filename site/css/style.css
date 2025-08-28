@@ -17,6 +17,7 @@
     --color-light-text-accent: rgba(0, 0, 0, 0.90);
 
     --color-light-text-link: rgb(0, 68, 204);
+    --color-light-text-link-low: rgb(0, 68, 204, 0.8);
 
     --color-light-text-primary-low: rgba(0, 0, 0, 0.60);
     --color-light-text-secondary-low: rgba(0, 0, 0, 0.55);
@@ -33,6 +34,7 @@
     --color-dark-text-accent: rgba(255, 255, 255, 0.90);
 
     --color-dark-text-link: rgb(122, 170, 255);
+    --color-dark-text-link-low: rgb(122, 170, 255, 0.8);
 
     --color-dark-text-primary-low: rgba(255, 255, 255, 0.50);
     --color-dark-text-secondary-low: rgba(255, 255, 255, 0.45);
@@ -93,6 +95,7 @@ html {
     --color-text-accent-low: var(--color-light-text-accent-low);
 
     --color-text-link: var(--color-light-text-link);
+    --color-text-link-low: var(--color-light-text-link-low);
 
     --color-text-primary-low: var(--color-light-text-primary-low);
     --color-text-secondary-low: var(--color-light-text-secondary-low);
@@ -123,6 +126,7 @@ html {
         --color-text-accent-low: var(--color-light-text-accent-low);
 
         --color-text-link: var(--color-light-text-link);
+        --color-text-link-low: var(--color-light-text-link-low);
 
         --color-text-primary-low: var(--color-light-text-primary-low);
         --color-text-secondary-low: var(--color-light-text-secondary-low);
@@ -153,6 +157,7 @@ html {
         --color-text-accent-low: var(--color-dark-text-accent-low);
 
         --color-text-link: var(--color-dark-text-link);
+        --color-text-link-low: var(--color-dark-text-link-low);
 
         --color-text-primary-low: var(--color-dark-text-primary-low);
         --color-text-secondary-low: var(--color-dark-text-secondary-low);
@@ -183,6 +188,7 @@ html.light {
     --color-text-accent-low: var(--color-light-text-accent-low);
 
     --color-text-link: var(--color-light-text-link);
+    --color-text-link-low: var(--color-light-text-link-low);
 
     --color-text-primary-low: var(--color-light-text-primary-low);
     --color-text-secondary-low: var(--color-light-text-secondary-low);
@@ -211,6 +217,7 @@ html.dark {
     --color-text-accent-low: var(--color-dark-text-accent-low);
 
     --color-text-link: var(--color-dark-text-link);
+    --color-text-link-low: var(--color-dark-text-link-low);
 
     --color-text-primary-low: var(--color-dark-text-primary-low);
     --color-text-secondary-low: var(--color-dark-text-secondary-low);
@@ -376,6 +383,14 @@ html {
 
 a {
     color: var(--color-text-link);
+}
+
+.link-color a {
+    color: var(--color-text-link);
+}
+
+.link-color-low a {
+    color: var(--color-text-link-low);
 }
 
 button,
@@ -839,10 +854,6 @@ svg {
 
 .home-content > div p {
     margin-bottom: 0em;
-}
-
-.home-content > div a {
-    color: var(--color-text-link);
 }
 
 table.standard-table {

@@ -9,7 +9,7 @@ function init() {
 function handlerHome(path, params, context, container) {
     container.innerHTML = `
         <div class='home-page'>
-            <div class='home-content'>
+            <div class='home-content link-color'>
                 <div class='home-title secondary-color drop-shadow'>
                     ${Icon.getIconHTML(Icon.ICON_NAME_HOME)}
                     <h1>

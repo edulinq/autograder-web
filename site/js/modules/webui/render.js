@@ -173,7 +173,7 @@ function makePage(
         }) {
     if ((controlAreaHTML) && (controlAreaHTML != '')) {
         controlAreaHTML = `
-            <div class="template-control-area secondary-color drop-shadow">
+            <div class="template-control-area secondary-color link-color drop-shadow">
                 ${controlAreaHTML}
             </div>
         `;
@@ -191,7 +191,7 @@ function makePage(
     let descriptionHTML = '';
     if ((description) && (description != '')) {
         descriptionHTML = `
-            <div class="template-description secondary-color-low">
+            <div class="template-description secondary-color-low link-color-low">
                 <p>
                     ${description}
                 </p>
