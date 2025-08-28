@@ -850,6 +850,8 @@ function apiOutputSwitcher(value, container, {
         }
 
         let button = document.createElement('button');
+        button.classList.add(mode.toLowerCase());
+        button.setAttribute('data-mode', mode);
         button.innerHTML = `Show as ${mode}`;
         button.onclick = function(event) {
             outputFunc(value, outputArea, renderOptions);

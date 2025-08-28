@@ -24,11 +24,11 @@ const PARAM_TARGET_USERS = 'target-users';
 
 const PATH_COURSE = 'course';
 const PATH_COURSES = 'courses';
+const PATH_COURSE_USERS_LIST = `${PATH_COURSE}/list`;
 const PATH_ASSIGNMENT = `${PATH_COURSE}/assignment`;
 const PATH_ASSIGNMENT_FETCH_COURSE_SCORES = `${PATH_ASSIGNMENT}/fetch/course/scores`;
 const PATH_ASSIGNMENT_FETCH_USER_ATTEMPT = `${PATH_ASSIGNMENT}/fetch/user/attempt`;
 const PATH_EMAIL = `${PATH_COURSE}/email`;
-const PATH_COURSE_USERS_LIST = `${PATH_COURSE}/list`;
 const PATH_SUBMIT = `${PATH_ASSIGNMENT}/submit`;
 const PATH_SUBMIT_REMOVE = `${PATH_ASSIGNMENT}/remove`;
 const PATH_PEEK = `${PATH_ASSIGNMENT}/peek`;

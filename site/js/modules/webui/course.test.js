@@ -15,8 +15,8 @@ test('Enrolled Courses', async function() {
     TestUtil.checkCards(expectedLabelNames);
 });
 
-test('Nav Course101', async function() {
-    // Each test case is a list of [user, [expected card labels]].
+describe('Nav Course101', function() {
+    // [[user, [expected card labels]], ...].
     const testCases = [
         [
             'course-other',
@@ -42,20 +42,17 @@ test('Nav Course101', async function() {
 
     const targetCourse = 'course101';
 
-    for (const testCase of testCases) {
-        const user = testCase[0];
-        const expectedLabelNames = testCase[1];
-
+    test.each(testCases)("%s", async function(user, expectedLabelNames) {
         await TestUtil.loginUser(user);
         await TestUtil.navigate(Routing.PATH_COURSE, {[Routing.PARAM_COURSE]: targetCourse});
 
         TestUtil.checkPageBasics(targetCourse, 'course');
         TestUtil.checkCards(expectedLabelNames);
-    }
+    });
 });
 
-test('Nav HW0', async function() {
-    // Each test case is a list of [user, [expected card labels]].
+describe('Nav HW0', function() {
+    // [[user, [expected card labels]], ...].
     const testCases = [
         [
             'course-other',
@@ -105,16 +102,37 @@ test('Nav HW0', async function() {
     const targetCourse = 'course101';
     const targetAssignment = 'hw0';
 
-    for (const testCase of testCases) {
-        const user = testCase[0];
-        const expectedLabelNames = testCase[1];
-
+    test.each(testCases)("%s", async function(user, expectedLabelNames) {
         await TestUtil.loginUser(user);
         await TestUtil.navigate(
                 Routing.PATH_ASSIGNMENT,
                 {[Routing.PARAM_COURSE]: targetCourse, [Routing.PARAM_ASSIGNMENT]: targetAssignment});
 
-        TestUtil.checkPageBasics('hw0 :: Autograder', 'assignment');
+        TestUtil.checkPageBasics(`${targetAssignment} :: Autograder`, 'assignment');
         TestUtil.checkCards(expectedLabelNames);
+    });
+});
+
+test('Course Users List', async function() {
+    const targetCourse = 'course101';
+    const expectedEmails = [
+        'course-admin@test.edulinq.org',
+        'course-grader@test.edulinq.org',
+        'course-other@test.edulinq.org',
+        'course-owner@test.edulinq.org',
+        'course-student@test.edulinq.org',
+    ];
+
+    await TestUtil.loginUser('course-admin');
+    await TestUtil.navigate(Routing.PATH_COURSE_USERS_LIST, {[Routing.PARAM_COURSE]: targetCourse});
+
+    TestUtil.checkPageBasics(targetCourse, 'users');
+
+    await TestUtil.submitTemplate();
+
+    let results = document.querySelector('.results-area').innerHTML;
+
+    for (const expectedEmail of expectedEmails) {
+        expect(results).toContain(expectedEmail);
     }
 });
