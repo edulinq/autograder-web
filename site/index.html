@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class='no-brightness-selection'>
+<html class='no-brightness-selection' lang='en-US'>
     <head>
         <meta charset='utf-8'/>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -8,6 +8,7 @@
         <title>EduLinq Autograder</title>
 
         <link rel='icon' href='images/favicon.png'>
+        <link rel='icon-sheet' href='images/edulinq-icon-sheet.svg'>
 
         <link rel='stylesheet' href='css/vendor/normalize.css'>
         <link rel='stylesheet' href='css/style.css'>
@@ -16,25 +17,77 @@
     </head>
     <body>
         <div class='page primary-color'>
-            <div class='header accent-color'>
+            <div class='header primary-accent-color'>
                 <div class='nav'>
                     <div class='nav-item' data-target='home'>
-                        <a href='#'>Home</a>
+                        <a href='#'>
+                            <div class='nav-link'>
+                                <div>
+                                    <svg class='light-only' role='img' aria-labelledby='home-label'>
+                                        <use href="images/edulinq-icon-sheet.svg#icon-home-light"></use>
+                                    </svg>
+                                    <svg class='dark-only' role='img' aria-labelledby='home-label'>
+                                        <use href="images/edulinq-icon-sheet.svg#icon-home-dark"></use>
+                                    </svg>
+                                </div>
+                                <span id='home-label'>Home</span>
+                            </div>
+                        </a>
                     </div>
                     <div class='nav-item' data-target='courses'>
-                        <a href='#courses'>Courses</a>
+                        <a href='#courses'>
+                            <div class='nav-link'>
+                                <div>
+                                    <svg class='light-only' role='img' aria-labelledby='courses-label'>
+                                        <use href="images/edulinq-icon-sheet.svg#icon-courses-light"></use>
+                                    </svg>
+                                    <svg class='dark-only' role='img' aria-labelledby='courses-label'>
+                                        <use href="images/edulinq-icon-sheet.svg#icon-courses-dark"></use>
+                                    </svg>
+                                </div>
+                                <span id='courses-label'>Courses</span>
+                            </div>
+                        </a>
                     </div>
                     <div class='nav-item' data-target='server'>
-                        <a href='#server'>Server</a>
+                        <a href='#server'>
+                            <div class='nav-link'>
+                                <div>
+                                    <svg class='light-only' role='img' aria-labelledby='server-label'>
+                                        <use href="images/edulinq-icon-sheet.svg#icon-server-light"></use>
+                                    </svg>
+                                    <svg class='dark-only' role='img' aria-labelledby='server-label'>
+                                        <use href="images/edulinq-icon-sheet.svg#icon-server-dark"></use>
+                                    </svg>
+                                </div>
+                                <span id='server-label'>Server</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <div class='page-title'>
+                <div class='page-branding'>
+                    <div>
+                        <svg class='light-only' role='img' aria-labelledby='logo-label'>
+                            <use href="images/edulinq-icon-sheet.svg#icon-default-light"></use>
+                        </svg>
+                        <svg class='dark-only' role='img' aria-labelledby='logo-label'>
+                            <use href="images/edulinq-icon-sheet.svg#icon-default-dark"></use>
+                        </svg>
+                    </div>
+                    <span id='logo-label'>LynxGrader</span>
                 </div>
                 <div class='user-info'>
                     <div class='bright-mode-toggle'>
-                        <span class='selector light'>☀</span>
-                        <span>/</span>
-                        <span class='selector dark'>☾</span>
+                        <div>
+                            <svg class='selector light light-only icon' role='img' aria-labelledby='moon-label'>
+                                <title id='moon-label'>Toggle light mode</title>
+                                <use href="images/edulinq-icon-sheet.svg#icon-moon-light"></use>
+                            </svg>
+                            <svg class='selector dark dark-only icon' role='img' aria-labelledby='sun-label'>
+                                <title id='sun-label'>Toggle dark mode</title>
+                                <use href="images/edulinq-icon-sheet.svg#icon-sun-dark"></use>
+                            </svg>
+                        </div>
                     </div>
                     <div class='login-area'>
                     </div>
@@ -48,16 +101,32 @@
                 </div>
             </div>
 
-            <div class='footer accent-color'>
+            <div class='footer primary-accent-color'>
                 <div class='left'>
                     <span>©2025 EduLinq</span>
                 </div>
                 <div class='middle'>
                 </div>
                 <div class='right'>
-                    <a href='https://github.com/edulinq'>
-                        <img class='light-only' src='images/vendor/github-mark.png' />
-                        <img class='dark-only' src='images/vendor/github-mark-white.png' />
+                    <a href='https://discord.gg/xRxdbWqtWS' aria-label='Join us on Discord'>
+                        <div>
+                            <svg class='light-only icon' aria-hidden='true' focusable='false'>
+                                <use href="images/edulinq-icon-sheet.svg#icon-discord-light"></use>
+                            </svg>
+                            <svg class='dark-only icon' aria-hidden='true' focusable='false'>
+                                <use href="images/edulinq-icon-sheet.svg#icon-discord-dark"></use>
+                            </svg>
+                        </div>
+                    </a>
+                    <a href='https://github.com/edulinq' aria-label='See our work on GitHub'>
+                        <div>
+                            <svg class='light-only icon' aria-hidden='true' focusable='false'>
+                                <use href="images/edulinq-icon-sheet.svg#icon-github-light"></use>
+                            </svg>
+                            <svg class='dark-only icon' aria-hidden='true' focusable='false'>
+                                <use href="images/edulinq-icon-sheet.svg#icon-github-dark"></use>
+                            </svg>
+                        </div>
                     </a>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import * as Autograder from '../autograder/base.js';
 
+import * as Icon from './icon.js';
 import * as Input from './input.js';
 import * as Render from './render.js';
 import * as Routing from './routing.js';
@@ -16,10 +17,10 @@ const FIELD_PRIORITY = [
 const INDENT = "    ";
 
 function init() {
-    Routing.addRoute(/^server$/, handlerServer, 'Server Actions', undefined);
-    Routing.addRoute(/^server\/call-api$/, handlerCallAPI, 'Call API', undefined);
-    Routing.addRoute(/^server\/docs$/, handlerDocs, "API Documentation");
-    Routing.addRoute(/^server\/users\/list$/, handlerUsers, "List Users");
+    Routing.addRoute(/^server$/, handlerServer, 'Server Actions', Routing.NAV_PARENT_SERVER, undefined);
+    Routing.addRoute(/^server\/call-api$/, handlerCallAPI, 'Call API', Routing.NAV_PARENT_SERVER, undefined);
+    Routing.addRoute(/^server\/docs$/, handlerDocs, "API Documentation", Routing.NAV_PARENT_SERVER);
+    Routing.addRoute(/^server\/users\/list$/, handlerUsers, "List Users", Routing.NAV_PARENT_SERVER);
 }
 
 function handlerServer(path, params, context, container) {
@@ -38,10 +39,10 @@ function handlerServer(path, params, context, container) {
     ];
 
     let cardSections = [
-        ['', cards],
+        ['Server Actions', cards],
     ];
 
-    container.innerHTML = Render.makeCardSections(context, 'Server Actions', cardSections);
+    container.innerHTML = Render.makeCardSections(context, '', cardSections);
 }
 
 function handlerCallAPI(path, params, context, container) {
@@ -86,6 +87,7 @@ function render(endpoints, selectedEndpoint, params, context, container) {
                 description: description,
                 inputs: inputFields,
                 buttonName: 'Call Endpoint',
+                iconName: Icon.ICON_NAME_CALL_ENDPOINT,
             },
         )
     ;
@@ -112,7 +114,11 @@ function renderSelector(context, endpoints, selectedEndpoint) {
         defaultValue: selectedEndpoint,
     });
 
-    return selector.toHTML();
+    return `
+        <fieldset>
+            ${selector.toHTML()}
+        </fieldset>
+    `;
 }
 
 function getInputFields(endpoints, selectedEndpoint, context) {
@@ -181,7 +187,7 @@ function callEndpoint(params, context, container, inputParams) {
 }
 
 function handlerDocs(path, params, context, container) {
-    Render.makeTitle("API Documentation");
+    Render.setTabTitle('API Documentation');
 
     Autograder.Server.describe()
         .then(function(result) {
@@ -318,7 +324,7 @@ function displayTypes(typeData) {
 }
 
 function handlerUsers(path, params, context, container) {
-    Render.makeTitle("List Users"); 
+    Render.setTabTitle('List Users');
 
     let inputFields = [
         new Input.FieldType(context, 'users', 'Target Users', {

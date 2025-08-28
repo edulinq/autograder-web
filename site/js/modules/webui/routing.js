@@ -1,6 +1,7 @@
 import * as Autograder from '../autograder/base.js';
 import * as Context from './context.js';
 import * as Event from './event.js';
+import * as Icon from './icon.js';
 import * as Log from './log.js';
 import * as Render from './render.js';
 
@@ -43,6 +44,11 @@ const PATH_SERVER_CALL_API = `${PATH_SERVER}/call-api`;
 const PATH_SERVER_DOCS = `${PATH_SERVER}/docs`;
 const PATH_SERVER_USERS_LIST = `${PATH_SERVER}/users/list`;
 
+const NAV_PARENT_COURSES = 'Courses';
+const NAV_PARENT_EMPTY = '';
+const NAV_PARENT_HOME = 'Home';
+const NAV_PARENT_SERVER = 'Server';
+
 // The current hash/location we are routed to.
 // Should be prefixed with a hash symbol.
 let currentHash = undefined;
@@ -67,12 +73,13 @@ function init(initialRoute = true) {
 // Possible fields for |context| are: user, courseID, course, and assignmentID.
 function addRoute(pattern, handler,
         pageName = undefined,
+        navParent = NAV_PARENT_EMPTY,
         requirements = {login: true, course: false, assignment: false}) {
     // Fill in any holes in requirements.
     requirements.course = requirements.course || requirements.assignment;
     requirements.login = requirements.login || requirements.course;
 
-    routes.push([pattern, handler, requirements, pageName]);
+    routes.push([pattern, handler, requirements, pageName, navParent]);
 }
 
 // Route the page content to a path specified in an argument or window.location.hash.
@@ -99,16 +106,16 @@ function route(rawPath = undefined) {
     window.location.hash = newHash;
 
     // Check all known routes.
-    for (const [pattern, handler, requirements, pageName] of routes) {
+    for (const [pattern, handler, requirements, pageName, navParent] of routes) {
         if (path.match(pattern)) {
             console.debug(`Routing '${path}' to ${handler.name}.`);
-            return handlerWrapper(handler, path, params, pageName, requirements);
+            return handlerWrapper(handler, path, params, pageName, navParent, requirements);
         }
     }
 
     // Fallback to the default route.
     console.warn(`Unknown path '${path}'. Falling back to default route.`);
-    return handlerWrapper(DEFAULT_HANDLER, path, params, undefined, {});
+    return handlerWrapper(DEFAULT_HANDLER, path, params, undefined, '', {});
 }
 
 function routeComponents({path = '', params = {}}) {
@@ -139,7 +146,7 @@ function parsePath(rawPath) {
 }
 
 // Do any setup for a handler, call the handler, then do any teardown.
-function handlerWrapper(handler, path, params, pageName, requirements) {
+function handlerWrapper(handler, path, params, pageName, navParent, requirements) {
     // Redirect to a login if required.
     if (requirements.login && !Autograder.hasCredentials()) {
         redirectLogin();
@@ -151,7 +158,7 @@ function handlerWrapper(handler, path, params, pageName, requirements) {
         Context.load()
             .then(function(result) {
                 // Call this function again to complete all checks and call the wrapper.
-                return handlerWrapper(handler, path, params, pageName, requirements);
+                return handlerWrapper(handler, path, params, pageName, navParent, requirements);
             })
             .catch(function(result) {
                 Log.warn('Failed to load context.', result);
@@ -196,13 +203,14 @@ function handlerWrapper(handler, path, params, pageName, requirements) {
 
     // Set the context user.
     setContextUserDisplay();
+    highlightNavItem(navParent);
 
     let container = mainConatiner();
 
     // Set the page inforamtion.
     if (pageName) {
         container.setAttribute('data-page', pageName.toLowerCase());
-        Render.makeTitle(pageName);
+        Render.setTabTitle(pageName);
     }
 
     // Call the handler.
@@ -229,17 +237,29 @@ function setContextUserDisplay() {
         `;
 
         loginAreaHTML = `
-            <a href='#logout'>Log Out</span>
+            <a href='#logout'>${Icon.getIconHTML(Icon.ICON_NAME_LOGOUT, '')}</span>
         `;
     } else {
         currentUserHTML = '';
         loginAreaHTML = `
-            <a href='#login'>Login</span>
+            <a href='#login'>${Icon.getIconHTML(Icon.ICON_NAME_LOGIN, '')}</span>
         `;
     }
 
     document.querySelector('.header .user-info .current-user').innerHTML = currentUserHTML;
     document.querySelector('.header .user-info .login-area').innerHTML = loginAreaHTML;
+}
+
+function highlightNavItem(targetNavName) {
+    let navLinks = document.querySelectorAll('.nav .nav-link');
+    for (let navLink of navLinks) {
+        let navName = navLink.querySelector('.nav-link span');
+        if (navName.textContent === targetNavName) {
+            navLink.classList.add('nav-highlight');
+        } else {
+            navLink.classList.remove('nav-highlight');
+        }
+    }
 }
 
 function mainConatiner() {
@@ -391,4 +411,9 @@ export {
     PATH_SERVER_DOCS,
     PATH_SERVER_USERS_LIST,
     PATH_USER_HISTORY,
+
+    NAV_PARENT_COURSES,
+    NAV_PARENT_EMPTY,
+    NAV_PARENT_HOME,
+    NAV_PARENT_SERVER,
 };

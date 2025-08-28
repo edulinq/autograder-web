@@ -1,53 +1,70 @@
 :root {
-    --color-light-bg-primary: #e7e7ff;
-    --color-light-bg-secondary: #f3f3ff;
+    --color-light-bg-primary: #dcdcfb;
+    --color-light-bg-secondary: #ebebff;
     --color-light-bg-tertiary: #ffffff;
 
-    --color-light-bg-accent-primary: #8672e7;
+    --color-light-bg-accent-primary: rgb(134, 114, 231);
+    --color-light-bg-accent-primary-low: rgba(134, 114, 231, 0.8);
+    --color-light-bg-accent-secondary: rgb(151, 227, 254);
+    --color-light-bg-accent-secondary-low: rgba(151, 227, 254, 0.8);
+    --color-light-bg-accent-tertiary: rgb(217, 4, 142);
+    --color-light-bg-accent-tertiary-low: rgba(217, 4, 142, 0.8);
+    --color-light-bg-accent-gradient: linear-gradient(60deg, var(--color-light-bg-tertiary) 0%, var(--color-light-bg-secondary) 50%, var(--color-light-bg-primary) 100%);
 
     --color-light-text-primary: rgba(0, 0, 0, 0.90);
-    --color-light-text-secondary: rgba(0, 0, 0, 0.70);
-    --color-light-text-tertiary: rgba(0, 0, 0, 0.50);
+    --color-light-text-secondary: rgba(0, 0, 0, 0.75);
+    --color-light-text-tertiary: rgba(0, 0, 0, 0.65);
     --color-light-text-accent: rgba(0, 0, 0, 0.90);
 
-    --color-light-text-link: rgba(40, 40, 255, 0.75);
+    --color-light-text-link: rgb(0, 68, 204);
 
-    --color-light-text-primary-low: rgba(0, 0, 0, 0.45);
-    --color-light-text-secondary-low: rgba(0, 0, 0, 0.35);
-    --color-light-text-tertiary-low: rgba(0, 0, 0, 0.20);
+    --color-light-text-primary-low: rgba(0, 0, 0, 0.60);
+    --color-light-text-secondary-low: rgba(0, 0, 0, 0.55);
+    --color-light-text-tertiary-low: rgba(0, 0, 0, 0.45);
     --color-light-text-accent-low: rgba(0, 0, 0, 0.45);
 
-    --color-dark-bg-primary: #383640;
-    --color-dark-bg-secondary: #110d1b;
-    --color-dark-bg-tertiary: #0c0814;
+    --color-dark-bg-primary: #2c2934;
+    --color-dark-bg-secondary: #171322;
+    --color-dark-bg-tertiary: #0b0812;
 
     --color-dark-text-primary: rgba(255, 255, 255, 0.90);
     --color-dark-text-secondary: rgba(255, 255, 255, 0.80);
     --color-dark-text-tertiary: rgba(255, 255, 255, 0.70);
     --color-dark-text-accent: rgba(255, 255, 255, 0.90);
 
-    --color-dark-text-link: rgba(130, 130, 255, 0.85);
+    --color-dark-text-link: rgb(122, 170, 255);
 
-    --color-dark-text-primary-low: rgba(255, 255, 255, 0.45);
-    --color-dark-text-secondary-low: rgba(255, 255, 255, 0.40);
-    --color-dark-text-tertiary-low: rgba(255, 255, 255, 0.35);
+    --color-dark-text-primary-low: rgba(255, 255, 255, 0.50);
+    --color-dark-text-secondary-low: rgba(255, 255, 255, 0.45);
+    --color-dark-text-tertiary-low: rgba(255, 255, 255, 0.40);
     --color-dark-text-accent-low: rgba(255, 255, 255, 0.45);
 
-    --color-dark-bg-accent-primary: #8672e7;
+    --color-dark-bg-accent-primary: rgb(134, 114, 231);
+    --color-dark-bg-accent-primary-low: rgb(134, 114, 231, 0.8);
+    --color-dark-bg-accent-secondary: rgba(176, 0, 120, 1);
+    --color-dark-bg-accent-secondary-low: rgba(176, 0, 120, 0.8);
+    --color-dark-bg-accent-tertiary: rgb(77, 204, 233);
+    --color-dark-bg-accent-tertiary-low: rgba(77, 204, 233, 0.8);
+    --color-dark-bg-accent-gradient: linear-gradient(60deg, var(--color-dark-bg-tertiary) 0%, var(--color-dark-bg-secondary) 50%, var(--color-dark-bg-primary) 100%);
 
+    --color-highlighter: rgba(255, 255, 255, 0.1);
     --color-bg-shadow: #0c0814;
     --color-text-error: #f40055;
     --color-light-bg-error: rgba(0, 0, 0, 0.1);
     --color-dark-bg-error: rgba(255, 255, 255, 0.1);
 
-    --curve-radius-small: 10px;
-    --curve-radius-large: 20px;
+    --curve-radius-small: 8px;
+    --curve-radius-large: 16px;
 
-    --font-size-larger: 1.25rem;
-    --font-size-large: 1.15rem;
-    --font-size-normal: 1.00rem;
-    --font-size-small: 0.85rem;
-    --font-size-smaller: 0.75rem;
+    --icon-size-large: 48px;
+    --icon-size-normal: 36px;
+    --icon-size-small: 24px;
+
+    --font-size-larger: 1.40rem;
+    --font-size-large: 1.30rem;
+    --font-size-normal: 1.15rem;
+    --font-size-small: 1.00rem;
+    --font-size-smaller: 0.90rem;
 
     --font-weight-normal: 450;
     --font-weight-bold: 650;
@@ -60,6 +77,12 @@ html {
     --color-bg-tertiary: var(--color-light-bg-tertiary);
 
     --color-bg-accent-primary: var(--color-light-bg-accent-primary);
+    --color-bg-accent-primary-low: var(--color-light-bg-accent-primary-low);
+    --color-bg-accent-secondary: var(--color-light-bg-accent-secondary);
+    --color-bg-accent-secondary-low: var(--color-light-bg-accent-secondary-low);
+    --color-bg-accent-tertiary: var(--color-light-bg-accent-tertiary);
+    --color-bg-accent-tertiary-low: var(--color-light-bg-accent-tertiary-low);
+    --color-bg-accent-gradient: var(--color-light-bg-accent-gradient);
     --color-bg-error: var(--color-light-bg-error);
 
     --color-text-primary: var(--color-light-text-primary);
@@ -84,6 +107,12 @@ html {
         --color-bg-tertiary: var(--color-light-bg-tertiary);
 
         --color-bg-accent-primary: var(--color-light-bg-accent-primary);
+        --color-bg-accent-primary-low: var(--color-light-bg-accent-primary-low);
+        --color-bg-accent-secondary: var(--color-light-bg-accent-secondary);
+        --color-bg-accent-secondary-low: var(--color-light-bg-accent-secondary-low);
+        --color-bg-accent-tertiary: var(--color-light-bg-accent-tertiary);
+        --color-bg-accent-tertiary-low: var(--color-light-bg-accent-tertiary-low);
+        --color-bg-accent-gradient: var(--color-light-bg-accent-gradient);
         --color-bg-error: var(--color-light-bg-error);
 
         --color-text-primary: var(--color-light-text-primary);
@@ -108,6 +137,12 @@ html {
         --color-bg-tertiary: var(--color-dark-bg-tertiary);
 
         --color-bg-accent-primary: var(--color-dark-bg-accent-primary);
+        --color-bg-accent-primary-low: var(--color-dark-bg-accent-primary-low);
+        --color-bg-accent-secondary: var(--color-dark-bg-accent-secondary);
+        --color-bg-accent-secondary-low: var(--color-dark-bg-accent-secondary-low);
+        --color-bg-accent-tertiary: var(--color-dark-bg-accent-tertiary);
+        --color-bg-accent-tertiary-low: var(--color-dark-bg-accent-tertiary-low);
+        --color-bg-accent-gradient: var(--color-dark-bg-accent-gradient);
         --color-bg-error: var(--color-dark-bg-error);
 
         --color-text-primary: var(--color-dark-text-primary);
@@ -132,6 +167,12 @@ html.light {
     --color-bg-tertiary: var(--color-light-bg-tertiary);
 
     --color-bg-accent-primary: var(--color-light-bg-accent-primary);
+    --color-bg-accent-primary-low: var(--color-light-bg-accent-primary-low);
+    --color-bg-accent-secondary: var(--color-light-bg-accent-secondary);
+    --color-bg-accent-secondary-low: var(--color-light-bg-accent-secondary-low);
+    --color-bg-accent-tertiary: var(--color-light-bg-accent-tertiary);
+    --color-bg-accent-tertiary-low: var(--color-light-bg-accent-tertiary-low);
+    --color-bg-accent-gradient: var(--color-light-bg-accent-gradient);
     --color-bg-error: var(--color-light-bg-error);
 
     --color-text-primary: var(--color-light-text-primary);
@@ -154,6 +195,12 @@ html.dark {
     --color-bg-tertiary: var(--color-dark-bg-tertiary);
 
     --color-bg-accent-primary: var(--color-dark-bg-accent-primary);
+    --color-bg-accent-primary-low: var(--color-dark-bg-accent-primary-low);
+    --color-bg-accent-secondary: var(--color-dark-bg-accent-secondary);
+    --color-bg-accent-secondary-low: var(--color-dark-bg-accent-secondary-low);
+    --color-bg-accent-tertiary: var(--color-dark-bg-accent-tertiary);
+    --color-bg-accent-tertiary-low: var(--color-dark-bg-accent-tertiary-low);
+    --color-bg-accent-gradient: var(--color-dark-bg-accent-gradient);
     --color-bg-error: var(--color-dark-bg-error);
 
     --color-text-primary: var(--color-dark-text-primary);
@@ -188,6 +235,11 @@ html {
 }
 
 .hidden {
+    display: none;
+}
+
+/* Add additional selection elements to increase the power of the selector. */
+.page-body .content .hidden {
     display: none;
 }
 
@@ -237,26 +289,85 @@ html {
     color: var(--color-text-tertiary-low);
 }
 
-.accent-color {
+.primary-accent-color {
     background-color: var(--color-bg-accent-primary);
     color: var(--color-text-accent);
 }
 
-.accent-color a {
+.primary-accent-color a {
     color: var(--color-text-accent);
 }
 
-.accent-color-low {
+.primary-accent-color-text-low {
     background-color: var(--color-bg-accent-primary);
     color: var(--color-text-accent-low);
 }
 
-.accent-color-low a {
+.primary-accent-color-text-low a {
     color: var(--color-text-accent-low);
+}
+
+.primary-accent-color-bg-low {
+    background-color: var(--color-bg-accent-primary-low);
+}
+
+.secondary-accent-color {
+    background-color: var(--color-bg-accent-secondary);
+    color: var(--color-text-accent);
+}
+
+.secondary-accent-color a {
+    color: var(--color-text-accent);
+}
+
+.secondary-accent-color-text-low {
+    background-color: var(--color-bg-accent-secondary);
+    color: var(--color-text-accent-low);
+}
+
+.secondary-accent-color-text-low a {
+    color: var(--color-text-accent-low);
+}
+
+.secondary-accent-color-bg-low {
+    background-color: var(--color-bg-accent-secondary-low);
+    color: var(--color-text-accent-low);
+}
+
+.tertiary-accent-color {
+    background-color: var(--color-bg-accent-tertiary);
+    color: var(--color-text-accent);
+}
+
+.tertiary-accent-color a {
+    color: var(--color-text-accent);
+}
+
+.tertiary-accent-color-text-low {
+    background-color: var(--color-bg-accent-tertiary);
+    color: var(--color-text-accent-low);
+}
+
+.tertiary-accent-color-text-low a {
+    color: var(--color-text-accent-low);
+}
+
+.tertiary-accent-color-bg-low {
+    background-color: var(--color-bg-accent-tertiary-low);
+    color: var(--color-text-accent-low);
+}
+
+.gradient-accent-color {
+    background: var(--color-bg-accent-gradient);
+}
+
+.error-color {
+    background-color: var(--color-bg-error);
+    color: var(--color-text-error);
 }
 
 .drop-shadow {
-    box-shadow: 2px 2px 1px var(--color-bg-shadow);
+    box-shadow: 2px 2px 0px var(--color-bg-shadow);
 }
 
 .required-color {
@@ -275,7 +386,7 @@ textarea {
     color: var(--color-text-secondary);
 
     border-color: var(--color-text-secondary);
-    border-width: medium;
+    border-width: 2px;
     border-radius: var(--curve-radius-small);
     box-shadow: 2px 2px 1px var(--color-bg-shadow);
 
@@ -284,7 +395,8 @@ textarea {
 
 button:disabled,
 input:disabled,
-select:disabled {
+select:disabled,
+textarea:disabled {
     background-color: var(--color-bg-secondary-low);
     color: var(--color-text-secondary-low);
     border-color: var(--color-text-secondary-low);
@@ -307,16 +419,37 @@ input:invalid.touched {
     border-color: var(--color-text-error);
 }
 
-button:focus,
-select:focus,
-input:focus {
-    accent-color: var(--color-bg-accent-primary);
-    border-color: var(--color-bg-accent-primary);
+button:hover:not([disabled]),
+input:hover:not([disabled]),
+select:hover:not([disabled]),
+textarea:hover:not([disabled]) {
+    box-shadow: -1px -1px 0px var(--color-bg-shadow);
+}
+
+button:hover:not([disabled]) {
+    transform: translateY(-1px);
+}
+
+button:focus:not([disabled]),
+input:focus:not([disabled]),
+select:focus:not([disabled]),
+textarea:focus:not([disabled]) {
+    box-shadow: none;
 }
 
 input[type="checkbox"] {
+    accent-color: var(--color-bg-accent-secondary);
     height: 1.25em;
     width: 1.25em;
+}
+
+/* Use the standard box shadow on checkboxes because the hover effect looks bad on this element. */
+input[type="checkbox"]:hover:not([disabled]) {
+    box-shadow: 2px 2px 0px var(--color-bg-shadow);
+}
+
+input[type="checkbox"]:focus {
+    box-shadow: 2px 2px 1px var(--color-bg-shadow);
 }
 
 /* Set basic relative font sizing. */
@@ -390,12 +523,34 @@ fieldset {
     animation: rotation 4s infinite linear;
 }
 
+svg {
+    height: var(--icon-size-small);
+    width: var(--icon-size-small);
+}
+
+.page-body .icon {
+    padding: 1.0em;
+    border-radius: var(--curve-radius-large);
+}
+.page-body svg {
+    flex-shrink: 1;
+    height: var(--icon-size-large);
+    width: var(--icon-size-large);
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(359deg);
+    }
+}
+
+@media (max-width: 700px) {
+    .header .nav-link .icon,
+    .header .page-branding .icon {
+        display: none;
     }
 }
 
@@ -418,8 +573,10 @@ fieldset {
 }
 
 .header {
-    padding: 1.0em;
+    padding-left: min(1.0em, 1vw);
+    padding-right: min(1.0em, 1vw);
     text-align: center;
+    font-size: var(--font-size-smaller);
 
     display: flex;
     flex-direction: row;
@@ -429,12 +586,14 @@ fieldset {
 }
 
 .header > div {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
     flex-basis: 0;
-}
+    word-break: keep-all;
 
-.header .page-title {
-    font-style: italic;
+    padding-top: 1.0em;
+    padding-bottom: 1.0em;
 }
 
 .header .nav {
@@ -442,10 +601,40 @@ fieldset {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 1.5em;
-    word-break: keep-all;
 
-    font-size: var(--font-size-large);
+    /* Remove the padding from the nav itself.
+     * The padding will be put on each nav link for better hover effects. */
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+.header .nav-highlight {
+    border-bottom: solid var(--color-bg-accent-tertiary);
+}
+
+.header .nav-link,
+.header .page-branding {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: min(0.5em, 0.5vw);
+}
+
+.header .nav-link {
+    /* Add padding to the nav link class for better hover effects. */
+    padding-top: 1.5em;
+    padding-right: min(1em, 1vw);
+    padding-bottom: 1.5em;
+    padding-left: min(1em, 1vw);
+}
+
+.header .page-branding {
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+}
+
+.header .nav-link:hover {
+    background: var(--color-highlighter);
 }
 
 .header a {
@@ -457,12 +646,11 @@ fieldset {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    gap: 1em;
+    gap: min(1.0em, 1.0vw);
 }
 
 .header .user-info .current-user {
     font-size: var(--font-size-small);
-    font-style: italic;
 }
 
 .footer {
@@ -485,11 +673,8 @@ fieldset {
 }
 
 .footer div.right {
+    gap: 1em;
     justify-content: flex-end;
-}
-
-.footer img {
-    height: 1.5em;
 }
 
 .page-body {
@@ -521,8 +706,52 @@ fieldset {
     margin-bottom: 0.75em;
 }
 
+.card-header,
+.template-content .page-information {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: min(1.75em, 4.5vw);
+    gap: 1.0em;
+    border-radius: var(--curve-radius-large);
+}
+
+.card-header {
+    margin-bottom: 1.0em;
+}
+
+.card-header h2 {
+    margin-bottom: 0em;
+}
+
+.card-header .card-title {
+    display: flex;
+    align-self: center;
+    max-width: fit-content;
+}
+
+.card-sections {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-sections > div {
+    display: block;
+    padding: 1.0em;
+    border-radius: var(--curve-radius-large);
+}
+
 .card-section {
     margin-bottom: 1em;
+}
+
+.card-section:last-of-type {
+    margin-bottom: 0em;
+}
+
+.card-section h2 {
+    text-align: start;
 }
 
 .cards-area {
@@ -536,19 +765,27 @@ fieldset {
 }
 
 .card {
-    flex-basis: 0;
+    flex-basis: 20vw;
     flex-grow: 1;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
+    min-width: min-content;
+
     border-radius: var(--curve-radius-large);
     font-size: var(--font-size-larger);
     text-align: center;
 
-    outline: 5px solid var(--color-bg-accent-primary);
-    outline-offset: -3px;
+    outline: 3px solid var(--color-bg-accent-primary);
+    outline-offset: -2px;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+    background: var(--color-bg-accent-gradient);
 }
 
 .card a {
@@ -557,20 +794,49 @@ fieldset {
     word-break: keep-all;
 }
 
-.email-page,
+.home-page,
 .template-page {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.email-content,
+.home-content,
 .template-content {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     max-width: fit-content;
+}
+
+.home-content .home-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75em;
+    font-size: var(--font-size-larger);
+}
+
+.home-title .page-image {
+    padding: 0.75em;
+    border-radius: var(--curve-radius-small);
+}
+
+.home-content > div {
+    padding: 1.5em;
+    /* Do not use relative margins as the title cards will be spaced differently. */
+    margin: min(18px, 1vw);
+    border-radius: var(--curve-radius-large);
+}
+
+.home-content > div p {
+    margin-bottom: 0em;
+}
+
+.home-content > div a {
+    color: var(--color-text-link);
 }
 
 table.standard-table {
@@ -600,11 +866,44 @@ table.standard-table tr:not(:last-child) {
     max-width: 95vw;
 }
 
-.user-input-fields {
+.template-content .page-information {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding: min(1.75em, 4.5vw);
+    border-radius: var(--curve-radius-small);
+}
+
+.template-content .page-image {
+    flex-shrink: 1;
+    padding: 1.0em;
+    border-radius: var(--curve-radius-small);
+}
+
+.template-content .page-text {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    text-align: center;
+    flex: 0 1 auto;
+    gap: 0.5em;
+}
+
+.template-content .page-text > div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: start;
+}
+
+.user-input-fields,
+.template-content .template-control-area {
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    max-width: 95vw;
 
     gap: 1em;
     padding: 1.5em;
@@ -612,40 +911,47 @@ table.standard-table tr:not(:last-child) {
     border-radius: var(--curve-radius-small);
 }
 
-.user-input-fields fieldset {
+.user-input-fields fieldset,
+.template-content .template-control-area fieldset {
     display: flex;
     flex-direction: column;
     align-self: stretch;
 }
 
-.user-input-fields fieldset > div {
+.user-input-fields fieldset > div,
+.template-content .template-control-area fieldset > div {
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5em;
 }
 
-.user-input-fields fieldset > div.checkbox-field {
+.user-input-fields fieldset > div.checkbox-field,
+.template-content .template-control-area fieldset > div.checkbox-field {
     flex-direction: row;
     align-items: center;
 }
 
 .user-input-fields .input-field label,
-.template-control-area .input-field label {
+.template-content .template-control-area .input-field label {
     margin-bottom: 0.5em;
 }
 
 .user-input-fields .checkbox-field label,
-.template-control-area .checkbox-field label {
+.template-content .template-control-area .checkbox-field label {
     margin-bottom: 0em;
     margin-left: 0.5em;
 }
 
-.user-input-fields .input-field .error-message {
+.template-content .template-control-area .input-field label,
+.template-content .template-control-area .input-field select {
+    max-width: 80vw;
+}
+
+.user-input-fields .input-field .error-message,
+.template-content .template-control-area .input-field .error-message {
     /* Hide the error message box by default. */
     display: none;
 
-    color: var(--color-text-error);
-    background-color: var(--color-bg-error);
     border-radius: var(--curve-radius-small);
 
     /* Add a small margin to account for the input field's drop shadow. */
@@ -658,30 +964,24 @@ table.standard-table tr:not(:last-child) {
     padding-bottom: 0.5em;
 }
 
-.user-input-fields .input-field .error-message.show {
+.user-input-fields .input-field .error-message.show,
+.template-content .template-control-area .input-field .error-message.show {
     display: block;
 }
 
-.user-input-fields .input-field .error-message p {
+.user-input-fields .input-field .error-message p,
+.template-content .template-control-area .input-field .error-message p {
     margin: 0em;
 }
 
-.template-content .page-information {
-    padding: 1.5em;
-    text-align: center;
-    border-radius: var(--curve-radius-small);
-}
-
-.email-content > button,
-.email-content > div,
-.template-content > button,
 .template-content > div {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    min-width: 50vw;
+    min-width: min(80vw, 1150px);
     max-width: 95vw;
+    box-sizing: border-box;
 
     gap: 1em;
     margin-top: 1em;
@@ -690,12 +990,18 @@ table.standard-table tr:not(:last-child) {
     margin-left: 0.5em;
 }
 
-.template-content .template-description p {
+.template-content button {
+    max-width: fit-content;
+    align-self: center;
+    padding: 0.5em 0.75em;
+}
+
+.template-content .template-header h2 {
     margin-bottom: 0em;
 }
 
-.template-content button {
-    padding: 0.5em 0.75em;
+.template-content .template-description p {
+    margin-bottom: 0em;
 }
 
 .results-area .result {
@@ -711,12 +1017,7 @@ table.standard-table tr:not(:last-child) {
     border-radius: var(--curve-radius-small);
 }
 
-.template-control-area {
-    padding: 1.5em;
-    border-radius: var(--curve-radius-small);
-}
-
-.template-control-area .input-field {
+.template-content .template-control-area .input-field {
     display: flex;
     flex-direction: column;
     align-self: stretch;

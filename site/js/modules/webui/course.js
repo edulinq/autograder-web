@@ -1,4 +1,5 @@
 import * as Autograder from '../autograder/base.js';
+import * as Icon from './icon.js';
 import * as Input from './input.js';
 import * as Render from './render.js';
 import * as Routing from './routing.js';
@@ -7,10 +8,10 @@ const COURSE_USER_REFERENCE_DOC_LINK = "https://github.com/edulinq/autograder-se
 
 function init() {
     let requirements = {course: true};
-    Routing.addRoute(/^courses$/, handlerCourses, 'Enrolled Courses');
-    Routing.addRoute(/^course$/, handlerCourse, 'Course', {course: true});
-    Routing.addRoute(/^course\/email$/, handlerEmail, 'Email', {course: true});
-    Routing.addRoute(/^course\/list$/, handlerUsers, 'Users', {course: true});
+    Routing.addRoute(/^courses$/, handlerCourses, 'Enrolled Courses', Routing.NAV_PARENT_COURSES);
+    Routing.addRoute(/^course$/, handlerCourse, 'Course', Routing.NAV_PARENT_COURSES, {course: true});
+    Routing.addRoute(/^course\/email$/, handlerEmail, 'Email', Routing.NAV_PARENT_COURSES, {course: true});
+    Routing.addRoute(/^course\/list$/, handlerUsers, 'Users', Routing.NAV_PARENT_COURSES, {course: true});
 }
 
 function handlerCourses(path, params, context, container) {
@@ -30,16 +31,16 @@ function handlerCourses(path, params, context, container) {
     }
 
     let cardSections = [
-        ['', cards],
+        ['Enrolled Courses', cards],
     ];
 
-    container.innerHTML = Render.makeCardSections(context, 'Enrolled Courses', cardSections);
+    container.innerHTML = Render.makeCardSections(context, '', cardSections);
 }
 
 function handlerCourse(path, params, context, container) {
     let course = context.courses[params[Routing.PARAM_COURSE]];
 
-    Render.makeTitle(course.id);
+    Render.setTabTitle(course.id);
 
     let assignmentCards = [];
     for (const [id, assignment] of Object.entries(course.assignments)) {
@@ -93,18 +94,13 @@ function handlerCourse(path, params, context, container) {
         ['Actions', actionCards],
     ];
 
-    container.innerHTML = Render.makeCardSections(context, course.name, cardSections);
+    container.innerHTML = Render.makeCardSections(context, course.name, cardSections, Icon.ICON_NAME_COURSES);
 }
 
 function handlerEmail(path, params, context, container) {
     let course = context.courses[params[Routing.PARAM_COURSE]];
-    let courseLink = Routing.formHashPath(Routing.PATH_COURSE, {[Routing.PARAM_COURSE]: course.id});
 
-    let titleParts = [
-        [course.id, courseLink],
-        ["email"]
-    ];
-    Render.makeTitle(course.id, titleParts);
+    Render.setTabTitle(course.id);
 
     let description = `
         Send an email to course users.
@@ -145,6 +141,7 @@ function handlerEmail(path, params, context, container) {
                 description: description,
                 inputs: inputFields,
                 buttonName: 'Send Email',
+                iconName: Icon.ICON_NAME_MAIL,
             },
         )
     ;
@@ -184,13 +181,8 @@ function sendEmail(params, context, container, inputParams) {
 
 function handlerUsers(path, params, context, container) {
     let course = context.courses[params[Routing.PARAM_COURSE]];
-    let courseLink = Routing.formHashPath(Routing.PATH_COURSE, {[Routing.PARAM_COURSE]: course.id});
 
-    let titleParts = [
-        [course.id, courseLink],
-        ["users"]
-    ];
-    Render.makeTitle(course.id, titleParts);
+    Render.setTabTitle(course.id);
 
     let inputFields = [
         new Input.FieldType(context, Routing.PARAM_TARGET_USERS, 'Target Users', {
@@ -209,6 +201,7 @@ function handlerUsers(path, params, context, container) {
                 description: description,
                 inputs: inputFields,
                 buttonName: 'List Users',
+                iconName: Icon.ICON_NAME_LIST,
             },
         )
     ;

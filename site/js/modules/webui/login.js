@@ -6,7 +6,7 @@ import * as Render from './render.js';
 import * as Routing from './routing.js';
 
 function init() {
-    Routing.addRoute(/^login$/, handlerLogin, 'Login', {login: false});
+    Routing.addRoute(/^login$/, handlerLogin, 'Login', Routing.NAV_PARENT_EMPTY, {login: false});
     Routing.addRoute(/^logout$/, handlerLogout, 'Logout');
 }
 

@@ -240,7 +240,7 @@ class FieldType {
             listOfFieldHTML.reverse();
         }
 
-        listOfFieldHTML.push(`<div class="error-message"><p><span></span></p></div>`);
+        listOfFieldHTML.push(`<div class="error-message error-color"><p><span></span></p></div>`);
 
         return `
             <div class="input-field ${this.inputClasses}" data-name="${this.name}">
