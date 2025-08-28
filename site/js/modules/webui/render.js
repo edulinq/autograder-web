@@ -6,10 +6,12 @@ import * as Routing from './routing.js';
 import * as Util from './util.js';
 
 const API_OUTPUT_SWITCHER_JSON = 'JSON';
+const API_OUTPUT_SWITCHER_TABLE = 'Table';
 const API_OUTPUT_SWITCHER_TEXT = 'Text';
 
 const API_OUTPUT_SWITCHER_MODES = {
     [API_OUTPUT_SWITCHER_JSON]: apiOutputJSON,
+    [API_OUTPUT_SWITCHER_TABLE]: apiOutputTable,
     [API_OUTPUT_SWITCHER_TEXT]: apiOutputText,
 };
 
@@ -653,7 +655,25 @@ function apiValueToText(value, indentLevel = 0, renderOptions = new APIValueRend
     }
 }
 
-// Convert a JS object into a text representation.
+// Convert a value (of any type) into a flat text representation usually used for a table.
+function apiValueToTableValue(value, indentLevel = 0, renderOptions = new APIValueRenderOptions()) {
+    if (value === undefined) {
+        return '';
+    }
+
+    if (value === null) {
+        return '';
+    }
+
+    switch (typeof(value)) {
+        case 'string':
+            return value;
+        default:
+            return JSON.stringify(value);
+    }
+}
+
+// Convert a JS object (from the API) into a text representation.
 // See apiValueToText().
 function apiObjectToText(object, indentLevel = 0, renderOptions = new APIValueRenderOptions()) {
     let keys = Object.keys(object);
@@ -687,7 +707,7 @@ function apiObjectToText(object, indentLevel = 0, renderOptions = new APIValueRe
     return rows.join(renderOptions.rowDelim);
 }
 
-// Convert a JS array into a text representation.
+// Convert a JS array (from the API) into a text representation.
 // See apiValueToText().
 function apiArrayToText(items, indentLevel = 0, renderOptions = new APIValueRenderOptions()) {
     let rows = [];
@@ -707,6 +727,44 @@ function apiArrayToText(items, indentLevel = 0, renderOptions = new APIValueRend
     let text = rows.join(renderOptions.entityDelim);
 
     return text;
+}
+
+// Convert a JS array (from the API) into a table representation.
+// See apiValueToText().
+// The array must be populated with objects (the keys of which will become the columns).
+function apiArrayToTable(items, renderOptions = new APIValueRenderOptions()) {
+    if (items.length <= 0) {
+        return '<p>No Records</p>';
+    }
+
+    // Collect keys from all the list items.
+    let keys = new Set();
+    for (const item of items) {
+        keys = keys.union(new Set(Object.keys(item)));
+    }
+
+    // Sort the keys.
+    keys = Array.from(keys);
+    renderOptions.sortKeys(keys);
+
+    // Transform keys.
+    let displayKeys = keys;
+    if (renderOptions.keyDisplayTransformer) {
+        displayKeys = keys.map(renderOptions.keyDisplayTransformer);
+    }
+
+    // Transform values.
+    let rows = [];
+    for (const item of items) {
+        let row = [];
+        for (const key of keys) {
+            row.push(apiValueToTableValue(item[key]));
+        }
+
+        rows.push(row);
+    }
+
+    return tableFromLists(displayKeys, rows);
 }
 
 // Create a table using an array of arrays.
@@ -735,7 +793,7 @@ function tableFromLists(headers, rows, classes = []) {
 }
 
 // Create a table using array of dictionaries.
-// Each row is representated a dictionary.
+// Each row is represented a dictionary.
 // Each header is represented as an array,
 // ex. ["key", "displayValue"],
 // where keys match the keys in the row dictionaries.
@@ -815,7 +873,6 @@ function apiOutputJSON(value, container, renderOptions) {
 // Render an API output as (pretty) text.
 function apiOutputText(value, container, renderOptions) {
     let text = apiArrayToText(value, renderOptions.initialIndentLevel, renderOptions);
-
     if (renderOptions.finalTrim) {
         text = text.trim();
     }
@@ -823,11 +880,19 @@ function apiOutputText(value, container, renderOptions) {
     container.innerHTML = `<pre>${text}</pre>`;
 }
 
+// Render an API output as a table.
+function apiOutputTable(value, container, renderOptions) {
+    container.innerHTML = apiArrayToTable(value, renderOptions);
+}
+
 export {
+    API_OUTPUT_SWITCHER_JSON,
+    API_OUTPUT_SWITCHER_TABLE,
+    API_OUTPUT_SWITCHER_TEXT,
+
     APIValueRenderOptions,
     Card,
 
-    apiArrayToText,
     apiOutputSwitcher,
     autograderError,
     cards,

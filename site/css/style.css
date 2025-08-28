@@ -607,6 +607,11 @@ table.standard-table {
 }
 
 table.standard-table th,
+table.standard-table td {
+    padding: 0.50em;
+}
+
+table.standard-table th,
 table.standard-table tr:not(:last-child) {
     border-bottom: 1px solid var(--color-text-secondary);
 }

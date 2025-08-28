@@ -352,6 +352,11 @@ function listServerUsers(params, context, container, inputParams) {
             });
             Render.apiOutputSwitcher(result.users, container, {
                 renderOptions: options,
+                modes: [
+                    Render.API_OUTPUT_SWITCHER_TEXT,
+                    Render.API_OUTPUT_SWITCHER_TABLE,
+                    Render.API_OUTPUT_SWITCHER_JSON,
+                ],
             });
 
             return undefined;
