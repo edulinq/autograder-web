@@ -216,35 +216,32 @@ function handlerUsers(path, params, context, container) {
 
 function listUsers(params, context, container, inputParams) {
     inputParams[Routing.PARAM_COURSE_ID] = context.courses[params[Routing.PARAM_COURSE]].id;
+
     return Autograder.Course.users(inputParams)
         .then(function(result) {
             if (result.users.length === 0) {
                 return '<p>Unable to find target users.</p>';
             }
 
-            return `<pre>${listCourseUsers(result.users)}</pre`;
+            Render.apiOutputSwitcher(result.users, container, {
+                renderOptions: new Render.APIValueRenderOptions({
+                    keyOrdering: ['email', 'name', 'role', 'lms-id'],
+                    initialIndentLevel: -1,
+                }),
+                modes: [
+                    Render.API_OUTPUT_SWITCHER_TEXT,
+                    Render.API_OUTPUT_SWITCHER_TABLE,
+                    Render.API_OUTPUT_SWITCHER_JSON,
+                ],
+            });
+
+            return undefined;
         })
         .catch(function(message) {
             console.error(message);
             return message;
         })
     ;
-}
-
-function listCourseUsers(users) {
-    let messages = [];
-    for (const user of users) {
-        let userParts = [
-            `Email: ${user['email']}`,
-            `Name: ${user['name']}`,
-            `Role: ${user['role']}`,
-            `LMS ID: ${user['lms-id']}`,
-        ];
-
-        messages.push(`${userParts.join("\n")}`);
-    }
-
-    return messages.join("\n\n");
 }
 
 function extractRecipients(input) {

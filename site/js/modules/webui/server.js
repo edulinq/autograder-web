@@ -346,12 +346,11 @@ function listServerUsers(params, context, container, inputParams) {
                 return '<p>Unable to find target users.</p>';
             }
 
-            let options = new Render.APIValueRenderOptions({
-                keyOrdering: ['id', 'email', 'name', 'role', 'type', 'courses'],
-                initialIndentLevel: -1,
-            });
             Render.apiOutputSwitcher(result.users, container, {
-                renderOptions: options,
+                renderOptions: new Render.APIValueRenderOptions({
+                    keyOrdering: ['id', 'email', 'name', 'role', 'type', 'courses'],
+                    initialIndentLevel: -1,
+                }),
                 modes: [
                     Render.API_OUTPUT_SWITCHER_TEXT,
                     Render.API_OUTPUT_SWITCHER_TABLE,
