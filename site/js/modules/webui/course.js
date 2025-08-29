@@ -8,10 +8,10 @@ const COURSE_USER_REFERENCE_DOC_LINK = "https://github.com/edulinq/autograder-se
 
 function init() {
     let requirements = {course: true};
-    Routing.addRoute(/^courses$/, handlerCourses, 'Enrolled Courses', Routing.NAV_PARENT_COURSES);
-    Routing.addRoute(/^course$/, handlerCourse, 'Course', Routing.NAV_PARENT_COURSES, {course: true});
-    Routing.addRoute(/^course\/email$/, handlerEmail, 'Email', Routing.NAV_PARENT_COURSES, {course: true});
-    Routing.addRoute(/^course\/list$/, handlerUsers, 'Users', Routing.NAV_PARENT_COURSES, {course: true});
+    Routing.addRoute(/^courses$/, handlerCourses, 'Enrolled Courses', Routing.NAV_COURSES);
+    Routing.addRoute(/^course$/, handlerCourse, 'Course', Routing.NAV_COURSES, {course: true});
+    Routing.addRoute(/^course\/email$/, handlerEmail, 'Email', Routing.NAV_COURSES, {course: true});
+    Routing.addRoute(/^course\/list$/, handlerUsers, 'Users', Routing.NAV_COURSES, {course: true});
 }
 
 function handlerCourses(path, params, context, container) {

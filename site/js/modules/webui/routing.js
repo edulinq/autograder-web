@@ -44,10 +44,10 @@ const PATH_SERVER_CALL_API = `${PATH_SERVER}/call-api`;
 const PATH_SERVER_DOCS = `${PATH_SERVER}/docs`;
 const PATH_SERVER_USERS_LIST = `${PATH_SERVER}/users/list`;
 
-const NAV_PARENT_COURSES = 'Courses';
-const NAV_PARENT_EMPTY = '';
-const NAV_PARENT_HOME = 'Home';
-const NAV_PARENT_SERVER = 'Server';
+const NAV_COURSES = 'Courses';
+const NAV_EMPTY = '';
+const NAV_HOME = 'Home';
+const NAV_SERVER = 'Server';
 
 // The current hash/location we are routed to.
 // Should be prefixed with a hash symbol.
@@ -73,7 +73,7 @@ function init(initialRoute = true) {
 // Possible fields for |context| are: user, courseID, course, and assignmentID.
 function addRoute(pattern, handler,
         pageName = undefined,
-        navParent = NAV_PARENT_EMPTY,
+        navParent = NAV_EMPTY,
         requirements = {login: true, course: false, assignment: false}) {
     // Fill in any holes in requirements.
     requirements.course = requirements.course || requirements.assignment;
@@ -412,8 +412,8 @@ export {
     PATH_SERVER_USERS_LIST,
     PATH_USER_HISTORY,
 
-    NAV_PARENT_COURSES,
-    NAV_PARENT_EMPTY,
-    NAV_PARENT_HOME,
-    NAV_PARENT_SERVER,
+    NAV_COURSES,
+    NAV_EMPTY,
+    NAV_HOME,
+    NAV_SERVER,
 };

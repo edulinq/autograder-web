@@ -17,10 +17,10 @@ const FIELD_PRIORITY = [
 const INDENT = "    ";
 
 function init() {
-    Routing.addRoute(/^server$/, handlerServer, 'Server Actions', Routing.NAV_PARENT_SERVER, undefined);
-    Routing.addRoute(/^server\/call-api$/, handlerCallAPI, 'Call API', Routing.NAV_PARENT_SERVER, undefined);
-    Routing.addRoute(/^server\/docs$/, handlerDocs, "API Documentation", Routing.NAV_PARENT_SERVER);
-    Routing.addRoute(/^server\/users\/list$/, handlerUsers, "List Users", Routing.NAV_PARENT_SERVER);
+    Routing.addRoute(/^server$/, handlerServer, 'Server Actions', Routing.NAV_SERVER, undefined);
+    Routing.addRoute(/^server\/call-api$/, handlerCallAPI, 'Call API', Routing.NAV_SERVER, undefined);
+    Routing.addRoute(/^server\/docs$/, handlerDocs, "API Documentation", Routing.NAV_SERVER);
+    Routing.addRoute(/^server\/users\/list$/, handlerUsers, "List Users", Routing.NAV_SERVER);
 }
 
 function handlerServer(path, params, context, container) {
