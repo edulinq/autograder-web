@@ -170,9 +170,7 @@ function callEndpoint(params, context, container, inputParams) {
             clearContextUser: false,
         })
         .then(function(result) {
-            return `
-                <pre><code class="code code-block" data-lang="json">${Util.displayJSON(result)}</code></pre>
-            `;
+            return Render.codeBlockJSON(result);
         })
         .catch(function(message) {
             console.error(message)

@@ -75,7 +75,7 @@ class APIValueRenderOptions {
     }
 
     // Sort the given keys in-place according to the given ordering and comparison.
-    // They keys should not have been transformed prior to this call.
+    // The keys should not have been transformed prior to this call.
     sortKeys(keys) {
         let options = this;
         let comparison = function(a, b) {
@@ -724,9 +724,7 @@ function apiArrayToText(items, indentLevel = 0, renderOptions = new APIValueRend
         rows.push(row.join(''));
     }
 
-    let text = rows.join(renderOptions.entityDelim);
-
-    return text;
+    return rows.join(renderOptions.entityDelim);
 }
 
 // Convert a JS array (from the API) into a table representation.
@@ -793,7 +791,7 @@ function tableFromLists(headers, rows, classes = []) {
 }
 
 // Create a table using array of dictionaries.
-// Each row is represented a dictionary.
+// Each row is represented as a dictionary.
 // Each header is represented as an array,
 // ex. ["key", "displayValue"],
 // where keys match the keys in the row dictionaries.
