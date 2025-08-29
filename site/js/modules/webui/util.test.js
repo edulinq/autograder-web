@@ -1,4 +1,22 @@
-import * as Util from './util.js'
+import * as Jest from '@jest/globals';
+import * as Util from './util.js';
+
+beforeAll(function() {
+    // Save the original locale method.
+    const realToLocaleString = Date.prototype.toLocaleString;
+
+    // Force all Date locale formatting to be in UTC.
+    Jest.jest.spyOn(Date.prototype, 'toLocaleString').mockImplementation(function(locale, options = {}) {
+        return realToLocaleString.call(this, locale, {
+            ...options,
+            timeZone: 'UTC',
+        });
+    });
+});
+
+afterAll(function() {
+    Jest.jest.restoreAllMocks();
+});
 
 test("caseInsensitiveStringCompare base", function() {
     const testCases = [
@@ -27,19 +45,19 @@ describe("Util.timestampToPretty() base", function() {
     // [[input, expected], ...]
     const testCases = [
         // Unix Epoch
-        [0, '12/31/1969, 4:00:00 PM'],
+        [0, '1/1/1970, 12:00:00 AM'],
 
         // After Unix Epoch
-        [Util.MSECS_PER_SECS, '12/31/1969, 4:00:01 PM'],
-        [Util.MSECS_PER_MINS, '12/31/1969, 4:01:00 PM'],
-        [Util.MSECS_PER_HOURS, '12/31/1969, 5:00:00 PM'],
-        [Util.MSECS_PER_DAYS, '1/1/1970, 4:00:00 PM'],
+        [Util.MSECS_PER_SECS, '1/1/1970, 12:00:01 AM'],
+        [Util.MSECS_PER_MINS, '1/1/1970, 12:01:00 AM'],
+        [Util.MSECS_PER_HOURS, '1/1/1970, 1:00:00 AM'],
+        [Util.MSECS_PER_DAYS, '1/2/1970, 12:00:00 AM'],
 
         // Before Unix Epoch
-        [-1 * Util.MSECS_PER_SECS, '12/31/1969, 3:59:59 PM'],
-        [-1 * Util.MSECS_PER_MINS, '12/31/1969, 3:59:00 PM'],
-        [-1 * Util.MSECS_PER_HOURS, '12/31/1969, 3:00:00 PM'],
-        [-1 * Util.MSECS_PER_DAYS, '12/30/1969, 4:00:00 PM'],
+        [-1 * Util.MSECS_PER_SECS, '12/31/1969, 11:59:59 PM'],
+        [-1 * Util.MSECS_PER_MINS, '12/31/1969, 11:59:00 PM'],
+        [-1 * Util.MSECS_PER_HOURS, '12/31/1969, 11:00:00 PM'],
+        [-1 * Util.MSECS_PER_DAYS, '12/31/1969, 12:00:00 AM'],
     ];
 
     test.each(testCases)("'%s'", function(input, expected) {
@@ -54,12 +72,12 @@ describe("Util.messageTimestampsToPretty() base", function() {
         ['Do you know when the Unix Epoch occured?', 'Do you know when the Unix Epoch occured?'],
 
         // One Timestamp
-        [`The Unix Epoch occured at '<timestamp:0>'.`, `The Unix Epoch occured at '12/31/1969, 4:00:00 PM'.`],
+        [`The Unix Epoch occured at '<timestamp:0>'.`, `The Unix Epoch occured at '1/1/1970, 12:00:00 AM'.`],
 
         // Multiple Timestamps
         [
             `That was after '<timestamp:${-1 * Util.MSECS_PER_DAYS}>' but before '<timestamp:${Util.MSECS_PER_DAYS}>'.`,
-            `That was after '12/30/1969, 4:00:00 PM' but before '1/1/1970, 4:00:00 PM'.`,
+            `That was after '12/31/1969, 12:00:00 AM' but before '1/2/1970, 12:00:00 AM'.`,
         ],
     ];
 
