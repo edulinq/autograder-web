@@ -154,7 +154,7 @@ function handlerAssignment(path, params, context, container) {
 
     let cardSections = [
         ['Student Actions', studentCards],
-        ['Course Staff Actions', staffCards],
+        ['Advanced Actions', staffCards],
     ];
 
     container.innerHTML = Render.makeCardSections(context, assignment.name, cardSections, Icon.ICON_NAME_COURSES);

@@ -61,21 +61,20 @@ describe('Nav HW0', function() {
         [
             'course-student',
             [
-                'Fetch Submission Attempt',
                 'Peek a Previous Submission',
                 'Submit',
                 'View Submission History',
+                'Fetch Submission Attempt',
             ],
         ],
         [
             'course-grader',
             [
-                'Fetch Course Scores',
-                'Fetch Submission Attempt',
                 'Peek a Previous Submission',
                 'Submit',
                 'View Submission History',
                 'Fetch Course Scores',
+                'Fetch Submission Attempt',
                 'Proxy Regrade',
                 'Proxy Resubmit',
                 'Remove Submission',
