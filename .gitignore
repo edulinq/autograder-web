@@ -6,7 +6,8 @@
 /dist/
 /test/
 
-coverage/
+/.coverage/
+/coverage/
 node_modules/
 old/
 

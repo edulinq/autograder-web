@@ -4,6 +4,7 @@ import * as Course from './course.js';
 import * as Server from './server.js';
 import * as Submissions from './submissions.js';
 import * as Users from './users.js';
+import * as Util from './util.js';
 
 // API functions to interact with an autograder server.
 
@@ -17,6 +18,7 @@ export {
     Server,
     Submissions,
     Users,
+    Util,
 
     hasCredentials,
     setCredentials,

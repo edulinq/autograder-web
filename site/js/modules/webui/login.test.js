@@ -1,9 +1,6 @@
-import * as Base from './base.js';
 import * as TestUtil from './test/util.js';
 
 test("Login Page", async function() {
-    Base.init(false);
-
     const testCases = [
         { displayName: "course-admin" },
         { displayName: "course-grader" },

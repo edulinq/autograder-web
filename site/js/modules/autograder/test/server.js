@@ -1,16 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import url from 'node:url';
+import stream from 'node:stream/web';
 
-import * as Core from '../core.js'
-import * as Util from '../util.js'
+import * as Core from '../core.js';
+import * as Util from '../util.js';
 
-var testData = {}
+global.testData = {};
 
 const DEFAULT_ID_EMAIL = 'server-admin@test.edulinq.org';
 const DEFAULT_ID_CLEARTEXT = 'server-admin';
 
-global.URL = url.URL;
+// Replace JSDOM objects with Node versions (Jest makes these replacements).
+global.DecompressionStream = stream.DecompressionStream;
 
 // Mock fetch to use our test data.
 global.fetch = function(url, options = {}) {
@@ -84,7 +85,7 @@ function loadHTML() {
 // Load the test data from ./api_test_data.json.
 function loadAPITestData() {
     const text = fs.readFileSync(path.join('site', 'js', 'modules', 'autograder', 'test', 'api_test_data.json'), 'utf8');
-    testData = JSON.parse(text)
+    testData = JSON.parse(text);
 
     for (const [key, value] of Object.entries(testData)) {
         let keyData = JSON.parse(key);
@@ -127,12 +128,12 @@ function createTokensDeleteTestData(userEmail, cleartext, tokenId = '<TOKEN_ID>'
         'endpoint': endpoint,
         'module_name': 'autograder.api.users.tokens.delete',
         'arguments': {
-            'token-id': tokenId
+            'token-id': tokenId,
         },
         'output': {
-            'found': true
-        }
-    }
+            'found': true,
+        },
+    };
 }
 
 // Load the default testing identity.

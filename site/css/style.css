@@ -260,6 +260,14 @@ html {
     color: var(--color-text-primary-low);
 }
 
+.primry-color hr {
+    border-color: var(--color-text-primary);
+}
+
+.primry-color-low hr {
+    border-color: var(--color-text-primary-low);
+}
+
 .secondary-color {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary);
@@ -267,6 +275,10 @@ html {
 
 .secondary-color a {
     color: var(--color-text-secondary);
+}
+
+.secondary-color hr {
+    border-color: var(--color-text-secondary);
 }
 
 .secondary-color-low {
@@ -278,6 +290,10 @@ html {
     color: var(--color-text-secondary-low);
 }
 
+.secondary-color-low hr {
+    border-color: var(--color-text-secondary-low);
+}
+
 .tertiary-color {
     background-color: var(--color-bg-tertiary);
     color: var(--color-text-tertiary);
@@ -285,6 +301,10 @@ html {
 
 .tertiary-color a {
     color: var(--color-text-tertiary);
+}
+
+.tertiary-color hr {
+    border-color: var(--color-text-tertiary);
 }
 
 .tertiary-color-low {
@@ -296,6 +316,9 @@ html {
     color: var(--color-text-tertiary-low);
 }
 
+.tertiary-color-low hr {
+    border-color: var(--color-text-tertiary-low);
+}
 .primary-accent-color {
     background-color: var(--color-bg-accent-primary);
     color: var(--color-text-accent);
@@ -391,6 +414,11 @@ a {
 
 .link-color-low a {
     color: var(--color-text-link-low);
+}
+
+hr {
+    width: 100%;
+    border-width: 2px;
 }
 
 button,
@@ -861,6 +889,11 @@ table.standard-table {
 }
 
 table.standard-table th,
+table.standard-table td {
+    padding: 0.50em;
+}
+
+table.standard-table th,
 table.standard-table tr:not(:last-child) {
     border-bottom: 1px solid var(--color-text-secondary);
 }
@@ -1035,6 +1068,18 @@ table.standard-table tr:not(:last-child) {
     align-self: stretch;
 }
 
+.results-area .results-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.template-control-area {
+    padding: 1.5em;
+    border-radius: var(--curve-radius-small);
+}
+
 .submission table,
 .submission-history table {
     margin-left: 2em;
@@ -1110,4 +1155,12 @@ table.standard-table tr:not(:last-child) {
     display: flex;
     flex-direction: column;
     gap: 1em;
+}
+
+.output-switcher .controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
 }

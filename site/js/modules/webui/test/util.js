@@ -26,7 +26,7 @@ async function loginUser(displayName) {
     let inputParams = {
         'email': `${displayName}@test.edulinq.org`,
         'cleartext': displayName,
-    }
+    };
     await Login.login(undefined, undefined, document, inputParams);
     await homeRenderedPromise;
 }
@@ -47,8 +47,31 @@ function checkPageBasics(title, dataPage) {
     expect(pageContent).not.toBeNull();
 }
 
+async function navigate(path, params = undefined) {
+    let pathComponents = {
+        'path': path,
+    };
+
+    if (params) {
+        pathComponents['params'] = params;
+    }
+
+    let renderPromise = Event.getEventPromise(Event.EVENT_TYPE_ROUTING_COMPLETE, pathComponents);
+
+    Routing.routeComponents(pathComponents);
+    await renderPromise;
+}
+
+async function submitTemplate() {
+    let resultWaitPromise = Event.getEventPromise(Event.EVENT_TYPE_TEMPLATE_RESULT_COMPLETE);
+    document.querySelector('.template-button').click();
+    await resultWaitPromise;
+}
+
 export {
     checkCards,
     checkPageBasics,
     loginUser,
+    navigate,
+    submitTemplate,
 }
