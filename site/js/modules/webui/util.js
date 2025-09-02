@@ -8,6 +8,9 @@ const MSECS_PER_DAYS = MSECS_PER_HOURS * 24
 const WORD_BREAK_RE = /[\-_]+/
 const JSON_INDENT = 4;
 
+const TESTING_LOCALE = 'en-US';
+const TESTING_TIME_ZONE = 'UTC';
+
 let _testing = false;
 
 function setTesting(value) {
@@ -58,7 +61,16 @@ function orderingCompare(a, b, ordering = [], fallback = stringCompare) {
 }
 
 function timestampToPretty(timestamp) {
-    return (new Date(timestamp)).toLocaleString();
+    const date = new Date(timestamp);
+
+    // Return a timestamp in a standard locale and time zone for testing consistency.
+    if (_testing) {
+        return date.toLocaleString(TESTING_LOCALE, {
+            timeZone: TESTING_TIME_ZONE,
+        });
+    }
+
+    return date.toLocaleString();
 }
 
 // Find timestamps in a message and replace them with the pretty version.

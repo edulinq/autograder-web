@@ -1,23 +1,6 @@
 import * as Jest from '@jest/globals';
 import * as Util from './util.js';
 
-beforeAll(function() {
-    // Save the original locale method.
-    const realToLocaleString = Date.prototype.toLocaleString;
-
-    // Force all Date locale formatting to be in UTC.
-    Jest.jest.spyOn(Date.prototype, 'toLocaleString').mockImplementation(function(locale, options = {}) {
-        return realToLocaleString.call(this, locale, {
-            ...options,
-            timeZone: 'UTC',
-        });
-    });
-});
-
-afterAll(function() {
-    Jest.jest.restoreAllMocks();
-});
-
 describe("Util.caseInsensitiveStringCompare() base", function() {
     // [[a, b, expected], ...]
     const testCases = [
