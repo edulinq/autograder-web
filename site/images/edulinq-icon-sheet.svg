@@ -17,14 +17,29 @@
         stroke: #000;
       }
 
+      .stroke-grey {
+        stroke: #231f20;
+      }
+
       .stroke-white {
         stroke: #fff;
       }
 
       .stroke-size {
-        fill: none;
         stroke-miterlimit: 10;
+      }
+
+      .stroke-width-large {
         stroke-width: 2;
+      }
+
+      .stroke-width-small {
+        stroke-width: 1.5;
+      }
+
+      .stroke-line-shape {
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
     </style>
   </defs>
@@ -52,32 +67,50 @@
   <!-- EduLinq Icons -->
   <!-- Logo Light -->
   <symbol class='icon' id='icon-logo-light' viewBox='0 0 40 40'>
+    <line class="fill-none stroke-grey stroke-width-small stroke-line-shape" x1="18.78" y1="21.61" x2="23.29" y2="19.31"/>
+    <polyline class="fill-none stroke-grey stroke-width-small stroke-line-shape" points="27.82 28.22 24.94 28.19 22.89 34.23 17.95 23.93"/>
+    <polyline class="fill-none stroke-grey stroke-width-small stroke-line-shape" points="20.04 8.47 21.77 11.72 28.5 15.22 30.15 18.87 33.32 22.33 30.39 27.15"/>
+    <line class="fill-none stroke-grey stroke-width-small stroke-size" x1="10.36" y1="23.77" x2="18.47" y2="7.89"/>
+    <path class="fill-bg-grey" d="M19.1,6.14c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M19.1,5.14c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-grey" d="M24.69,17.52c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M24.69,16.52c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-grey" d="M29.43,27.64c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M29.43,26.64c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-grey" d="M17.24,21.4c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M17.24,20.4c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-grey" d="M9.84,23.93c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M9.84,22.93c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
   </symbol>
 
   <!-- Logo Dark -->
   <symbol class='icon' id='icon-logo-dark' viewBox='0 0 40 40'>
+    <line class="fill-none stroke-white stroke-width-small stroke-line-shape" x1="18.78" y1="21.61" x2="23.29" y2="19.31"/>
+    <polyline class="fill-none stroke-white stroke-width-small stroke-line-shape" points="27.82 28.22 24.94 28.19 22.89 34.23 17.95 23.93"/>
+    <polyline class="fill-none stroke-white stroke-width-small stroke-line-shape" points="20.04 8.47 21.77 11.72 28.5 15.22 30.15 18.87 33.32 22.33 30.39 27.15"/>
+    <line class="fill-none stroke-white stroke-width-small stroke-size" x1="10.36" y1="23.77" x2="18.47" y2="7.89"/>
+    <path class="fill-bg-white" d="M19.1,6.14c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M19.1,5.14c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-white" d="M24.69,17.52c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M24.69,16.52c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-white" d="M29.43,27.64c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M29.43,26.64c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-white" d="M17.24,21.4c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M17.24,20.4c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
+    <path class="fill-bg-white" d="M9.84,23.93c.48,0,.87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87M9.84,22.93c-1.03,0-1.87.84-1.87,1.87s.84,1.87,1.87,1.87,1.87-.84,1.87-1.87-.84-1.87-1.87-1.87h0Z"/>
   </symbol>
 
   <!-- Analysis Light -->
   <symbol class='icon' id='icon-analysis-light' viewBox='0 0 38.69 39.95'>
-	<path class="stroke-size stroke-black" d="M29.55,9.49c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
-	<g>
-		<path class="fill-bg-grey" d="M8.36,31.14V6.15s0-.01-.01-.01h-2.61v27.66s0,.01.01.01h27.17v-2.66s0-.01-.01-.01H8.36Z"/>
-		<path class="stroke-size stroke-black" d="M15.88,16.91c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
-		<path class="stroke-size stroke-black" d="M24.45,22.8c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
-		<line class="stroke-size stroke-black" x1="15.88" y1="20.66" x2="20" y2="23.26"/>
-		<line class="stroke-size stroke-black" x1="23.82" y1="22.32" x2="27.16" y2="14.02"/>
-	</g>
+    <path class="stroke-size fill-none stroke-width-large stroke-black" d="M29.55,9.49c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
+    <g>
+        <path class="fill-bg-grey" d="M8.36,31.14V6.15s0-.01-.01-.01h-2.61v27.66s0,.01.01.01h27.17v-2.66s0-.01-.01-.01H8.36Z"/>
+        <path class="stroke-size fill-none stroke-width-large stroke-black" d="M15.88,16.91c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
+        <path class="stroke-size fill-none stroke-width-large stroke-black" d="M24.45,22.8c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
+        <line class="stroke-size fill-none stroke-width-large stroke-black" x1="15.88" y1="20.66" x2="20" y2="23.26"/>
+        <line class="stroke-size fill-none stroke-width-large stroke-black" x1="23.82" y1="22.32" x2="27.16" y2="14.02"/>
+    </g>
   </symbol>
 
   <!-- Analysis Dark -->
   <symbol class='icon' id='icon-analysis-dark' viewBox='0 0 38.69 39.95'>
-    <path class="stroke-size stroke-white" d="M30.22,9.59c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
+    <path class="stroke-size fill-none stroke-width-large stroke-white" d="M30.22,9.59c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
     <path class="fill-bg-white" d="M9.03,31.24V6.25s0-.01-.01-.01h-2.61v27.66s0,.01.01.01h27.17v-2.66s0-.01-.01-.01H9.03Z"/>
-    <path class="stroke-size stroke-white" d="M16.55,17.01c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
-    <path class="stroke-size stroke-white" d="M25.12,22.9c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
-    <line class="stroke-size stroke-white" x1="16.55" y1="20.76" x2="20.67" y2="23.36"/>
-    <line class="stroke-size stroke-white" x1="24.49" y1="22.42" x2="27.83" y2="14.12"/>
+    <path class="stroke-size fill-none stroke-width-large stroke-white" d="M16.55,17.01c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
+    <path class="stroke-size fill-none stroke-width-large stroke-white" d="M25.12,22.9c1.02,1.04,1.02,2.72,0,3.75s-2.67,1.04-3.69,0-1.02-2.72,0-3.75,2.67-1.04,3.69,0Z"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-white" x1="16.55" y1="20.76" x2="20.67" y2="23.36"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-white" x1="24.49" y1="22.42" x2="27.83" y2="14.12"/>
   </symbol>
 
   <!-- Call Endpoint Light -->
@@ -102,24 +135,24 @@
 
   <!-- Default Light -->
   <symbol class='icon' id='icon-default-light' viewBox='0 0 40 40'>
-    <circle class="stroke-size stroke-black" cx="16.85" cy="27.07" r="2.64"/>
-    <circle class="stroke-size stroke-black" cx="33.02" cy="20.51" r="2.64"/>
-    <circle class="stroke-size stroke-black" cx="22.13" cy="13.91" r="2.64"/>
-    <circle class="stroke-size stroke-black" cx="6.98" cy="12.93" r="2.64"/>
-    <line class="stroke-size stroke-black" x1="8.48" y1="15.11" x2="15.12" y2="25.06"/>
-    <line class="stroke-size stroke-black" x1="21.31" y1="16.42" x2="17.76" y2="24.59"/>
-    <line class="stroke-size stroke-black" x1="24.19" y1="15.58" x2="31.08" y2="18.71"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-black" cx="16.85" cy="27.07" r="2.64"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-black" cx="33.02" cy="20.51" r="2.64"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-black" cx="22.13" cy="13.91" r="2.64"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-black" cx="6.98" cy="12.93" r="2.64"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-black" x1="8.48" y1="15.11" x2="15.12" y2="25.06"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-black" x1="21.31" y1="16.42" x2="17.76" y2="24.59"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-black" x1="24.19" y1="15.58" x2="31.08" y2="18.71"/>
   </symbol>
 
   <!-- Default Dark -->
   <symbol class='icon' id='icon-default-dark' viewBox='0 0 40 40'>
-    <circle class="stroke-size stroke-white" cx="17.19" cy="27.07" r="2.64"/>
-    <circle class="stroke-size stroke-white" cx="33.36" cy="20.51" r="2.64"/>
-    <circle class="stroke-size stroke-white" cx="22.48" cy="13.91" r="2.64"/>
-    <circle class="stroke-size stroke-white" cx="7.33" cy="12.93" r="2.64"/>
-    <line class="stroke-size stroke-white" x1="8.83" y1="15.11" x2="15.47" y2="25.06"/>
-    <line class="stroke-size stroke-white" x1="21.66" y1="16.42" x2="18.11" y2="24.59"/>
-    <line class="stroke-size stroke-white" x1="24.53" y1="15.58" x2="31.43" y2="18.71"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-white" cx="17.19" cy="27.07" r="2.64"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-white" cx="33.36" cy="20.51" r="2.64"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-white" cx="22.48" cy="13.91" r="2.64"/>
+    <circle class="stroke-size fill-none stroke-width-large stroke-white" cx="7.33" cy="12.93" r="2.64"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-white" x1="8.83" y1="15.11" x2="15.47" y2="25.06"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-white" x1="21.66" y1="16.42" x2="18.11" y2="24.59"/>
+    <line class="stroke-size fill-none stroke-width-large stroke-white" x1="24.53" y1="15.58" x2="31.43" y2="18.71"/>
   </symbol>
 
   <!-- Fetch Light -->
@@ -168,26 +201,26 @@
 
   <!-- Login Light -->
   <symbol class='icon' id='icon-login-light' viewBox='0 0 40 40'>
-	<path class="stroke-black stroke-size" d="M17.56,32.58h10.54c2,0,3.63-1.62,3.63-3.62V11.04c0-2-1.62-3.63-3.62-3.63h-10.54"/>
-	<polygon points="27.96 20 17.54 12.09 17.54 16.27 8.27 16.27 8.27 23.73 17.54 23.73 17.54 27.91 27.96 20"/>
+    <path class="stroke-black stroke-size fill-none stroke-width-large" d="M17.56,32.58h10.54c2,0,3.63-1.62,3.63-3.62V11.04c0-2-1.62-3.63-3.62-3.63h-10.54"/>
+    <polygon points="27.96 20 17.54 12.09 17.54 16.27 8.27 16.27 8.27 23.73 17.54 23.73 17.54 27.91 27.96 20"/>
   </symbol>
 
   <!-- Login Dark -->
   <symbol class='icon' id='icon-login-dark' viewBox='0 0 40 40'>
-    <path class="stroke-white stroke-size" d="M17.56,32.58h10.54c2,0,3.63-1.62,3.63-3.62V11.04c0-2-1.62-3.63-3.62-3.63h-10.54"/>
+    <path class="stroke-white stroke-size fill-none stroke-width-large" d="M17.56,32.58h10.54c2,0,3.63-1.62,3.63-3.62V11.04c0-2-1.62-3.63-3.62-3.63h-10.54"/>
     <polygon class="fill-bg-white" points="27.96 20 17.54 12.09 17.54 16.27 8.27 16.27 8.27 23.73 17.54 23.73 17.54 27.91 27.96 20"/>
   </symbol>
 
   <!-- Logout Light -->
   <symbol class='icon' id='icon-logout-light' viewBox='0 0 40 40'>
-    <path class="stroke-black stroke-size" d="M23.82,32.58h-10.54c-2,0-3.62-1.62-3.62-3.62V11.04c0-2,1.62-3.62,3.62-3.62h10.54"/>
+    <path class="stroke-black stroke-size fill-none stroke-width-large" d="M23.82,32.58h-10.54c-2,0-3.62-1.62-3.62-3.62V11.04c0-2,1.62-3.62,3.62-3.62h10.54"/>
     <polygon points="34.17 20 23.74 12.09 23.74 16.27 14.48 16.27 14.48 23.73 23.74 23.73 23.74 27.91 34.17 20"/>
   </symbol>
 
   <!-- Logout Dark -->
   <symbol class='icon' id='icon-logout-dark' viewBox='0 0 40 40'>
-	<path class="stroke-white stroke-size" d="M23.33,32.58h-10.54c-2,0-3.62-1.62-3.62-3.62V11.04c0-2,1.62-3.62,3.62-3.62h10.54"/>
-	<polygon class="fill-bg-white" points="33.67 20 23.25 12.09 23.25 16.27 13.98 16.27 13.98 23.73 23.25 23.73 23.25 27.91 33.67 20"/>
+    <path class="stroke-white stroke-size fill-none stroke-width-large" d="M23.33,32.58h-10.54c-2,0-3.62-1.62-3.62-3.62V11.04c0-2,1.62-3.62,3.62-3.62h10.54"/>
+    <polygon class="fill-bg-white" points="33.67 20 23.25 12.09 23.25 16.27 13.98 16.27 13.98 23.73 23.25 23.73 23.25 27.91 33.67 20"/>
   </symbol>
 
   <!-- Mail Light -->

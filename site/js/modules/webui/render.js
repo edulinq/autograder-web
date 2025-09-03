@@ -384,8 +384,10 @@ function submitInputs(params, context, container, inputs, onSubmitFunc, postResu
     }
 
     let resultsArea = container.querySelector(".results-area");
+    resultsArea.innerHTML = `<div class="result secondary-color drop-shadow"></div>`;
+    let resultsElement = resultsArea.firstChild;
 
-    Routing.loadingStart(resultsArea, false);
+    Routing.loadingStart(resultsElement, false);
 
     let inputParams = {};
     let errorMessages = [];
@@ -418,9 +420,6 @@ function submitInputs(params, context, container, inputs, onSubmitFunc, postResu
     if (button) {
         button.disabled = true;
     }
-
-    resultsArea.innerHTML = `<div class="result secondary-color drop-shadow"></div>`;
-    let resultsElement = resultsArea.firstChild;
 
     onSubmitFunc(params, context, resultsElement, inputParams)
         .then(function(result) {

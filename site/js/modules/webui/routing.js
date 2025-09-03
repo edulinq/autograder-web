@@ -347,15 +347,18 @@ function redirectLogout() {
 function loadingStart(container = undefined, modal = true) {
     container = container ?? mainConatiner();
 
-    let loadingClass = 'loading';
+    let loadingClass = 'glow-pulse loading logo';
     if (modal) {
         loadingClass += ' loading-modal';
     }
 
     container.innerHTML = `
         <div class='loading-container'>
-            <div class='${loadingClass}'>
-                <img src='images/loading-basic-edq.png' />
+            ${Icon.getIconHTML(Icon.ICON_NAME_LOGO, loadingClass)}
+            <div class='loading-dots'>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     `;

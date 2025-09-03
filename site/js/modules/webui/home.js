@@ -11,7 +11,7 @@ function handlerHome(path, params, context, container) {
         <div class='home-page'>
             <div class='home-content link-color'>
                 <div class='home-title secondary-color drop-shadow'>
-                    ${Icon.getIconHTML(Icon.ICON_NAME_HOME)}
+                    ${Icon.getIconHTML(Icon.ICON_NAME_LOGO)}
                     <h1>
                         Welcome to the LynxGrader!
                     </h1>
