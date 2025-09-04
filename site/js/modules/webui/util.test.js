@@ -1,4 +1,3 @@
-import * as Jest from '@jest/globals';
 import * as Util from './util.js';
 
 describe("Util.caseInsensitiveStringCompare() base", function() {
