@@ -59,7 +59,8 @@
     --curve-radius-large: 16px;
 
     --logo-size-large: 144px;
-    --logo-size-small: 48px;
+    --logo-size-normal: 54px;
+    --logo-size-small: 42px;
 
     --icon-size-larger: 48px;
     --icon-size-large: 42px;
@@ -939,15 +940,19 @@ svg {
     font-size: var(--font-size-larger);
 }
 
-.home-title .page-image {
+.home-title .icon {
     padding: 0.75em;
-    border-radius: var(--curve-radius-small);
+}
+
+.home-title svg {
+    height: var(--logo-size-normal);
+    width: var(--logo-size-normal);
 }
 
 .home-content > div {
-    padding: 1.5em;
     /* Do not use relative margins as the title cards will be spaced differently. */
     margin: min(18px, 1vw);
+    padding: 1.5em;
     border-radius: var(--curve-radius-large);
 }
 
