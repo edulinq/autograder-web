@@ -3,7 +3,7 @@ import * as Core from '../../core/index.js';
 import * as Render from '../../render/index.js';
 
 function init() {
-    Core.Routing.addRoute(Core.Routing.PATH_ASSIGNMENT, handlerAssignment, 'Assignment', Core.Routing.NAV_COURSES, {assignment: true});
+    Core.Routing.addRoute(Core.Routing.PATH_ASSIGNMENT, handlerAssignment, 'Assignment', Core.Routing.NAV_COURSES, { assignment: true });
 }
 
 function handlerAssignment(path, params, context, container) {
@@ -127,6 +127,16 @@ function handlerAssignment(path, params, context, container) {
             'assignment-action',
             'View User History',
             Core.Routing.formHashPath(Core.Routing.PATH_USER_HISTORY, args),
+            {
+                minServerRole: Autograder.Common.SERVER_ROLE_USER,
+                minCourseRole: Autograder.Common.COURSE_ROLE_GRADER,
+                courseId: course.id,
+            },
+        ),
+        new Render.Card(
+            'assignment-action',
+            'Peek User Submission',
+            Core.Routing.formHashPath(Core.Routing.PATH_USER_PEEK, args),
             {
                 minServerRole: Autograder.Common.SERVER_ROLE_USER,
                 minCourseRole: Autograder.Common.COURSE_ROLE_GRADER,

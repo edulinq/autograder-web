@@ -20,7 +20,7 @@ function handlerPeek(path, params, context, container) {
     ];
 
     Render.makePage(
-            params, context, container, peek,
+            params, context, container, peekCallback,
             {
                 header: 'Peek a Submission',
                 description: 'View a past submission. If no submission ID is provided, the most recent submission is used.',
@@ -34,16 +34,18 @@ function handlerPeek(path, params, context, container) {
     ;
 }
 
-function peek(params, context, container, inputParams) {
+function peekCallback(params, context, container, inputParams) {
     let course = context.courses[params[Core.Routing.PARAM_COURSE]];
     let assignment = course.assignments[params[Core.Routing.PARAM_ASSIGNMENT]];
 
-    return Autograder.Courses.Assignments.Submissions.Fetch.User.peek(course.id, assignment.id, inputParams.submission)
+    let targetEmail = inputParams.targetUser ?? context.user.email;
+
+    return Autograder.Courses.Assignments.Submissions.Fetch.User.peek(course.id, assignment.id, inputParams.submission, targetEmail)
         .then(function(result) {
             let html = "";
 
             if (!result['found-user']) {
-                html = `<p>Could not find user: '${context.user.name}'.</p>`;
+                html = `<p>Could not find user: '${targetEmail}'.</p>`;
             } else if (!result['found-submission']) {
                 if (inputParams.submission) {
                     html = `<p>Could not find submission: '${inputParams.submission}'.</p>`;
@@ -64,3 +66,7 @@ function peek(params, context, container, inputParams) {
 }
 
 init();
+
+export {
+    peekCallback,
+};

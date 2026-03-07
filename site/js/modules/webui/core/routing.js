@@ -32,6 +32,7 @@ const PATH_SUBMIT_REMOVE = `${PATH_ASSIGNMENT}/remove`;
 const PATH_PEEK = `${PATH_ASSIGNMENT}/peek`;
 const PATH_HISTORY = `${PATH_ASSIGNMENT}/history`;
 const PATH_USER_HISTORY = `${PATH_ASSIGNMENT}/user/history`;
+const PATH_USER_PEEK = `${PATH_ASSIGNMENT}/user/peek`;
 const PATH_PROXY_REGRADE = `${PATH_ASSIGNMENT}/proxy-regrade`;
 const PATH_PROXY_RESUBMIT = `${PATH_ASSIGNMENT}/proxy-resubmit`;
 const PATH_ANALYSIS_INDIVIDUAL = `${PATH_ASSIGNMENT}/analysis/individual`;
@@ -442,6 +443,7 @@ export {
     PATH_SERVER_COURSES_LIST,
     PATH_SERVER_USERS_LIST,
     PATH_USER_HISTORY,
+    PATH_USER_PEEK,
 
     NAV_COURSES,
     NAV_EMPTY,
