@@ -1,4 +1,4 @@
-# Autograder Web
+# Lynx Grader - Web Interface
 
 A web-based GUI for the [EduLinq Autograder Server](https://github.com/edulinq/autograder-server).
 
