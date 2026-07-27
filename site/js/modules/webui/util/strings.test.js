@@ -84,3 +84,33 @@ describe("titleCase() base", function() {
         expect(Strings.titleCase(input, clean)).toBe(expected);
     });
 });
+
+describe("escapeHTML() base", function() {
+    // [[input, expected], ...]
+    const testCases = [
+        // Null/undefined guard.
+        [null, ''],
+        [undefined, ''],
+
+        // Plain strings pass through unchanged.
+        ['', ''],
+        ['hello', 'hello'],
+
+        // HTML special characters are escaped.
+        ['<', '&lt;'],
+        ['>', '&gt;'],
+        ['&', '&amp;'],
+
+        // The Option trick does not escape double quotes,
+        // which is fine since attributes are not being constructed here.
+        ['"', '"'],
+
+        // Non-string coercion.
+        [42, '42'],
+        [true, 'true'],
+    ];
+
+    test.each(testCases)("'%s'", function(input, expected) {
+        expect(Strings.escapeHTML(input)).toBe(expected);
+    });
+});

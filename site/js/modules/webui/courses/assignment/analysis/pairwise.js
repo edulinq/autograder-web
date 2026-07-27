@@ -47,7 +47,7 @@ function analysisPairwise(params, context, container, inputParams) {
             inputParams.wait, inputParams.dryRun,
         )
         .then(function(result) {
-            return Render.codeBlockJSON(result);
+            return Render.renderPairwiseAnalysis(result);
         })
         .catch(function(message) {
             console.error(message);

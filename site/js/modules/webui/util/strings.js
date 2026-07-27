@@ -29,6 +29,14 @@ function displayJSON(value) {
     return JSON.stringify(value, null, JSON_INDENT);
 }
 
+// Escape a string for safe insertion into HTML.
+function escapeHTML(str) {
+    if (str === null || str === undefined) {
+        return '';
+    }
+    return new Option(String(str)).innerHTML;
+}
+
 function stringCompare(a, b) {
     return a.localeCompare(b);
 }
@@ -54,6 +62,7 @@ export {
     caseInsensitiveStringCompare,
     cleanText,
     displayJSON,
+    escapeHTML,
     stringCompare,
     titleCase,
 }

@@ -47,7 +47,7 @@ function analysisIndividual(params, context, container, inputParams) {
             inputParams.wait, inputParams.dryRun,
         )
         .then(function(result) {
-            return Render.codeBlockJSON(result);
+            return Render.renderIndividualAnalysis(result);
         })
         .catch(function(message) {
             console.error(message);

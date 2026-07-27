@@ -21,9 +21,12 @@ test('Pairwise Analysis', async function() {
 
     await Test.submitTemplate();
 
-    let results = document.querySelector('.results-area').innerHTML;
-    expect(results).toContain('similarities');
-    expect(results).toContain('"complete": true');
-    expect(results).toContain('"pending-count": 0');
-    expect(results).toContain('"overwrite-records": true');
+    let resultsArea = document.querySelector('.results-area');
+
+    // DOM-based structural assertions.
+    expect(resultsArea.querySelector('.analysis-section')).not.toBeNull();
+    expect(resultsArea.querySelector('.pairwise-summary')).not.toBeNull();
+    expect(resultsArea.querySelector('.pairwise-pairs-table')).not.toBeNull();
+    expect(resultsArea.querySelector('details.analysis-raw-json')).not.toBeNull();
+    expect(resultsArea.querySelector('details.analysis-raw-json summary').textContent).toContain('Raw JSON');
 });

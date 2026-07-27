@@ -1,3 +1,4 @@
+export * from './analysis.js';
 export * from './api.js';
 export * from './card.js';
 export * from './dom.js';
