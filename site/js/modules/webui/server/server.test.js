@@ -9,6 +9,7 @@ describe('Nav Server Actions', function() {
             [
                 'API Documentation',
                 'Call API',
+                'View Server Logs',
             ],
         ],
         [
@@ -16,6 +17,7 @@ describe('Nav Server Actions', function() {
             [
                 'API Documentation',
                 'Call API',
+                'View Server Logs',
             ],
         ],
         [
@@ -25,6 +27,7 @@ describe('Nav Server Actions', function() {
                 'Call API',
                 'List Courses',
                 'List Users',
+                'View Server Logs',
             ],
         ],
     ];

@@ -41,6 +41,7 @@ const PATH_SERVER = 'server';
 const PATH_SERVER_CALL_API = `${PATH_SERVER}/call-api`;
 const PATH_SERVER_DOCS = `${PATH_SERVER}/docs`;
 const PATH_SERVER_COURSES_LIST = `${PATH_SERVER}/courses/list`;
+const PATH_SERVER_LOGS = `${PATH_SERVER}/logs`;
 const PATH_SERVER_USERS_LIST = `${PATH_SERVER}/users/list`;
 
 const NAV_COURSES = 'Courses';
@@ -441,6 +442,7 @@ export {
     PATH_SERVER_CALL_API,
     PATH_SERVER_DOCS,
     PATH_SERVER_COURSES_LIST,
+    PATH_SERVER_LOGS,
     PATH_SERVER_USERS_LIST,
     PATH_USER_HISTORY,
 

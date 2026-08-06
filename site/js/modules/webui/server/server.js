@@ -16,6 +16,7 @@ function handlerServer(path, params, context, container) {
     let cards = [
         new Render.Card('server-action', 'API Documentation', Core.Routing.formHashPath(Core.Routing.PATH_SERVER_DOCS)),
         new Render.Card('server-action', 'Call API', Core.Routing.formHashPath(Core.Routing.PATH_SERVER_CALL_API, args)),
+        new Render.Card('server-action', 'View Server Logs', Core.Routing.formHashPath(Core.Routing.PATH_SERVER_LOGS, args)),
         new Render.Card('server-action', 'List Courses', Core.Routing.formHashPath(Core.Routing.PATH_SERVER_COURSES_LIST, args), {
             minServerRole: Autograder.Common.SERVER_ROLE_ADMIN,
         }),
